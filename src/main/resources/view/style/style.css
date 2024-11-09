@@ -1,0 +1,47 @@
+.root {
+    -fx-background-color: #f3f7f3;
+}
+
+.scroll-pane {
+    -fx-background-color: #f3f7f3;
+    -fx-border-width: 0px;
+    -fx-background-insets: 0;
+}
+
+.image-view {
+    -fx-border-radius: 50%; /* Make the image view circular */
+    -fx-background-radius: 50%;
+}
+
+.tree-view {
+    -fx-background-radius: 0px 50px 50px 0px; /* Apply rounded corners to all sides */
+    -fx-background-insets: 0; /* Remove inner padding to expose the rounded corners */
+    -fx-padding: 10px;
+}
+.tree-view .tree-cell {
+    -fx-padding: 5px;
+    -fx-font-size: 17px; /* Adjust the font size as needed */
+    /*-fx-font-weight: bold;*/
+    -fx-background-radius: 25px;
+    -fx-border-radius: 25px;
+}
+    .tree-view .tree-cell .tree-item{
+
+}
+/*.tree-view .tree-cell .tree-cell{*/
+/*    -fx-font-weight: normal;*/
+/*}*/
+
+
+/*.tree-cell .tree-item .tree-item .text {*/
+/*    -fx-text-fill: #282a2c; !* Sub-options *!*/
+/*}*/
+
+.tree-cell:hover {
+    -fx-cursor: hand;
+    -fx-background-color:  #9BBEC8;
+}
+.vbox-tree{
+    -fx-background-radius: 0px 20px 20px 0px; /* Apply rounded corners to all sides */
+    -fx-background-insets: 0;
+}

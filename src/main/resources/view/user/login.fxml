@@ -72,7 +72,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Hyperlink layoutX="249.0" layoutY="489.0" onAction="#linkRegisterOnAction" text="Sign up">
+                  <Hyperlink layoutX="249.0" layoutY="488.0" onAction="#linkRegisterOnAction" text="Sign up">
                      <font>
                         <Font size="14.0" />
                      </font>

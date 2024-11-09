@@ -35,6 +35,13 @@ CREATE TABLE Category
     category_id INT PRIMARY KEY AUTO_INCREMENT,
     description VARCHAR(255)
 );
+
+CREATE TABLE Location
+(
+    location_id INT PRIMARY KEY AUTO_INCREMENT,
+    description VARCHAR(255)
+);
+
 CREATE TABLE Jot
 (
     jot_id      INT PRIMARY KEY AUTO_INCREMENT,
@@ -60,11 +67,6 @@ CREATE TABLE Shared_Jot
     FOREIGN KEY (jot_id) REFERENCES Jot (jot_id),
     FOREIGN KEY (user_id_by) REFERENCES User (user_id),
     FOREIGN KEY (user_id_with) REFERENCES User (user_id)
-);
-CREATE TABLE Location
-(
-    location_id INT PRIMARY KEY AUTO_INCREMENT,
-    description VARCHAR(255)
 );
 CREATE TABLE Mood
 (

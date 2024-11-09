@@ -13,6 +13,9 @@ import javafx.util.Duration;
 import lk.ijse.gdse71.finalproject.jotit.dto.UserDto;
 import lk.ijse.gdse71.finalproject.jotit.model.UserModel;
 import lk.ijse.gdse71.finalproject.jotit.model.UserModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.util.PasswordUtil;
+
+import java.sql.Date;
 
 public class RegisterController {
     @FXML
@@ -74,8 +77,15 @@ public class RegisterController {
         try {
             UserDto userDto = new UserDto();
 
-            if ((txtPassword1.equals(txtPassword2))) {
-                userDto.setPassword(txtPassword1.getText());
+            userDto.setFirstName(txtFirstName.getText());
+            userDto.setLastName(txtLastName.getText());
+            userDto.setEmail(txtEmail.getText());
+            userDto.setUsername(txtUserName.getText());
+            userDto.setDateOfBirth(Date.valueOf(dateDob.getValue()));
+
+
+            if ((txtPassword1.getText().equals(txtPassword2.getText()))) {
+                userDto.setPassword(PasswordUtil.hashPassword(txtPassword1.getText()));
                 USER_MODEL.save(userDto);
             } else {
                 txtPassword1.setStyle("-fx-text-fill: red; -fx-border-color: ff3063;-fx-border-radius: 25; -fx-background-radius: 25");

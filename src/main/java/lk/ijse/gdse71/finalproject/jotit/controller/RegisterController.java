@@ -12,7 +12,7 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import lk.ijse.gdse71.finalproject.jotit.dto.UserDto;
 import lk.ijse.gdse71.finalproject.jotit.model.UserModel;
-import lk.ijse.gdse71.finalproject.jotit.model.UserModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.model.impl.UserModelImpl;
 import lk.ijse.gdse71.finalproject.jotit.util.PasswordUtil;
 
 import java.sql.Date;

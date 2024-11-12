@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.web.WebView?>
+
+<!-- Add this import -->
+
+<AnchorPane prefHeight="682.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse71.finalproject.jotit.controller.AddJotController">
+   <children>
+      <BorderPane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <WebView fx:id="webView" prefHeight="530.0" prefWidth="657.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets left="10.0" />
+               </BorderPane.margin></WebView>
+         </center>
+         <top>
+            <HBox alignment="CENTER_LEFT" prefHeight="83.0" prefWidth="790.0" spacing="10.0" BorderPane.alignment="CENTER_LEFT">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Button onAction="#onSaveButtonClick" prefHeight="26.0" prefWidth="104.0" text="Save" />
+                        <Button onAction="#onLoadButtonClick" prefHeight="26.0" prefWidth="89.0" text="Load" />
+                     </children>
+                  </HBox>
+               </children>
+               <BorderPane.margin>
+                  <Insets left="10.0" />
+               </BorderPane.margin>
+            </HBox>
+         </top>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+         <bottom>
+            <HBox prefHeight="59.0" prefWidth="790.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="190.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <ComboBox fx:id="locationCombo" prefHeight="26.0" prefWidth="250.0" promptText="select location" />
+                        <Button fx:id="addLocation" mnemonicParsing="false" onAction="#addLocationOnAction" prefHeight="26.0" prefWidth="29.0" text="+" />
+                     </children>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </HBox>
+               </children>
+            </HBox>
+         </bottom>
+         <right>
+            <VBox prefHeight="530.0" prefWidth="189.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="530.0" prefWidth="39.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="58.0" prefWidth="190.0">
+                           <children>
+                              <ComboBox fx:id="tagCombo" prefHeight="26.0" prefWidth="129.0" promptText="select tag" />
+                              <Button fx:id="addTag" mnemonicParsing="false" onAction="#addTagOnAction" prefHeight="26.0" prefWidth="29.0" text="+" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Separator prefWidth="200.0" />
+                  <VBox alignment="TOP_CENTER" prefHeight="530.0" prefWidth="39.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="58.0" prefWidth="190.0">
+                           <children>
+                              <ComboBox fx:id="moodCombo" prefHeight="26.0" prefWidth="129.0" promptText="select mood" />
+                              <Button fx:id="addMood" mnemonicParsing="false" onAction="#addMoodOnAction" prefHeight="26.0" prefWidth="29.0" text="+" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </right>
+      </BorderPane>
+   </children>
+</AnchorPane>

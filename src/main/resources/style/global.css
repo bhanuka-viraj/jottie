@@ -1,0 +1,8 @@
+*{
+    /*-fx-background-color: #f3f7f3;*/
+}
+
+.scroll-pane{
+    -fx-border-width: 0px;
+    -fx-background-insets: 0;
+}

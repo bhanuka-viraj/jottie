@@ -8,15 +8,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class AppInitializer extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/view/mainView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/mainLayout.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("JoTtie");
         stage.setScene(scene);
         stage.show();
-        stage.getIcons().add(new Image(HelloApplication.class.getResourceAsStream("/view/assets/logoPic.png")));
+        stage.getIcons().add(new Image(AppInitializer.class.getResourceAsStream("/view/assets/logoPic.png")));
     }
 
     public static void main(String[] args) {

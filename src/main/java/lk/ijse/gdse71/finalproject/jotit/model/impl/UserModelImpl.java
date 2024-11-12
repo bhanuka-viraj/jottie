@@ -1,6 +1,7 @@
-package lk.ijse.gdse71.finalproject.jotit.model;
+package lk.ijse.gdse71.finalproject.jotit.model.impl;
 
 import lk.ijse.gdse71.finalproject.jotit.dto.UserDto;
+import lk.ijse.gdse71.finalproject.jotit.model.UserModel;
 import lk.ijse.gdse71.finalproject.jotit.util.CrudUtil;
 
 import java.sql.SQLException;

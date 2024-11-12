@@ -11,6 +11,7 @@ module lk.ijse.gdse71.finalproject.jotit {
     requires java.sql;
     requires static lombok;
     requires jbcrypt;
+    requires org.apache.commons.lang3;
 
     opens lk.ijse.gdse71.finalproject.jotit.controller to javafx.fxml;
     exports lk.ijse.gdse71.finalproject.jotit;

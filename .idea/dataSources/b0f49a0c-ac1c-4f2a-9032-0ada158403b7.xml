@@ -999,7 +999,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </schema>
     <schema id="289" parent="1" name="jottie">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2024-11-12.03:56:22</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-11-12.14:43:03</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="290" parent="1" name="mysql">
@@ -1155,16 +1155,22 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </column>
     <foreign-key id="327" parent="302" name="jot_ibfk_1">
       <ColNames>user_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
       <RefColNames>user_id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
     <foreign-key id="328" parent="302" name="jot_ibfk_2">
       <ColNames>category_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
       <RefColNames>category_id</RefColNames>
       <RefTableName>category</RefTableName>
     </foreign-key>
     <foreign-key id="329" parent="302" name="jot_ibfk_3">
       <ColNames>location_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
       <RefColNames>location_id</RefColNames>
       <RefTableName>location</RefTableName>
     </foreign-key>
@@ -1196,15 +1202,19 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </column>
     <column id="336" parent="303" name="mood_id">
       <Position>2</Position>
-      <StoredType>int|0s</StoredType>
+      <StoredType>varchar(50)|0s</StoredType>
     </column>
     <foreign-key id="337" parent="303" name="jot_mood_ibfk_1">
       <ColNames>jot_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
       <RefColNames>jot_id</RefColNames>
       <RefTableName>jot</RefTableName>
     </foreign-key>
     <foreign-key id="338" parent="303" name="jot_mood_ibfk_2">
       <ColNames>mood_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
       <RefColNames>mood_id</RefColNames>
       <RefTableName>mood</RefTableName>
     </foreign-key>
@@ -1222,15 +1232,19 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </column>
     <column id="342" parent="304" name="tag_id">
       <Position>2</Position>
-      <StoredType>int|0s</StoredType>
+      <StoredType>varchar(50)|0s</StoredType>
     </column>
     <foreign-key id="343" parent="304" name="jot_tag_ibfk_1">
       <ColNames>jot_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
       <RefColNames>jot_id</RefColNames>
       <RefTableName>jot</RefTableName>
     </foreign-key>
     <foreign-key id="344" parent="304" name="jot_tag_ibfk_2">
       <ColNames>tag_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
       <RefColNames>tag_id</RefColNames>
       <RefTableName>tag</RefTableName>
     </foreign-key>
@@ -1264,7 +1278,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <column id="351" parent="306" name="mood_id">
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StoredType>int|0s</StoredType>
+      <StoredType>varchar(50)|0s</StoredType>
     </column>
     <column id="352" parent="306" name="description">
       <Position>2</Position>
@@ -1307,6 +1321,8 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </column>
     <foreign-key id="361" parent="307" name="notification_ibfk_1">
       <ColNames>jot_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
       <RefColNames>jot_id</RefColNames>
       <RefTableName>jot</RefTableName>
     </foreign-key>
@@ -1368,6 +1384,8 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </column>
     <foreign-key id="374" parent="309" name="reminder_ibfk_1">
       <ColNames>task_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
       <RefColNames>task_id</RefColNames>
       <RefTableName>task</RefTableName>
     </foreign-key>
@@ -1412,16 +1430,22 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </column>
     <foreign-key id="384" parent="310" name="shared_jot_ibfk_1">
       <ColNames>jot_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
       <RefColNames>jot_id</RefColNames>
       <RefTableName>jot</RefTableName>
     </foreign-key>
     <foreign-key id="385" parent="310" name="shared_jot_ibfk_2">
       <ColNames>user_id_by</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
       <RefColNames>user_id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
     <foreign-key id="386" parent="310" name="shared_jot_ibfk_3">
       <ColNames>user_id_with</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
       <RefColNames>user_id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
@@ -1448,10 +1472,9 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="392" parent="311" name="tag_id">
-      <AutoIncrement>1</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StoredType>int|0s</StoredType>
+      <StoredType>varchar(50)|0s</StoredType>
     </column>
     <column id="393" parent="311" name="name">
       <Position>2</Position>
@@ -1504,16 +1527,22 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </column>
     <foreign-key id="404" parent="312" name="task_ibfk_1">
       <ColNames>user_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
       <RefColNames>user_id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
     <foreign-key id="405" parent="312" name="task_ibfk_2">
       <ColNames>jot_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
       <RefColNames>jot_id</RefColNames>
       <RefTableName>jot</RefTableName>
     </foreign-key>
     <foreign-key id="406" parent="312" name="task_ibfk_3">
       <ColNames>parent_task_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
       <RefColNames>task_id</RefColNames>
       <RefTableName>task</RefTableName>
     </foreign-key>
@@ -1618,16 +1647,22 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </column>
     <foreign-key id="429" parent="314" name="user_relationship_ibfk_1">
       <ColNames>user_id_1</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
       <RefColNames>user_id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
     <foreign-key id="430" parent="314" name="user_relationship_ibfk_2">
       <ColNames>user_id_2</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
       <RefColNames>user_id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
     <foreign-key id="431" parent="314" name="user_relationship_ibfk_3">
       <ColNames>relationship_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
       <RefColNames>relationship_id</RefColNames>
       <RefTableName>relationship</RefTableName>
     </foreign-key>

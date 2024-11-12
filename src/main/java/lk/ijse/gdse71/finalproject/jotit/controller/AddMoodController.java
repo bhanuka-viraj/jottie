@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import lk.ijse.gdse71.finalproject.jotit.dto.MoodDto;
 import lk.ijse.gdse71.finalproject.jotit.model.MoodModel;
 import lk.ijse.gdse71.finalproject.jotit.model.impl.MoodModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.util.IdGenerator;
 
 public class AddMoodController {
 
@@ -18,7 +19,16 @@ public class AddMoodController {
     @FXML
     void btnSaveOnAction(ActionEvent event) {
         try {
-            moodModel.saveMood(new MoodDto());
+            boolean isSaved = moodModel.saveMood(new MoodDto(
+                    IdGenerator.generateId("MD",5),
+                    txtMood.getText()
+            ));
+
+            if (isSaved) {
+                new Alert(Alert.AlertType.INFORMATION, "Mood Saved").show();
+            }else {
+                new Alert(Alert.AlertType.ERROR, "Error saving mood").show();
+            }
         } catch (Exception e) {
             new Alert(Alert.AlertType.WARNING,e.getMessage()).show();
         }

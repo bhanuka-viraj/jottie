@@ -12,8 +12,8 @@ import java.util.List;
 public class MoodModelImpl implements MoodModel {
 
     @Override
-    public void saveMood(MoodDto moodDto) throws Exception {
-        CrudUtil.execute("INSERT INTO mood (mood_id, description) VALUES (?, ?)",
+    public boolean saveMood(MoodDto moodDto) throws Exception {
+        return CrudUtil.execute("INSERT INTO mood (mood_id, description) VALUES (?, ?)",
                 moodDto.getId(), moodDto.getDescription());
     }
 
@@ -27,8 +27,8 @@ public class MoodModelImpl implements MoodModel {
     }
 
     @Override
-    public void deleteMood(String id) throws Exception {
-        CrudUtil.execute("DELETE FROM mood WHERE mood_id = ?", Integer.parseInt(id));
+    public boolean deleteMood(String id) throws Exception {
+        return CrudUtil.execute("DELETE FROM mood WHERE mood_id = ?", Integer.parseInt(id));
     }
 
     @Override

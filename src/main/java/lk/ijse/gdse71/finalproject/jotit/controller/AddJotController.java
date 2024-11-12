@@ -2,24 +2,40 @@ package lk.ijse.gdse71.finalproject.jotit.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import lk.ijse.gdse71.finalproject.jotit.controller.components.Mood;
+import lk.ijse.gdse71.finalproject.jotit.dto.LocationDto;
+import lk.ijse.gdse71.finalproject.jotit.dto.MoodDto;
+import lk.ijse.gdse71.finalproject.jotit.dto.TagDto;
 import lk.ijse.gdse71.finalproject.jotit.model.CategoryModel;
 import lk.ijse.gdse71.finalproject.jotit.model.LocationModel;
 import lk.ijse.gdse71.finalproject.jotit.model.MoodModel;
+import lk.ijse.gdse71.finalproject.jotit.model.impl.CategoryModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.model.impl.LocationModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.model.impl.MoodModelImpl;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class AddJotController {
     @FXML
@@ -32,22 +48,22 @@ public class AddJotController {
     private Button addTag;
 
     @FXML
-    private ComboBox<?> locationCombo;
+    private ComboBox<LocationDto> locationCombo;
 
     @FXML
-    private ComboBox<?> moodCombo;
-
-    @FXML
-    private ComboBox<?> tagCombo;
+    private ComboBox<TagDto> tagCombo;
 
     @FXML
     private WebView webView;
 
+    @FXML
+    private GridPane moodGridPane;
+
     private WebEngine webEngine;
     private String currentFilePath = null;
-    private CategoryModel categoryModel;
-    private LocationModel locationModel;
-    private MoodModel moodModel;
+    private final CategoryModel categoryModel = new CategoryModelImpl();
+    private final LocationModel locationModel = new LocationModelImpl();
+    private final MoodModel moodModel = new MoodModelImpl();
 
     private static final String SECRET_KEY = "1234567890123456";
 
@@ -56,6 +72,12 @@ public class AddJotController {
         webEngine = webView.getEngine();
         String editorFilePath = getClass().getResource("/view/editor/index.html").toExternalForm();
         webEngine.load(editorFilePath);
+
+        try {
+            refreshMoodList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String getEditorContent() {
@@ -97,7 +119,7 @@ public class AddJotController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Note");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Encrypted Files", "*.enc"));
-        fileChooser.setInitialDirectory(new File("saveNotes"));
+        fileChooser.setInitialDirectory(new File("jotsenc"));
         File selectedFile = fileChooser.showOpenDialog(null);
 
         if (selectedFile != null) {
@@ -145,12 +167,59 @@ public class AddJotController {
 
     @FXML
     void addMoodOnAction(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/addMood.fxml"));
+            Parent parent = loader.load();
 
+            AddMoodController addMoodController = loader.getController();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.setTitle("Add New Mood");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+
+            stage.setOnHidden(e -> {
+                try {
+                    refreshMoodList();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            });
+
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.WARNING, e.getMessage()).show();
+        }
     }
 
     @FXML
     void addTagOnAction(ActionEvent event) {
 
+    }
 
+    private void refreshMoodList() throws Exception {
+        moodGridPane.getChildren().clear();
+
+        List<MoodDto> moodDtos = moodModel.getAllMoods();
+
+        int columnIndex = 0;
+        int rowIndex = 0;
+
+        for (MoodDto moodDto : moodDtos) {
+            FXMLLoader moodLoader = new FXMLLoader(getClass().getResource("/view/components/mood.fxml"));
+            Parent moodNode = moodLoader.load();
+
+            Mood moodController = moodLoader.getController();
+            moodController.setLabel(moodDto.getDescription());
+            // Set the image in the ImageView if needed
+
+            moodGridPane.add(moodNode, columnIndex, rowIndex);
+
+            columnIndex++;
+            if (columnIndex == 2) {
+                columnIndex = 0;
+                rowIndex++;
+            }
+        }
     }
 }

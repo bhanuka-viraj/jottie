@@ -72,28 +72,28 @@ CREATE TABLE Shared_Jot
 
 CREATE TABLE Mood
 (
-    mood_id     INT PRIMARY KEY,
+    mood_id     VARCHAR(50) PRIMARY KEY,
     description VARCHAR(255)
 );
 
 CREATE TABLE Jot_Mood
 (
     jot_id  VARCHAR(50),
-    mood_id INT,
+    mood_id VARCHAR(50),
     FOREIGN KEY (jot_id) REFERENCES Jot (jot_id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (mood_id) REFERENCES Mood (mood_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Tag
 (
-    tag_id INT PRIMARY KEY AUTO_INCREMENT,
+    tag_id VARCHAR(50) PRIMARY KEY,
     name   VARCHAR(100)
 );
 
 CREATE TABLE Jot_Tag
 (
     jot_id VARCHAR(50),
-    tag_id INT,
+    tag_id VARCHAR(50),
     FOREIGN KEY (jot_id) REFERENCES Jot (jot_id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (tag_id) REFERENCES Tag (tag_id) ON DELETE CASCADE ON UPDATE CASCADE
 );

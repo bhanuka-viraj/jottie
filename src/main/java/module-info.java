@@ -14,5 +14,6 @@ module lk.ijse.gdse71.finalproject.jotit {
     requires org.apache.commons.lang3;
 
     opens lk.ijse.gdse71.finalproject.jotit.controller to javafx.fxml;
+    opens lk.ijse.gdse71.finalproject.jotit.controller.components to javafx.fxml;
     exports lk.ijse.gdse71.finalproject.jotit;
 }

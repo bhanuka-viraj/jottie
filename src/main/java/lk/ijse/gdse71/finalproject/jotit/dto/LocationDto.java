@@ -10,4 +10,9 @@ import lombok.NoArgsConstructor;
 public class LocationDto {
     private String id;
     private String description;
+
+    @Override
+    public String toString() {
+        return description;
+    }
 }

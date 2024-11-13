@@ -1,7 +1,7 @@
 package lk.ijse.gdse71.finalproject.jotit.controller.components;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -10,15 +10,12 @@ public class Mood {
     private ImageView image;
 
     @FXML
-    Label lblMood;
+    private ToggleButton toggleMood;
 
 
     public void setLabel(String lbl){
-        lblMood.setText(lbl);
-        // Load the corresponding image based on the label
-        // Load the corresponding image based on the label
+        toggleMood.setText(lbl);
         String imagePath = "/view/assets/moodPics/" + lbl.toLowerCase() + ".png";
-        System.out.println(imagePath);
         Image moodImage;
         try {
             moodImage = new Image(getClass().getResourceAsStream(imagePath));
@@ -26,8 +23,10 @@ public class Mood {
             imagePath = "/view/assets/moodPics/default.png";
             moodImage = new Image(getClass().getResourceAsStream(imagePath));
         }
-
         image.setImage(moodImage);
+    }
 
+    public boolean isSelected() {
+        return toggleMood.isSelected();
     }
 }

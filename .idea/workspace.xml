@@ -5,11 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ffa9a06d-aec7-4e3f-aef0-c5d8a106ee84" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/AddLocationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/AddTagController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/CategoryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/components/Tag.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/view/addLocation.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/view/addTag.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/view/category.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/view/components/tag.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/AddJotController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/AddJotController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/components/Mood.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/components/Mood.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/dto/LocationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/dto/LocationDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/view/addJot.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/addJot.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/assets/moodPics/Happy.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/assets/moodPics/happy.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/assets/moodPics/Sad.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/assets/moodPics/sad.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/components/mood.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/components/mood.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/mainLayout.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/mainLayout.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,34 +57,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.AppInitializer.executor": "Run",
-    "Application.HelloApplication.executor": "Run",
-    "Database Script.jottie.sql.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/WWW/Desktop/FX/jottie again/jottie/src/main/resources/view/assets/moodPics",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.AppInitializer.executor&quot;: &quot;Run&quot;,
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Database Script.jottie.sql.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/WWW/Desktop/FX/jottie again/jottie/src/main/resources/view/assets/moodPics&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ],
-    "RunConfigurationTargetLRU": [
-      "b0f49a0c-ac1c-4f2a-9032-0ada158403b7"
+    &quot;RunConfigurationTargetLRU&quot;: [
+      &quot;b0f49a0c-ac1c-4f2a-9032-0ada158403b7&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\WWW\Desktop\FX\jottie again\jottie\src\main\resources\view\assets\moodPics" />
@@ -80,9 +92,9 @@
       <recent name="D:\final-project\jotit\src\main\resources\view\assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\WWW\Desktop\FX\jottie again\jottie\src\main\resources\view" />
       <recent name="C:\Users\WWW\Desktop\FX\jottie again\jottie\src\main\resources\view\components" />
       <recent name="C:\Users\WWW\Desktop\FX\jottie again\jottie\src\main\resources" />
-      <recent name="C:\Users\WWW\Desktop\FX\jottie again\jottie\src\main\resources\view" />
       <recent name="D:\final-project\jotit\src\main\resources\view\assets" />
       <recent name="D:\final-project\jotit\src\main\resources\view\user" />
     </key>
@@ -127,7 +139,8 @@
       <workItem from="1730184532846" duration="7678000" />
       <workItem from="1730950222467" duration="22378000" />
       <workItem from="1731302027951" duration="3259000" />
-      <workItem from="1731342827807" duration="38768000" />
+      <workItem from="1731342827807" duration="38906000" />
+      <workItem from="1731470784612" duration="16125000" />
     </task>
     <servers />
   </component>

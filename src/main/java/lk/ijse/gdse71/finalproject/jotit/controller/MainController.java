@@ -16,6 +16,8 @@ public class MainController {
     private Button addButton;
     @FXML
     private ScrollPane scrollPane;
+    @FXML
+    private TextField searchBar;
 
     @FXML
     public void initialize() {
@@ -26,6 +28,7 @@ public class MainController {
     @FXML
     void addButtonOnAction(ActionEvent event) {
         try {
+            searchBar.setVisible(false);
             Parent root = FXMLLoader.load(getClass().getResource("/view/addJot.fxml"));
             scrollPane.setContent(root);
         } catch (IOException e) {

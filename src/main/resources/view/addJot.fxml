@@ -45,7 +45,7 @@
                               <Font name="Arial Bold" size="15.0" />
                            </font>
                         </Label>
-                        <TextField HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="txtTitle" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                   <HBox alignment="BOTTOM_RIGHT" prefHeight="26.0" prefWidth="70.0" spacing="10.0" HBox.hgrow="ALWAYS">

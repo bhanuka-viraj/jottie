@@ -41,6 +41,7 @@ public class JotModelImpl implements JotModel {
                 if (isJotTagSaved) {
                     boolean isMoodSaved = false;
                     List<MoodDto> moods = jotDto.getMoods();
+                    System.out.println(moods);
                     for (MoodDto mood : moods) {
                         isMoodSaved = CrudUtil.execute("INSERT INTO jot_mood VALUES (?,?)", jotDto.getId(), mood.getId());
                     }

@@ -17,8 +17,8 @@ public class TagModelImpl implements TagModel {
     }
 
     @Override
-    public TagDto getTag(String id) throws Exception {
-        ResultSet rs = CrudUtil.execute("SELECT * FROM tag WHERE tag_id = ? ", id);
+    public TagDto getTag(String name) throws Exception {
+        ResultSet rs = CrudUtil.execute("SELECT * FROM tag WHERE name = ? ", name);
         if (rs.next()) {
             return new TagDto(rs.getString("tag_id"), rs.getString("name"));
         }
@@ -36,7 +36,7 @@ public class TagModelImpl implements TagModel {
     }
 
     @Override
-    public boolean deleteTag(TagDto tagDto) throws Exception {
-        return CrudUtil.execute("DELETE FROM tag WHERE tag_id = ?", tagDto.getId());
+    public boolean deleteTag(String name) throws Exception {
+        return CrudUtil.execute("DELETE FROM tag WHERE name = ?", name);
     }
 }

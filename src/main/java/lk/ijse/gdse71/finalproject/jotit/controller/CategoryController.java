@@ -12,10 +12,15 @@ import javafx.stage.Stage;
 import lk.ijse.gdse71.finalproject.jotit.dto.CategoryDto;
 import lk.ijse.gdse71.finalproject.jotit.model.CategoryModel;
 import lk.ijse.gdse71.finalproject.jotit.model.impl.CategoryModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.util.IdGenerator;
 
 import java.util.List;
 
 public class CategoryController {
+
+
+    @FXML
+    private Button btnSaveCat;
 
     @FXML
     private ComboBox<CategoryDto> categoryCombo;
@@ -23,11 +28,6 @@ public class CategoryController {
     @FXML
     private TextField txtCategoryDescription;
 
-    @FXML
-    private Button btnSaveCategory;
-
-    @FXML
-    private Button btnSaveJot;
 
     private CategoryModel categoryModel;
     private CategoryDto selectedCategory; // To store the selected category
@@ -36,15 +36,24 @@ public class CategoryController {
     public void initialize() {
         categoryModel = new CategoryModelImpl();
         loadCategories();
+        btnSaveCat.setVisible(false);
+        txtCategoryDescription.setVisible(false);
     }
 
-    private void loadCategories() {
+    @FXML
+    void addCategoryOnAction(ActionEvent event) {
+        btnSaveCat.setVisible(true);
+        txtCategoryDescription.setVisible(true);
+    }
+
+
+        private void loadCategories() {
         try {
             List<CategoryDto> categoryDtos = categoryModel.getAllCategories();
             ObservableList<CategoryDto> observableList = FXCollections.observableArrayList(categoryDtos);
             categoryCombo.setItems(observableList);
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, "Failed to load categories").show();
+            new Alert(Alert.AlertType.ERROR, "Failed to load categories " + e.getMessage()).show();
         }
     }
 
@@ -58,6 +67,7 @@ public class CategoryController {
             }
 
             CategoryDto categoryDto = new CategoryDto();
+            categoryDto.setId(IdGenerator.generateId("Cat",5));
             categoryDto.setDescription(categoryDescription);
 
             if (categoryModel.saveCategory(categoryDto)) {
@@ -68,7 +78,7 @@ public class CategoryController {
                 new Alert(Alert.AlertType.ERROR, "Failed to save category").show();
             }
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, "An error occurred").show();
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
@@ -81,7 +91,7 @@ public class CategoryController {
         }
 
         // Close the category window
-        Stage stage = (Stage) btnSaveJot.getScene().getWindow();
+        Stage stage = (Stage) categoryCombo.getScene().getWindow();
         stage.close();
     }
 

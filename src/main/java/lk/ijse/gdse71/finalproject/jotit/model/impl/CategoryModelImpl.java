@@ -19,7 +19,7 @@ public class CategoryModelImpl implements CategoryModel {
     @Override
     public CategoryDto getCategory(String id) throws Exception {
         ResultSet rs = CrudUtil.execute("SELECT * FROM category WHERE category_id =?", id);
-        return new CategoryDto(rs.getString("category_id"), rs.getString("category_description"));
+        return new CategoryDto(rs.getString("category_id"), rs.getString("description"));
     }
 
     @Override
@@ -27,7 +27,7 @@ public class CategoryModelImpl implements CategoryModel {
         ResultSet rs = CrudUtil.execute("SELECT * FROM category");
         List<CategoryDto> categories = new ArrayList<>();
         while (rs.next()) {
-            categories.add(new CategoryDto(rs.getString("category_id"), rs.getString("category_description")));
+            categories.add(new CategoryDto(rs.getString("category_id"), rs.getString("description")));
         }
         return categories;
     }

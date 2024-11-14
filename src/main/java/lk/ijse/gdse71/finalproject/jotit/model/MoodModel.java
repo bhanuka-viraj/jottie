@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface MoodModel {
     public boolean saveMood(MoodDto moodDto) throws Exception;
-    public MoodDto getMood(String id) throws Exception;
-    public boolean deleteMood(String id) throws Exception;
+    public MoodDto getMood(String desc) throws Exception;
+    public boolean deleteMood(String desc) throws Exception;
     public List<MoodDto> getAllMoods() throws Exception;
 }

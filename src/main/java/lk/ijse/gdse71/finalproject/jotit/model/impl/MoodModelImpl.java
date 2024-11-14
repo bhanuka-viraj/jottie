@@ -18,8 +18,8 @@ public class MoodModelImpl implements MoodModel {
     }
 
     @Override
-    public MoodDto getMood(String id) throws Exception {
-        ResultSet resultSet = CrudUtil.execute("SELECT * FROM mood WHERE mood_id = ?", Integer.parseInt(id));
+    public MoodDto getMood(String desc) throws Exception {
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM mood WHERE description = ?", desc);
         if (resultSet.next()) {
             return new MoodDto(resultSet.getString("mood_id"), resultSet.getString("description"));
         }
@@ -27,8 +27,8 @@ public class MoodModelImpl implements MoodModel {
     }
 
     @Override
-    public boolean deleteMood(String id) throws Exception {
-        return CrudUtil.execute("DELETE FROM mood WHERE mood_id = ?", Integer.parseInt(id));
+    public boolean deleteMood(String desc) throws Exception {
+        return CrudUtil.execute("DELETE FROM mood WHERE description = ?", Integer.parseInt(desc));
     }
 
     @Override

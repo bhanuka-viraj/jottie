@@ -30,7 +30,7 @@ public class CategoryController {
 
 
     private CategoryModel categoryModel;
-    private CategoryDto selectedCategory; // To store the selected category
+    private CategoryDto selectedCategory;
 
     @FXML
     public void initialize() {
@@ -90,12 +90,10 @@ public class CategoryController {
             return;
         }
 
-        // Close the category window
         Stage stage = (Stage) categoryCombo.getScene().getWindow();
         stage.close();
     }
 
-    // Method to get the selected category
     public CategoryDto getSelectedCategory() {
         return selectedCategory;
     }

@@ -247,7 +247,7 @@ public class AddJotController {
     void addLocationOnAction(ActionEvent event) {
         loadView("Add New Location", "/view/addLocation.fxml");
         try {
-            loadLocations(); // Call loadLocations() directly after loading the view
+            loadLocations();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -257,7 +257,7 @@ public class AddJotController {
     void addMoodOnAction(ActionEvent event) {
         loadView("Add New Mood", "/view/addMood.fxml");
         try {
-            refreshMoodList(); // Call refreshMoodList() directly after loading the view
+            refreshMoodList();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -267,7 +267,7 @@ public class AddJotController {
     void addTagOnAction(ActionEvent event) {
         loadView("Add New Tag", "/view/addTag.fxml");
         try {
-            refreshTagList(); // Call refreshTagList() directly after loading the view
+            refreshTagList();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -300,13 +300,13 @@ public class AddJotController {
     }
 
     private void refreshTagList() throws Exception {
-        tagFlowPane.getChildren().clear(); // Clear existing tags
+        tagFlowPane.getChildren().clear();
 
-        List<TagDto> tagDtos = tagModel.getAllTags(); // Fetch all tags
+        List<TagDto> tagDtos = tagModel.getAllTags();
 
         for (TagDto tagDto : tagDtos) {
             System.out.println(tagDto);
-            FXMLLoader tagLoader = new FXMLLoader(getClass().getResource("/view/components/tag.fxml")); // Assuming you have a tag.fxml
+            FXMLLoader tagLoader = new FXMLLoader(getClass().getResource("/view/components/tag.fxml"));
             Parent tagNode = tagLoader.load();
 
             Tag tagController = tagLoader.getController();

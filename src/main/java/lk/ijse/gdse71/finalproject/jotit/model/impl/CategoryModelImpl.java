@@ -19,7 +19,11 @@ public class CategoryModelImpl implements CategoryModel {
     @Override
     public CategoryDto getCategory(String id) throws Exception {
         ResultSet rs = CrudUtil.execute("SELECT * FROM category WHERE category_id =?", id);
-        return new CategoryDto(rs.getString("category_id"), rs.getString("description"));
+        if (rs.next()) { // Move to the first row before accessing data
+            return new CategoryDto(rs.getString("category_id"), rs.getString("description"));
+        } else {
+            return null;
+        }
     }
 
     @Override

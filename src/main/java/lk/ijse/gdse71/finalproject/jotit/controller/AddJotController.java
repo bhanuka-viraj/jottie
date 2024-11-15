@@ -44,7 +44,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -116,7 +115,7 @@ public class AddJotController {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
 
-            loadView("/view/category.fxml", "Select category");
+//            loadView("Select Category", "/view/category.fxml"); should be completed
 
             stage.setOnHidden(e -> {
                 selectedCategory = categoryController.getSelectedCategory();
@@ -286,7 +285,7 @@ public class AddJotController {
             Parent moodNode = moodLoader.load();
 
             Mood moodController = moodLoader.getController();
-            moodController.setLabel(moodDto.getDescription());
+            moodController.setData(moodDto);
 
             moodNode.getProperties().put("controller", moodController);
             moodGridPane.add(moodNode, columnIndex, rowIndex);
@@ -310,7 +309,7 @@ public class AddJotController {
             Parent tagNode = tagLoader.load();
 
             Tag tagController = tagLoader.getController();
-            tagController.setLabel(tagDto.getName());
+            tagController.setData(tagDto);
 
             tagNode.getProperties().put("controller", tagController);
             FlowPane.setMargin(tagNode, new Insets(2, 2, 2, 2));

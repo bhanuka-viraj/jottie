@@ -13,8 +13,8 @@ public class Tag {
     private ToggleButton toggleTag;
     private final TagModel tagModel = new TagModelImpl();
 
-    public void setLabel(String label) {
-        toggleTag.setText(label);
+    public void setData(TagDto tagDto) {
+        toggleTag.setText(tagDto.getName());
     }
 
     public boolean isSelected() {

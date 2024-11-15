@@ -122,7 +122,8 @@ public class JotModelImpl implements JotModel {
 
     @Override
     public List<JotDto> getAllJot(String userId) throws Exception {
-        ResultSet resultSet = CrudUtil.execute("SELECT * FROM jot WHERE user_id=?", userId);
+//        ResultSet resultSet = CrudUtil.execute("SELECT * FROM jot WHERE user_id=?", userId);
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM jot");
         List<JotDto> jotDtos = new ArrayList<>();
         while (resultSet.next()) {
             JotDto jotDto = new JotDto();
@@ -139,7 +140,7 @@ public class JotModelImpl implements JotModel {
             List<TagDto> tags = new ArrayList<>();
             ResultSet tagResultSet  = CrudUtil.execute(
                     "SELECT * FROM tag t" +
-                            "JOIN jot_tag jt ON t.tag_id = jt.tag_id " +
+                            " JOIN jot_tag jt ON t.tag_id = jt.tag_id " +
                             "WHERE jt.jot_id = ?", jotDto.getId());
             while (tagResultSet .next()) {
                 tags.add(new TagDto(tagResultSet .getString("tag_id"), tagResultSet .getString("name")));
@@ -149,7 +150,7 @@ public class JotModelImpl implements JotModel {
             List<MoodDto> moods = new ArrayList<>();
             ResultSet jotMoods = CrudUtil.execute(
                     "SELECT * FROM mood m" +
-                            "JOIN jot_mood jm ON m.mood_id = jm.mood_id " +
+                            " JOIN jot_mood jm ON m.mood_id = jm.mood_id " +
                             "WHERE jm.jot_id = ?", jotDto.getId());
             while (jotMoods.next()) {
                 moods.add(new MoodDto(jotMoods.getString("mood_id"), jotMoods.getString("description")));

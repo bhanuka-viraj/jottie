@@ -1,14 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.gdse71.finalproject.jotit.controller.components.JotCard"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" style="-fx-background-radius: 50; -fx-background-color: #605678;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse71.finalproject.jotit.controller.components.JotCard">
+   <children>
+      <HBox prefHeight="74.0" prefWidth="808.0" VBox.vgrow="ALWAYS">
+         <children>
+            <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="lblTitle" text="Title" textFill="WHITE" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="40.0" />
+                     </font>
+                     <padding>
+                        <Insets left="90.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="lblDate" text="2024-05-03" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="27.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets right="90.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="111.0" prefWidth="758.0" VBox.vgrow="ALWAYS">
+         <VBox.margin>
+            <Insets bottom="25.0" left="25.0" right="25.0" />
+         </VBox.margin>
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <HBox fx:id="moodHbox" VBox.vgrow="ALWAYS" />
+                  <HBox fx:id="locationHbox" alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+                     <children>
+                        <ImageView fitHeight="93.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                           <image>
+                              <Image url="@../assets/location.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="lblLocation" text="Home" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="15.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="60.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <HBox fx:id="tagHbox" VBox.vgrow="ALWAYS" />
+                  <HBox fx:id="categoryHbox" alignment="CENTER" VBox.vgrow="ALWAYS">
+                     <children>
+                        <ImageView fitHeight="71.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/category.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="lblCategory" text="Personal" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="808.0">
+         <children>
+            <Hyperlink alignment="CENTER_RIGHT" text="View" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="90.0" />
+               </padding>
+               <font>
+                  <Font name="FontAwesome" size="19.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/open.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Hyperlink>
+         </children>
+      </HBox>
+   </children>
+</VBox>

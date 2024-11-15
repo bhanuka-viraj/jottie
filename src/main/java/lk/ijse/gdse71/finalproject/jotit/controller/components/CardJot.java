@@ -4,38 +4,30 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import lk.ijse.gdse71.finalproject.jotit.dto.JotDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.MoodDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.TagDto;
 import org.ocpsoft.prettytime.PrettyTime;
 
-import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-public class JotCard {
-
-    @FXML
-    private Label lblTitle;
-
-    @FXML
-    private Label lblDate;
-
-    @FXML
-    private HBox categoryHbox;
+public class CardJot {
 
     @FXML
     private Label lblCategory;
 
     @FXML
+    private Label lblDate;
+
+    @FXML
     private Label lblLocation;
 
     @FXML
-    private HBox locationHbox;
+    private Label lblTitle;
 
     @FXML
     private HBox moodHbox;
@@ -43,7 +35,13 @@ public class JotCard {
     @FXML
     private HBox tagHbox;
 
-    public void initialize() {
+    @FXML
+    void cardClickOnAction(MouseEvent event) {
+
+    }
+
+    @FXML
+    void openOnClicked(MouseEvent event) {
 
     }
 
@@ -85,4 +83,5 @@ public class JotCard {
             }
         }
     }
+
 }

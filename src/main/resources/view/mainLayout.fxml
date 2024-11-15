@@ -9,17 +9,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1300.0" stylesheets="@../style/global.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse71.finalproject.jotit.controller.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1300.0" stylesheets="@../style/global.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse71.finalproject.jotit.controller.LayoutController">
    <left>
       <VBox prefHeight="570.0" prefWidth="223.0" style="-fx-background-color: #e3e3e3;" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#addButtonOnAction" prefHeight="26.0" prefWidth="184.0" text="Add Jot" />
-                  <Button fx:id="addButton1" mnemonicParsing="false" onAction="#addButtonOnAction" prefHeight="26.0" prefWidth="184.0" text="View Jots" />
-                  <Button fx:id="addButton2" mnemonicParsing="false" onAction="#addButtonOnAction" prefHeight="26.0" prefWidth="184.0" text="Add Task" />
-                  <Button fx:id="addButton3" mnemonicParsing="false" onAction="#addButtonOnAction" prefHeight="26.0" prefWidth="184.0" text="View Task" />
-                  <Button fx:id="addButton4" mnemonicParsing="false" onAction="#addButtonOnAction" prefHeight="26.0" prefWidth="184.0" text="Received Jots" />
+                  <Button fx:id="btnAddJot" mnemonicParsing="false" onAction="#btnAddJotOnAction" prefHeight="26.0" prefWidth="184.0" text="Add Jot" />
+                  <Button fx:id="btnViewJot" mnemonicParsing="false" onAction="#btnViewJotOnAction" prefHeight="26.0" prefWidth="184.0" text="View Jots" />
+                  <Button fx:id="addButton2" mnemonicParsing="false" prefHeight="26.0" prefWidth="184.0" text="Add Task" />
+                  <Button fx:id="addButton3" mnemonicParsing="false" prefHeight="26.0" prefWidth="184.0" text="View Task" />
+                  <Button fx:id="addButton4" mnemonicParsing="false" prefHeight="26.0" prefWidth="184.0" text="Received Jots" />
                </children>
                <padding>
                   <Insets bottom="10.0" top="10.0" />

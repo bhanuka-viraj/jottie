@@ -19,9 +19,9 @@ public class Mood {
     private final MoodModel moodModel = new MoodModelImpl();
 
 
-    public void setLabel(String lbl){
-        toggleMood.setText(lbl);
-        String imagePath = "/view/assets/moodPics/" + lbl.toLowerCase() + ".png";
+    public void setData(MoodDto moodDto){
+        toggleMood.setText(moodDto.getDescription());
+        String imagePath = "/view/assets/moodPics/" + moodDto.getDescription().toLowerCase() + ".png";
         Image moodImage;
         try {
             moodImage = new Image(getClass().getResourceAsStream(imagePath));

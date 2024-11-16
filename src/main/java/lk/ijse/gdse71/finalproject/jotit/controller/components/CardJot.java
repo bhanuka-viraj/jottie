@@ -1,10 +1,13 @@
 package lk.ijse.gdse71.finalproject.jotit.controller.components;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import lk.ijse.gdse71.finalproject.jotit.controller.AddJotController;
 import lk.ijse.gdse71.finalproject.jotit.controller.Controller;
@@ -36,6 +39,12 @@ public class CardJot {
 
     @FXML
     private HBox tagHbox;
+    @FXML
+    private AnchorPane pane;
+    @FXML
+    private PieChart pieChart;
+    @FXML
+    private Label lblTasks;
 
     private JotDto jotDto;
 
@@ -96,5 +105,15 @@ public class CardJot {
             }
         }
     }
+    @FXML
+    void btnAddTaskOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnDeleteOnAction(ActionEvent event) {
+
+    }
+
 
 }

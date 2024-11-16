@@ -8,5 +8,18 @@
 }
 
 .card {
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 15, 0.0, 0.0, 0.0);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0.0, 0.0, 5);
+}
+
+.card:hover .card-manage {
+    visibility: visible;
+}
+
+.card-manage {
+    visibility: hidden;
+    opacity: 0.8;
+}
+
+.card-manage Button {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 3, 0.0, 0.0, 2);
 }

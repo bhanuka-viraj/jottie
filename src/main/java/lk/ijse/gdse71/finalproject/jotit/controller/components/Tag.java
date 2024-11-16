@@ -21,6 +21,10 @@ public class Tag {
         return toggleTag.isSelected();
     }
 
+    public void setSelected(boolean selected) {
+        toggleTag.setSelected(selected);
+    }
+
     public TagDto getSelectedTagDto(){
         try {
             return tagModel.getTag(toggleTag.getText());

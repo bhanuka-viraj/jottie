@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import lk.ijse.gdse71.finalproject.jotit.dto.JotDto;
 
 import java.io.IOException;
 
@@ -27,7 +28,9 @@ public class LayoutController {
     void btnAddJotOnAction(ActionEvent event) {
         try {
             searchBar.setVisible(false);
-            Parent root = FXMLLoader.load(getClass().getResource("/view/addJot.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/addJot.fxml"));
+            Parent root = loader.load();
+            AddJotController addJotController = loader.getController();
             scrollPane.setContent(root);
         } catch (IOException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).show();
@@ -36,6 +39,7 @@ public class LayoutController {
 
     @FXML
     void btnViewJotOnAction(ActionEvent event) {
+        searchBar.setVisible(true);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/viewJots.fxml"));
             Parent viewJotsRoot = loader.load();
@@ -50,5 +54,18 @@ public class LayoutController {
         }
     }
 
+    public void viewOnEdtitor(JotDto jotDto) {
+        try {
+            searchBar.setVisible(false);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/addJot.fxml"));
+            Parent root = loader.load();
+            AddJotController addJotController = loader.getController();
+            addJotController.loadJot(jotDto);
+
+            scrollPane.setContent(root);
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).show();
+        }
+    }
 
 }

@@ -16,7 +16,7 @@ import lk.ijse.gdse71.finalproject.jotit.util.IdGenerator;
 
 import java.util.List;
 
-public class CategoryController {
+public class StepTwoController {
 
 
     @FXML
@@ -28,7 +28,7 @@ public class CategoryController {
     @FXML
     private TextField txtCategoryDescription;
 
-
+    private AddJotController addJotController;
     private CategoryModel categoryModel;
     private CategoryDto selectedCategory;
 
@@ -47,7 +47,7 @@ public class CategoryController {
     }
 
 
-        private void loadCategories() {
+    private void loadCategories() {
         try {
             List<CategoryDto> categoryDtos = categoryModel.getAllCategories();
             ObservableList<CategoryDto> observableList = FXCollections.observableArrayList(categoryDtos);
@@ -67,7 +67,7 @@ public class CategoryController {
             }
 
             CategoryDto categoryDto = new CategoryDto();
-            categoryDto.setId(IdGenerator.generateId("Cat",5));
+            categoryDto.setId(IdGenerator.generateId("Cat", 5));
             categoryDto.setDescription(categoryDescription);
 
             if (categoryModel.saveCategory(categoryDto)) {
@@ -90,11 +90,26 @@ public class CategoryController {
             return;
         }
 
+//        addJotController.setSelectedCategory(selectedCategory);
         Stage stage = (Stage) categoryCombo.getScene().getWindow();
         stage.close();
     }
 
     public CategoryDto getSelectedCategory() {
         return selectedCategory;
+    }
+
+    public void setSelectedCategory(CategoryDto selectedCategory) {
+        categoryCombo.setValue(selectedCategory);
+        this.selectedCategory = selectedCategory;
+    }
+
+    public void setAddJotController(AddJotController addJotController) {
+        this.addJotController = addJotController;
+    }
+
+    @FXML
+    void btnAddTaskOnAction(ActionEvent event) {
+
     }
 }

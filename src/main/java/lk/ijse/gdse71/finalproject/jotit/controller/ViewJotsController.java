@@ -3,11 +3,8 @@ package lk.ijse.gdse71.finalproject.jotit.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import lk.ijse.gdse71.finalproject.jotit.controller.components.CardJot;
-import lk.ijse.gdse71.finalproject.jotit.controller.components.JotCard;
 import lk.ijse.gdse71.finalproject.jotit.dto.JotDto;
 import lk.ijse.gdse71.finalproject.jotit.model.JotModel;
 import lk.ijse.gdse71.finalproject.jotit.model.impl.JotModelImpl;
@@ -31,7 +28,7 @@ public class ViewJotsController {
             int row = 0;
             int col = 0;
             for (JotDto jot : jots) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/components/card_jot.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/components/card_jot_.fxml"));
                 Parent jotCardRoot = loader.load();
                 CardJot jotCardController = loader.getController();
                 jotCardController.setData(jot);

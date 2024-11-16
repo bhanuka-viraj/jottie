@@ -4,7 +4,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse71.finalproject.jotit.controller.components.CardTag">
    <children>
       <Label fx:id="lblTag" layoutX="14.0" layoutY="1.0" text="Hackathon" textFill="WHITE">
@@ -12,7 +11,7 @@
             <Font name="Arial" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="4.0" layoutY="1.0" text="#" textFill="WHITE">
+      <Label layoutX="7.0" layoutY="1.0" text="#" textFill="WHITE">
          <font>
             <Font name="Arial" size="12.0" />
          </font>

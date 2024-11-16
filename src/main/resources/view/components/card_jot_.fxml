@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -54,11 +55,17 @@
       </Label>
       <AnchorPane onMouseClicked="#cardClickOnAction" prefHeight="403.0" prefWidth="302.0" style="-fx-background-radius: 15;">
          <children>
-            <Circle fill="DODGERBLUE" layoutX="249.0" layoutY="359.0" onMouseClicked="#openOnClicked" radius="26.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: white; -fx-stroke: none;" />
+            <Circle fill="DODGERBLUE" layoutX="249.0" layoutY="359.0" onMouseClicked="#openOnClicked" radius="26.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: white; -fx-stroke: none;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Circle>
             <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="235.0" layoutY="348.0" onMouseClicked="#openOnClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/open.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
       </AnchorPane>

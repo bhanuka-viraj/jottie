@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import lk.ijse.gdse71.finalproject.jotit.controller.AddJotController;
+import lk.ijse.gdse71.finalproject.jotit.controller.Controller;
 import lk.ijse.gdse71.finalproject.jotit.dto.JotDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.MoodDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.TagDto;
@@ -35,6 +37,8 @@ public class CardJot {
     @FXML
     private HBox tagHbox;
 
+    private JotDto jotDto;
+
     @FXML
     void cardClickOnAction(MouseEvent event) {
 
@@ -42,19 +46,28 @@ public class CardJot {
 
     @FXML
     void openOnClicked(MouseEvent event) {
+        if (jotDto != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/addJot.fxml"));
+                Parent root = loader.load();
 
+                Controller.layoutController.viewOnEdtitor(jotDto);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void setData(JotDto jotDto){
+        this.jotDto = jotDto;
         lblCategory.setText(jotDto.getCategory().getDescription());
         lblLocation.setText(jotDto.getLocation().getDescription());
         lblTitle.setText(jotDto.getTitle());
 
-        Date date = jotDto.getCreatedAt();
+        Date date = jotDto.getUpdatedAt();
         LocalDateTime localDateTime = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-//        String formattedDate = localDateTime.format(formatter);
         PrettyTime p = new PrettyTime();
 
         lblDate.setText(p.format(localDateTime));

@@ -35,6 +35,10 @@ public class Mood {
     public boolean isSelected() {
         return toggleMood.isSelected();
     }
+    public void setSelected(boolean selected) {
+        System.out.println("mood selected: " + selected);
+        toggleMood.setSelected(selected);
+    }
 
     public MoodDto getSelectedMoodDto(){
         try {

@@ -18,49 +18,108 @@ public class JotModelImpl implements JotModel {
     @Override
     public boolean saveJot(JotDto jotDto) throws Exception {
         try {
-            CrudUtil.beginTransaction();
+            JotDto existingJot = getJot(jotDto.getId());
+            if (existingJot != null) {
+                updateJot(jotDto);
+                return true;
+            } else {
+                CrudUtil.beginTransaction();
+                boolean isJotSaved = CrudUtil.execute(
+                        "INSERT INTO jot (jot_id, user_id, title, path, category_id, location_id) " +
+                                "VALUES (?, ?, ?, ?, ?, ?)",
+                        jotDto.getId(),
+                        jotDto.getUserId(),
+                        jotDto.getTitle(),
+                        jotDto.getPath(),
+                        jotDto.getCategory().getId(),
+                        jotDto.getLocation().getId()
+                );
 
-            boolean isJotSaved = CrudUtil.execute(
-                    "INSERT INTO jot (jot_id, user_id, title, path, category_id, location_id) " +
-                            "VALUES (?, ?, ?, ?, ?, ?)",
-                    jotDto.getId(),
-                    jotDto.getUserId(),
-                    jotDto.getTitle(),
-                    jotDto.getPath(),
-                    jotDto.getCategory().getId(),
-                    jotDto.getLocation().getId()
-            );
-
-            if (isJotSaved) {
-                boolean isJotTagSaved = false;
-                List<TagDto> tags = jotDto.getTags();
-                for (TagDto tag : tags) {
-                    isJotTagSaved = CrudUtil.execute("INSERT INTO jot_tag VALUES (?,?)", jotDto.getId(), tag.getId());
-                }
-
-                if (isJotTagSaved) {
-                    boolean isMoodSaved = false;
-                    List<MoodDto> moods = jotDto.getMoods();
-                    System.out.println(moods);
-                    for (MoodDto mood : moods) {
-                        isMoodSaved = CrudUtil.execute("INSERT INTO jot_mood VALUES (?,?)", jotDto.getId(), mood.getId());
+                if (isJotSaved) {
+                    boolean isJotTagSaved = false;
+                    List<TagDto> tags = jotDto.getTags();
+                    for (TagDto tag : tags) {
+                        isJotTagSaved = CrudUtil.execute("INSERT INTO jot_tag VALUES (?,?)", jotDto.getId(), tag.getId());
                     }
 
-                    if (isMoodSaved) {
-                        CrudUtil.commitTransaction();
+                    if (isJotTagSaved) {
+                        boolean isMoodSaved = false;
+                        List<MoodDto> moods = jotDto.getMoods();
+                        System.out.println(moods);
+                        for (MoodDto mood : moods) {
+                            isMoodSaved = CrudUtil.execute("INSERT INTO jot_mood VALUES (?,?)", jotDto.getId(), mood.getId());
+                        }
+
+                        if (isMoodSaved) {
+                            CrudUtil.commitTransaction();
+                        }
+                    } else {
+                        CrudUtil.rollbackTransaction();
+                        return false;
                     }
+
                 } else {
                     CrudUtil.rollbackTransaction();
                     return false;
                 }
-
-            } else {
-                CrudUtil.rollbackTransaction();
-                return false;
+                return true;
             }
-            return true;
+
 
         } catch (SQLException e) {
+            CrudUtil.rollbackTransaction();
+            e.printStackTrace();
+            throw e;
+        } finally {
+            CrudUtil.closeConnection();
+        }
+
+    }
+
+    private boolean updateJot(JotDto jotDto) throws Exception {
+        try {
+
+            CrudUtil.beginTransaction();
+            boolean isJotUpdated = CrudUtil.execute(// AND user_id = ?
+                    "UPDATE jot SET title = ?, path = ?, category_id = ?, location_id = ? WHERE jot_id = ?",
+                    jotDto.getTitle(),
+                    jotDto.getPath(),
+                    jotDto.getCategory().getId(),
+                    jotDto.getLocation().getId(),
+                    jotDto.getId()
+//                    jotDto.getUserId()
+            );
+
+            if (isJotUpdated) {
+                boolean isJotTagDeleted = CrudUtil.execute("DELETE FROM jot_tag WHERE jot_id = ?", jotDto.getId());
+                boolean isJotMoodDeleted = CrudUtil.execute("DELETE FROM jot_mood WHERE jot_id = ?", jotDto.getId());
+
+                if (isJotTagDeleted && isJotMoodDeleted) {
+                    boolean isJotTagSaved = false;
+                    List<TagDto> tags = jotDto.getTags();
+                    for (TagDto tag : tags) {
+                        isJotTagSaved = CrudUtil.execute("INSERT INTO jot_tag VALUES (?, ?)", jotDto.getId(), tag.getId());
+
+                    }
+
+                    if (isJotTagSaved) {
+                        boolean isMoodSaved = false;
+                        List<MoodDto> moods = jotDto.getMoods();
+                        for (MoodDto mood : moods) {
+                            isMoodSaved =  CrudUtil.execute("INSERT INTO jot_mood VALUES (?, ?)", jotDto.getId(), mood.getId());
+                        }
+
+                        if (isMoodSaved) {
+                            CrudUtil.commitTransaction();
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            CrudUtil.rollbackTransaction();
+            return false;
+        } catch (Exception e) {
             CrudUtil.rollbackTransaction();
             throw e;
         } finally {
@@ -96,20 +155,20 @@ public class JotModelImpl implements JotModel {
             jotDto.setUpdatedAt(resultSet.getTimestamp("updated_at"));
 
             List<TagDto> tags = new ArrayList<>();
-            ResultSet tagResultSet  = CrudUtil.execute(
+            ResultSet tagResultSet = CrudUtil.execute(
                     "SELECT * FROM tag t" +
-                    "JOIN jot_tag jt ON t.tag_id = jt.tag_id " +
-                    "WHERE jt.jot_id = ?", id);
-            while (tagResultSet .next()) {
-                tags.add(new TagDto(tagResultSet .getString("tag_id"), tagResultSet .getString("name")));
+                            " JOIN jot_tag jt ON t.tag_id = jt.tag_id " +
+                            "WHERE jt.jot_id = ?", id);
+            while (tagResultSet.next()) {
+                tags.add(new TagDto(tagResultSet.getString("tag_id"), tagResultSet.getString("name")));
             }
             jotDto.setTags(tags);
 
             List<MoodDto> moods = new ArrayList<>();
             ResultSet jotMoods = CrudUtil.execute(
                     "SELECT * FROM mood m" +
-                    "JOIN jot_mood jm ON m.mood_id = jm.mood_id " +
-                    "WHERE jm.jot_id = ?", id);
+                            " JOIN jot_mood jm ON m.mood_id = jm.mood_id " +
+                            "WHERE jm.jot_id = ?", id);
             while (jotMoods.next()) {
                 moods.add(new MoodDto(jotMoods.getString("mood_id"), jotMoods.getString("description")));
             }
@@ -138,12 +197,12 @@ public class JotModelImpl implements JotModel {
             jotDto.setUpdatedAt(resultSet.getTimestamp("updated_at"));
 
             List<TagDto> tags = new ArrayList<>();
-            ResultSet tagResultSet  = CrudUtil.execute(
+            ResultSet tagResultSet = CrudUtil.execute(
                     "SELECT * FROM tag t" +
                             " JOIN jot_tag jt ON t.tag_id = jt.tag_id " +
                             "WHERE jt.jot_id = ?", jotDto.getId());
-            while (tagResultSet .next()) {
-                tags.add(new TagDto(tagResultSet .getString("tag_id"), tagResultSet .getString("name")));
+            while (tagResultSet.next()) {
+                tags.add(new TagDto(tagResultSet.getString("tag_id"), tagResultSet.getString("name")));
             }
             jotDto.setTags(tags);
 

@@ -2,9 +2,12 @@ package lk.ijse.gdse71.finalproject.jotit;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import lk.ijse.gdse71.finalproject.jotit.controller.Controller;
 
 import java.io.IOException;
 
@@ -12,7 +15,9 @@ public class AppInitializer extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/mainLayout.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        Parent root = fxmlLoader.load();
+        Controller.layoutController = fxmlLoader.getController();
+        Scene scene = new Scene(root);
         stage.setTitle("JoTtie");
         stage.setScene(scene);
         stage.show();

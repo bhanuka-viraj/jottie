@@ -44,14 +44,14 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
          </children></HBox>
    </top>
-   <center>
-      <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" prefHeight="588.0" prefWidth="822.0" BorderPane.alignment="CENTER">
-         <content>
-            <VBox alignment="CENTER" />
-         </content>
-      </ScrollPane>
-   </center>
    <bottom>
       <HBox prefHeight="18.0" prefWidth="946.0" BorderPane.alignment="CENTER" />
    </bottom>
+   <center>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+   </center>
 </BorderPane>

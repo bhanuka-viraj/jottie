@@ -2,6 +2,7 @@ package lk.ijse.gdse71.finalproject.jotit.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +15,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lk.ijse.gdse71.finalproject.jotit.controller.components.Mood;
@@ -38,10 +38,10 @@ import lk.ijse.gdse71.finalproject.jotit.util.IdGenerator;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -77,6 +77,7 @@ public class AddJotController {
     private CategoryDto selectedCategory;
     private ObservableList<MoodDto> selectedMoods = FXCollections.observableArrayList();
     private ObservableList<TagDto> selectedTags = FXCollections.observableArrayList();
+    private JotDto jotDto;
 
     @FXML
     public void initialize() {
@@ -104,102 +105,137 @@ public class AddJotController {
     @FXML
     void onSaveButtonClick(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/category.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/step_two.fxml"));
             Parent categoryView = loader.load();
 
-            CategoryController categoryController = loader.getController();
+            StepTwoController stepTwoController = loader.getController();
+
+            if (this.jotDto != null) {
+                stepTwoController.setSelectedCategory(jotDto.getCategory());
+            }
 
             Stage stage = new Stage();
             stage.setScene(new Scene(categoryView));
             stage.setTitle("Select Category");
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.show();
 
-//            loadView("Select Category", "/view/category.fxml"); should be completed
-
-            stage.setOnHidden(e -> {
-                selectedCategory = categoryController.getSelectedCategory();
-                if (selectedCategory != null) {
-                    try {
-                        saveJotWithCategory();
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                }
+            stage.setOnCloseRequest(windowEvent -> {
+                stepTwoController.setSelectedCategory(null);
             });
 
-        } catch (IOException e) {
+            stage.showAndWait();
 
-        }
-    }
+            stepTwoController.setAddJotController(this);
 
-    @FXML
-    void onLoadButtonClick(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Note");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Encrypted Files", "*.enc"));
-        fileChooser.setInitialDirectory(new File("jotsenc"));
-        File selectedFile = fileChooser.showOpenDialog(null);
-
-        if (selectedFile != null) {
-            try {
-                byte[] encryptedContent = Files.readAllBytes(selectedFile.toPath());
-                String decryptedContent = decrypt(encryptedContent, SECRET_KEY);
-                setEditorContent(decryptedContent);
-                currentFilePath = selectedFile.getAbsolutePath();
-                showNotification("Note loaded successfully", "from:\n" + selectedFile.getAbsolutePath());
-            } catch (Exception e) {
-                showNotification("Failed to load note: ", e.getMessage());
-                e.printStackTrace();
+            if (stepTwoController.getSelectedCategory() != null) {
+                selectedCategory = stepTwoController.getSelectedCategory();
+                saveJotWithCategory();
             }
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    private void saveJotWithCategory() throws Exception {
-        collectSelectedMoods();
-        collectSelectedTags();
-        LocationDto selectedLocation = locationCombo.getValue();
+    public void loadJot(JotDto jotDto) {
+        if (jotDto == null) {
+            System.err.println("Error: JotDto is null.");
+            return;
+        }
 
-        JotDto jotDto = new JotDto();
-        jotDto.setId(IdGenerator.generateId("JT", 5));
-        jotDto.setTitle(txtTitle.getText());
-//        jotDto.setUserId("user001");
-        jotDto.setPath(currentFilePath);
-        jotDto.setCategory(selectedCategory);
-        jotDto.setLocation(selectedLocation);
-        jotDto.setMoods(selectedMoods);
-        jotDto.setTags(selectedTags);
+        String relativePath = jotDto.getPath();
+        if (relativePath == null || relativePath.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Error: Path in JotDto is null or empty.", ButtonType.OK).show();
+            return;
+        }
 
-        saveFile();
+        currentFilePath = relativePath;
+        Path jotPath = Paths.get("C:\\Users\\WWW\\Desktop\\FX\\jottie again\\jottie", relativePath);
 
-        if (jotModel.saveJot(jotDto)) {
-            showNotification("Note saved at: ", new File(currentFilePath).getAbsolutePath());
-            currentFilePath = null;
-            setEditorContent("");
-        } else {
-            showNotification("Failed to save the note.", "Please try again");
+        try {
+            if (!Files.exists(jotPath)) {
+                System.err.println("Error: File does not exist at path: " + jotPath);
+                return;
+            }
+            byte[] encryptedContent = Files.readAllBytes(jotPath);
+            String decryptedContent = decrypt(encryptedContent, SECRET_KEY);
+
+            webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue == Worker.State.SUCCEEDED) {
+                    setEditorContent(decryptedContent);
+                }
+            });
+            setJotData(jotDto);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    private void saveFile() {
+    private void setJotData(JotDto jotDto) {
+        this.jotDto = jotDto;
+        refreshMoodList();
+        refreshTagList();
+        txtTitle.setText(jotDto.getTitle());
+        locationCombo.setValue(jotDto.getLocation());
+    }
+
+    private void saveJotWithCategory(){
+        try {
+            if (saveFile()) {
+                collectSelectedMoods();
+                collectSelectedTags();
+                LocationDto selectedLocation = locationCombo.getValue();
+
+                JotDto jotDto = new JotDto();
+                if (this.jotDto==null){
+                    jotDto.setId(IdGenerator.generateId("JT", 5));
+                }else {
+                    jotDto.setId(this.jotDto.getId());
+                }
+                jotDto.setTitle(txtTitle.getText());
+                //        jotDto.setUserId("user001");
+                jotDto.setCategory(selectedCategory);
+                jotDto.setLocation(selectedLocation);
+                jotDto.setMoods(selectedMoods);
+                jotDto.setTags(selectedTags);
+                jotDto.setPath(currentFilePath);
+
+                if (jotModel.saveJot(jotDto)) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Note saved successfully.." + ButtonType.OK).show();
+                    currentFilePath = null;
+                    setEditorContent("");
+                } else {
+                    showNotification("Failed to save the note.", "Please try again");
+                }
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(), ButtonType.OK).show();
+        }
+
+    }
+
+    private boolean saveFile() {
         try {
             String content = getEditorContent();
             if (currentFilePath == null) {
                 String directoryPath = "jotsenc";
                 Files.createDirectories(Paths.get(directoryPath));
                 String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-                currentFilePath = directoryPath + "/note_" + timestamp + ".enc";
+                this.currentFilePath = directoryPath + "/note_" + timestamp + ".enc";
             }
 
             byte[] encryptedContent = encrypt(content, SECRET_KEY);
             try (FileOutputStream fos = new FileOutputStream(currentFilePath)) {
                 fos.write(encryptedContent);
+                return true;
             }
 
 
-        } catch (Exception e){
+        } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Failed to save the file.", ButtonType.OK).show();
             e.printStackTrace();
+            return false;
         }
 
     }
@@ -242,6 +278,7 @@ public class AddJotController {
             new Alert(Alert.AlertType.WARNING, e.getMessage()).show();
         }
     }
+
     @FXML
     void addLocationOnAction(ActionEvent event) {
         loadView("Add New Location", "/view/addLocation.fxml");
@@ -272,48 +309,76 @@ public class AddJotController {
         }
     }
 
-    private void refreshMoodList() throws Exception {
-        moodGridPane.getChildren().clear();
+    private void refreshMoodList() {
+        try {
+            moodGridPane.getChildren().clear();
 
-        List<MoodDto> moodDtos = moodModel.getAllMoods();
+            List<MoodDto> moodDtos = moodModel.getAllMoods();
 
-        int columnIndex = 0;
-        int rowIndex = 0;
+            int columnIndex = 0;
+            int rowIndex = 0;
 
-        for (MoodDto moodDto : moodDtos) {
-            FXMLLoader moodLoader = new FXMLLoader(getClass().getResource("/view/components/mood.fxml"));
-            Parent moodNode = moodLoader.load();
+            for (MoodDto moodDto : moodDtos) {
+                FXMLLoader moodLoader = new FXMLLoader(getClass().getResource("/view/components/mood.fxml"));
+                Parent moodNode = moodLoader.load();
 
-            Mood moodController = moodLoader.getController();
-            moodController.setData(moodDto);
+                Mood moodController = moodLoader.getController();
+                moodController.setData(moodDto);
 
-            moodNode.getProperties().put("controller", moodController);
-            moodGridPane.add(moodNode, columnIndex, rowIndex);
+                if (this.jotDto != null) {
+                    List<MoodDto> moods = this.jotDto.getMoods();
 
-            columnIndex++;
-            if (columnIndex == 2) {
-                columnIndex = 0;
-                rowIndex++;
+                    for (MoodDto moodDto2 : moods) {
+                        if (moodDto2.getId().equals(moodDto.getId())) {
+                            moodController.setSelected(true);
+                        }
+                    }
+                }
+
+                moodNode.getProperties().put("controller", moodController);
+                moodGridPane.add(moodNode, columnIndex, rowIndex);
+
+                columnIndex++;
+                if (columnIndex == 2) {
+                    columnIndex = 0;
+                    rowIndex++;
+                }
             }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.WARNING, e.getMessage(), ButtonType.OK).show();
         }
+
     }
 
-    private void refreshTagList() throws Exception {
-        tagFlowPane.getChildren().clear();
+    private void refreshTagList() {
+        try {
+            tagFlowPane.getChildren().clear();
 
-        List<TagDto> tagDtos = tagModel.getAllTags();
+            List<TagDto> tagDtos = tagModel.getAllTags();
 
-        for (TagDto tagDto : tagDtos) {
-            System.out.println(tagDto);
-            FXMLLoader tagLoader = new FXMLLoader(getClass().getResource("/view/components/tag.fxml"));
-            Parent tagNode = tagLoader.load();
+            for (TagDto tagDto : tagDtos) {
+                System.out.println(tagDto);
+                FXMLLoader tagLoader = new FXMLLoader(getClass().getResource("/view/components/tag.fxml"));
+                Parent tagNode = tagLoader.load();
 
-            Tag tagController = tagLoader.getController();
-            tagController.setData(tagDto);
+                Tag tagController = tagLoader.getController();
+                tagController.setData(tagDto);
 
-            tagNode.getProperties().put("controller", tagController);
-            FlowPane.setMargin(tagNode, new Insets(2, 2, 2, 2));
-            tagFlowPane.getChildren().add(tagNode);
+                if (this.jotDto != null) {
+                    List<TagDto> tags = this.jotDto.getTags();
+                    for (TagDto tagDto2 : tags) {
+                        if (tagDto2.getId().equals(tagDto.getId())) {
+                            tagController.setSelected(true);
+                        }
+                    }
+                }
+                tagNode.getProperties().put("controller", tagController);
+                FlowPane.setMargin(tagNode, new Insets(2, 2, 2, 2));
+                tagFlowPane.getChildren().add(tagNode);
+            }
+
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.WARNING, e.getMessage(), ButtonType.OK).show();
         }
     }
 
@@ -355,4 +420,7 @@ public class AddJotController {
         }
     }
 
+    public void setSelectedCategory(CategoryDto selectedCategory) {
+        this.selectedCategory = selectedCategory;
+    }
 }

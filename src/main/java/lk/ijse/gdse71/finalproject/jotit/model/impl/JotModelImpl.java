@@ -182,7 +182,28 @@ public class JotModelImpl implements JotModel {
     @Override
     public List<JotDto> getAllJot(String userId) throws Exception {
 //        ResultSet resultSet = CrudUtil.execute("SELECT * FROM jot WHERE user_id=?", userId);
-        ResultSet resultSet = CrudUtil.execute("SELECT * FROM jot");
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM jot ORDER BY created_at DESC");
+
+        return getJotDtos(resultSet);
+    }
+
+    @Override
+    public boolean deleteJot(JotDto jotDto) throws Exception {
+        return CrudUtil.execute("DELETE FROM jot WHERE jot_id = ?", jotDto.getId());
+        //on update and on delete cascades are there in the database
+    }
+
+    @Override
+    public List<JotDto> findJots(String title) throws Exception {
+        ResultSet resultSet = CrudUtil.execute(//ORDER BY created_at DESC
+                "SELECT * FROM jot WHERE title LIKE ? ", "%" + title + "%"
+        );
+
+        return getJotDtos(resultSet);
+    }
+
+
+    public List<JotDto> getJotDtos(ResultSet resultSet) throws Exception {
         List<JotDto> jotDtos = new ArrayList<>();
         while (resultSet.next()) {
             JotDto jotDto = new JotDto();
@@ -218,11 +239,7 @@ public class JotModelImpl implements JotModel {
             jotDtos.add(jotDto);
         }
         return jotDtos;
+
     }
 
-    @Override
-    public boolean deleteJot(JotDto jotDto) throws Exception {
-        return CrudUtil.execute("DELETE FROM jot WHERE jot_id = ?", jotDto.getId());
-        //on update and on delete cascades are there in the database
-    }
 }

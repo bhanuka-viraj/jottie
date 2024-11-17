@@ -149,9 +149,9 @@ public class AddJotController {
             return;
         }
 
-        currentFilePath = relativePath;
-        Path jotPath = Paths.get("C:\\Users\\WWW\\Desktop\\FX\\jottie again\\jottie", relativePath);
+        String baseDir = System.getProperty("user.dir");
 
+        Path jotPath = Paths.get(baseDir, relativePath);
         try {
             if (!Files.exists(jotPath)) {
                 System.err.println("Error: File does not exist at path: " + jotPath);

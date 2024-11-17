@@ -5,9 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import lk.ijse.gdse71.finalproject.jotit.controller.Controller;
+import lk.ijse.gdse71.finalproject.jotit.controller.ControllerRef;
 
 import java.io.IOException;
 
@@ -16,7 +15,7 @@ public class AppInitializer extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/mainLayout.fxml"));
         Parent root = fxmlLoader.load();
-        Controller.layoutController = fxmlLoader.getController();
+        ControllerRef.layoutController = fxmlLoader.getController();
         Scene scene = new Scene(root);
         stage.setTitle("JoTtie");
         stage.setScene(scene);

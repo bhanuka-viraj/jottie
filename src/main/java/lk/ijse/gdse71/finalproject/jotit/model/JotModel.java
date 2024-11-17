@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface JotModel {
     public boolean saveJot(JotDto jotDto) throws Exception;
-    public JotDto getJot(String id) throws Exception;
+    public JotDto getJot(String str) throws Exception;
     public List<JotDto> getAllJot(String userId) throws Exception;
     public boolean deleteJot(JotDto jotDto) throws Exception;
+    public List<JotDto> findJots(String title) throws Exception;
 }

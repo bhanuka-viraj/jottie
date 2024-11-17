@@ -19,12 +19,20 @@ public class ViewJotsController {
     private String userId;
 
     public void initialize() {
+        ControllerRef.viewJotsController = this;
         loadJotCards();
     }
 
-    private void loadJotCards() {
+    public void loadJotCards() {
+        load(null);
+    }
+
+    public void load(List<JotDto> jots) {
         try {
-            List<JotDto> jots = jotModel.getAllJot(userId);
+            if (jots == null) {
+                jots = jotModel.getAllJot(userId);
+            }
+
             int row = 0;
             int col = 0;
             for (JotDto jot : jots) {
@@ -33,16 +41,25 @@ public class ViewJotsController {
                 CardJot jotCardController = loader.getController();
                 jotCardController.setData(jot);
 
-                gridPane.add(jotCardRoot, col, row); // Add to GridPane
-
+                gridPane.add(jotCardRoot, col, row);
                 col++;
-                if (col == 4) { // Assuming 2 columns
+                if (col == 4) {
                     col = 0;
                     row++;
                 }
             }
+
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+    }
+
+    public void setSearchResults(String title) {
+        try {
+            load(jotModel.findJots(title));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

@@ -16,7 +16,7 @@
 }
 
 .card-manage {
-    visibility: hidden;
+    visibility: visible;
     opacity: 0.8;
 }
 

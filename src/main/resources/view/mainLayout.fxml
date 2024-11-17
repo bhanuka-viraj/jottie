@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1300.0" stylesheets="@../style/global.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse71.finalproject.jotit.controller.LayoutController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1300.0" stylesheets="@../style/global.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse71.finalproject.jotit.controller.LayoutController">
    <left>
       <VBox prefHeight="570.0" prefWidth="223.0" style="-fx-background-color: #e3e3e3;" BorderPane.alignment="CENTER">
          <children>
@@ -17,8 +17,7 @@
                <children>
                   <Button fx:id="btnAddJot" mnemonicParsing="false" onAction="#btnAddJotOnAction" prefHeight="26.0" prefWidth="184.0" text="Add Jot" />
                   <Button fx:id="btnViewJot" mnemonicParsing="false" onAction="#btnViewJotOnAction" prefHeight="26.0" prefWidth="184.0" text="View Jots" />
-                  <Button fx:id="addButton2" mnemonicParsing="false" prefHeight="26.0" prefWidth="184.0" text="Add Task" />
-                  <Button fx:id="addButton3" mnemonicParsing="false" prefHeight="26.0" prefWidth="184.0" text="View Task" />
+                  <Button fx:id="addButton3" mnemonicParsing="false" prefHeight="26.0" prefWidth="184.0" text="Manage tasks" />
                   <Button fx:id="addButton4" mnemonicParsing="false" prefHeight="26.0" prefWidth="184.0" text="Received Jots" />
                </children>
                <padding>
@@ -34,7 +33,7 @@
             <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
             <HBox alignment="CENTER">
                <children>
-                  <TextField fx:id="searchBar" prefHeight="26.0" prefWidth="399.0">
+                  <TextField fx:id="searchBar" onKeyTyped="#txtSearchTyped" prefHeight="26.0" prefWidth="399.0">
                      <HBox.margin>
                         <Insets left="10.0" right="50.0" />
                      </HBox.margin>

@@ -81,6 +81,7 @@ public class AddJotController {
 
     @FXML
     public void initialize() {
+        ControllerRef.addJotController = this;
         webEngine = webView.getEngine();
         String editorFilePath = getClass().getResource("/view/editor/index.html").toExternalForm();
         webEngine.load(editorFilePath);
@@ -118,6 +119,7 @@ public class AddJotController {
             stage.setScene(new Scene(categoryView));
             stage.setTitle("Select Category");
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
 
             stage.setOnCloseRequest(windowEvent -> {
                 stepTwoController.setSelectedCategory(null);
@@ -130,6 +132,7 @@ public class AddJotController {
             if (stepTwoController.getSelectedCategory() != null) {
                 selectedCategory = stepTwoController.getSelectedCategory();
                 saveJotWithCategory();
+                ControllerRef.layoutController.loadCategories();
             }
 
         } catch (IOException e) {

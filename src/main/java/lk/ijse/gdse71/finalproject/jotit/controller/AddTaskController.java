@@ -61,8 +61,8 @@ public class AddTaskController {
 
             if (taskModel.saveTask(taskDto)) {
                 taskManageController.loadTaskData();
+                txtDesc.getScene().getWindow().hide();
                 new Alert(Alert.AlertType.INFORMATION, "Task saved successfully", ButtonType.OK).show();
-                clearFields();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Failed to save task", ButtonType.OK).show();
             }
@@ -71,16 +71,6 @@ public class AddTaskController {
         }
     }
 
-    @FXML
-    void btnSaveJotOnAction(ActionEvent event) {
-    }
-
-
-    private void clearFields() {
-        txtDesc.clear();
-        dueDatePicker.setValue(null);
-        statusCombo.setValue(null);
-    }
 
     public void setJotDto(JotDto jotDto) {
         this.jotDto = jotDto;

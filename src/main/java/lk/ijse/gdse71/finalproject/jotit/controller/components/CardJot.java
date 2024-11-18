@@ -136,6 +136,7 @@ public class CardJot {
             stage.setScene(new Scene(taskMangeView));
             stage.setTitle("Tasks");
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
             stage.show();
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Error loading tasks" + e.getMessage(), ButtonType.OK).show();

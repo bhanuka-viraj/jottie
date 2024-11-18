@@ -10,4 +10,5 @@ public interface JotModel {
     public List<JotDto> getAllJot(String userId) throws Exception;
     public boolean deleteJot(JotDto jotDto) throws Exception;
     public List<JotDto> findJots(String title) throws Exception;
+    public int getJotCountByCategory(String categoryId) throws Exception;
 }

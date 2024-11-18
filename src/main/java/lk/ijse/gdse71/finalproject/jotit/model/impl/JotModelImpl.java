@@ -21,48 +21,48 @@ public class JotModelImpl implements JotModel {
             JotDto existingJot = getJot(jotDto.getId());
             if (existingJot != null) {
                 return updateJot(jotDto);
-            } else {
-                CrudUtil.beginTransaction();
-                boolean isJotSaved = CrudUtil.execute(
-                        "INSERT INTO jot (jot_id, user_id, title, path, category_id, location_id) " +
-                                "VALUES (?, ?, ?, ?, ?, ?)",
-                        jotDto.getId(),
-                        jotDto.getUserId(),
-                        jotDto.getTitle(),
-                        jotDto.getPath(),
-                        jotDto.getCategory().getId(),
-                        jotDto.getLocation().getId()
-                );
+            }
 
-                if (isJotSaved) {
-                    boolean isJotTagSaved = false;
-                    List<TagDto> tags = jotDto.getTags();
-                    for (TagDto tag : tags) {
-                        isJotTagSaved = CrudUtil.execute("INSERT INTO jot_tag VALUES (?,?)", jotDto.getId(), tag.getId());
+            CrudUtil.beginTransaction();
+            boolean isJotSaved = CrudUtil.execute(
+                    "INSERT INTO jot (jot_id, user_id, title, path, category_id, location_id) " +
+                            "VALUES (?, ?, ?, ?, ?, ?)",
+                    jotDto.getId(),
+                    jotDto.getUserId(),
+                    jotDto.getTitle(),
+                    jotDto.getPath(),
+                    jotDto.getCategory().getId(),
+                    jotDto.getLocation().getId()
+            );
+
+            if (isJotSaved) {
+                boolean isJotTagSaved = false;
+                List<TagDto> tags = jotDto.getTags();
+                for (TagDto tag : tags) {
+                    isJotTagSaved = CrudUtil.execute("INSERT INTO jot_tag VALUES (?,?)", jotDto.getId(), tag.getId());
+                }
+
+                if (isJotTagSaved) {
+                    boolean isMoodSaved = false;
+                    List<MoodDto> moods = jotDto.getMoods();
+                    System.out.println(moods);
+                    for (MoodDto mood : moods) {
+                        isMoodSaved = CrudUtil.execute("INSERT INTO jot_mood VALUES (?,?)", jotDto.getId(), mood.getId());
                     }
 
-                    if (isJotTagSaved) {
-                        boolean isMoodSaved = false;
-                        List<MoodDto> moods = jotDto.getMoods();
-                        System.out.println(moods);
-                        for (MoodDto mood : moods) {
-                            isMoodSaved = CrudUtil.execute("INSERT INTO jot_mood VALUES (?,?)", jotDto.getId(), mood.getId());
-                        }
-
-                        if (isMoodSaved) {
-                            CrudUtil.commitTransaction();
-                        }
-                    } else {
-                        CrudUtil.rollbackTransaction();
-                        return false;
+                    if (isMoodSaved) {
+                        CrudUtil.commitTransaction();
                     }
-
                 } else {
                     CrudUtil.rollbackTransaction();
                     return false;
                 }
-                return true;
+
+            } else {
+                CrudUtil.rollbackTransaction();
+                return false;
             }
+            return true;
 
 
         } catch (SQLException e) {
@@ -105,7 +105,7 @@ public class JotModelImpl implements JotModel {
                         boolean isMoodSaved = false;
                         List<MoodDto> moods = jotDto.getMoods();
                         for (MoodDto mood : moods) {
-                            isMoodSaved =  CrudUtil.execute("INSERT INTO jot_mood VALUES (?, ?)", jotDto.getId(), mood.getId());
+                            isMoodSaved = CrudUtil.execute("INSERT INTO jot_mood VALUES (?, ?)", jotDto.getId(), mood.getId());
                         }
 
                         if (isMoodSaved) {
@@ -193,14 +193,27 @@ public class JotModelImpl implements JotModel {
     }
 
     @Override
-    public List<JotDto> findJots(String title) throws Exception {
+    public List<JotDto> findJots(String text) throws Exception {
+        if (text.startsWith("#")) {
+            text = text.replace("#", "");
+            return findJotsByTag(text);
+        }
         ResultSet resultSet = CrudUtil.execute(//ORDER BY created_at DESC
-                "SELECT * FROM jot WHERE title LIKE ? ", "%" + title + "%"
+                "SELECT * FROM jot WHERE title LIKE ? ", "%" + text + "%"
         );
 
         return getJotDtos(resultSet);
     }
 
+    private List<JotDto> findJotsByTag(String tagName) throws Exception {
+        ResultSet resultSet = CrudUtil.execute(
+                "SELECT j.* FROM jot j " +
+                        " JOIN jot_tag jt ON j.jot_id = jt.jot_id " +
+                        " JOIN tag t ON jt.tag_id = t.tag_id " +
+                        " WHERE t.name LIKE ?", "%" + tagName + "%"
+        );
+        return getJotDtos(resultSet);
+    }
 
     public List<JotDto> getJotDtos(ResultSet resultSet) throws Exception {
         List<JotDto> jotDtos = new ArrayList<>();
@@ -239,6 +252,15 @@ public class JotModelImpl implements JotModel {
         }
         return jotDtos;
 
+    }
+
+    @Override
+    public int getJotCountByCategory(String categoryId) throws Exception {
+        ResultSet resultSet = CrudUtil.execute("SELECT COUNT(*) FROM jot WHERE category_id = ?", categoryId);
+        if (resultSet.next()) {
+            return resultSet.getInt(1);
+        }
+        return 0;
     }
 
 }

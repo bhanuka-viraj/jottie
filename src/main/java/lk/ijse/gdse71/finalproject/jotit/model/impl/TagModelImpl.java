@@ -36,7 +36,7 @@ public class TagModelImpl implements TagModel {
     }
 
     @Override
-    public boolean deleteTag(String name) throws Exception {
-        return CrudUtil.execute("DELETE FROM tag WHERE name = ?", name);
+    public boolean deleteUnusedTags() throws Exception {
+        return CrudUtil.execute("DELETE FROM Tag WHERE tag_id NOT IN (SELECT DISTINCT tag_id FROM jot_tag)");
     }
 }

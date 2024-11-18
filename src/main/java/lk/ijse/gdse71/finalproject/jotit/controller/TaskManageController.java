@@ -40,6 +40,9 @@ public class TaskManageController {
     @FXML
     private TableColumn<TaskTm, Button> delete;
 
+    @FXML
+    private Label lblDescription;
+
     private final TaskModel taskModel = new TaskModelImpl();
     private AddTaskController addTaskController;
     private JotDto jotDto;
@@ -52,6 +55,14 @@ public class TaskManageController {
         status.setCellValueFactory(new PropertyValueFactory<>("status"));
         delete.setCellValueFactory(new PropertyValueFactory<>("btnDelete"));
         update.setCellValueFactory(new PropertyValueFactory<>("btnUpdate"));
+
+        tblTasks.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                lblDescription.setText(newSelection.getDesc());
+            } else {
+                lblDescription.setText(""); // Clear the label if no row is selected
+            }
+        });
 
     }
     public void setJotDto(JotDto jotDto) {
@@ -81,6 +92,7 @@ public class TaskManageController {
             stage.setScene(new Scene(addTaskView));
             stage.setTitle("Tasks");
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
             stage.show();
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Error loading tasks" + e.getMessage(), ButtonType.OK).show();

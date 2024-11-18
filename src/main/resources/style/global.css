@@ -11,6 +11,18 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0.0, 0.0, 5);
 }
 
+.button{
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+    -fx-cursor: hand;
+}
+.toggle-button{
+    -fx-background-color: white;
+}
+.toggle-button:selected {
+    -fx-background-color: #C2FFC7;
+}
+
 .card:hover .card-manage {
     visibility: visible;
 }

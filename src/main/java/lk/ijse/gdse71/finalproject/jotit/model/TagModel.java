@@ -8,6 +8,6 @@ public interface TagModel {
     public boolean saveTag(TagDto tagDto) throws Exception;
     public TagDto getTag(String desc) throws Exception;
     public List<TagDto> getAllTags() throws Exception;
-    public boolean deleteTag(String desc) throws Exception;
+    public boolean deleteUnusedTags() throws Exception;
 
 }

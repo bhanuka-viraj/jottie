@@ -8,9 +8,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.VBox;
+import lk.ijse.gdse71.finalproject.jotit.dto.CategoryDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.JotDto;
+import lk.ijse.gdse71.finalproject.jotit.model.CategoryModel;
+import lk.ijse.gdse71.finalproject.jotit.model.JotModel;
+import lk.ijse.gdse71.finalproject.jotit.model.impl.CategoryModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.model.impl.JotModelImpl;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LayoutController {
 
@@ -20,10 +28,42 @@ public class LayoutController {
     private ScrollPane scrollPane;
     @FXML
     private TextField searchBar;
+    @FXML
+    private VBox categoryPane;
+
+    private final CategoryModel categoryModel= new CategoryModelImpl();
+    private final JotModel jotModel= new JotModelImpl();
+
+    private List<Button> buttons = new ArrayList<>();
 
     @FXML
     public void initialize() {
 
+        loadCategories();
+    }
+
+    public void loadCategories() {
+        try {
+            categoryPane.getChildren().clear();
+            List<CategoryDto> categories = categoryModel.getAllCategories();
+            for (CategoryDto category : categories) {
+                int jotCount = jotModel.getJotCountByCategory(category.getId());
+                Button categoryButton = new Button(category.getDescription() + " (" + jotCount + ")");
+                categoryButton.setPrefHeight(35);
+                categoryButton.setPrefWidth(185);
+                categoryButton.setStyle("-fx-background-color: rgb(180,13,204);-fx-text-fill: white;-fx-font-style: Arial-black");
+
+
+                categoryButton.setOnAction(event -> {
+
+                });
+                buttons.add(categoryButton);
+
+                categoryPane.getChildren().add(categoryButton);
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Error loading categories: " + e.getMessage(), ButtonType.OK).show();
+        }
     }
 
     @FXML
@@ -32,7 +72,6 @@ public class LayoutController {
             searchBar.setVisible(false);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/addJot.fxml"));
             Parent root = loader.load();
-            AddJotController addJotController = loader.getController();
             scrollPane.setContent(root);
         } catch (IOException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).show();
@@ -95,5 +134,6 @@ public class LayoutController {
             new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).show();
         }
     }
+
 
 }

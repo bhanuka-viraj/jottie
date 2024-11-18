@@ -23,12 +23,7 @@
          </children>
       </HBox>
       <Button layoutX="419.0" layoutY="320.0" mnemonicParsing="false" onAction="#btnSaveJotOnAction" prefHeight="36.0" prefWidth="129.0" style="-fx-background-radius: 25;" text="Save Jot" />
-      <Label layoutX="72.0" layoutY="59.0" prefHeight="36.0" prefWidth="97.0" text="Category">
-         <font>
-            <Font name="Segoe UI Semibold" size="17.0" />
-         </font>
-      </Label>
-      <Label layoutX="72.0" layoutY="24.0" text="Step 2">
+      <Label layoutX="72.0" layoutY="24.0" text="Category">
          <font>
             <Font name="Segoe UI Semibold" size="27.0" />
          </font>

@@ -1,14 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.gdse71.finalproject.jotit.controller.AddTaskController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse71.finalproject.jotit.controller.AddTaskController">
+   <children>
+      <Label layoutX="72.0" layoutY="58.0" prefHeight="36.0" prefWidth="97.0" text="Add task +">
+         <font>
+            <Font name="Segoe UI Semibold" size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtDesc" layoutX="51.0" layoutY="135.0" prefHeight="40.0" prefWidth="498.0" promptText="Task Description" style="-fx-background-radius: 25;">
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+      </TextField>
+      <DatePicker fx:id="dueDatePicker" layoutX="53.0" layoutY="200.0" prefHeight="32.0" prefWidth="204.0" promptText="Due date">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </DatePicker>
+      <ComboBox fx:id="statusCombo" layoutX="333.0" layoutY="204.0" prefHeight="32.0" prefWidth="204.0" promptText="Status">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <Button layoutX="51.0" layoutY="253.0" mnemonicParsing="false" onAction="#btnSaveTaskOnAction" prefHeight="36.0" prefWidth="498.0" style="-fx-background-radius: 25;" text="Save Task">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="419.0" layoutY="320.0" mnemonicParsing="false" onAction="#btnSaveJotOnAction" prefHeight="36.0" prefWidth="129.0" style="-fx-background-radius: 25;" text="Save Jot">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="72.0" layoutY="23.0" text="Step 2">
+         <font>
+            <Font name="Segoe UI Semibold" size="27.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>

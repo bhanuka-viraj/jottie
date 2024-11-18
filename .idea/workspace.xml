@@ -5,37 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ffa9a06d-aec7-4e3f-aef0-c5d8a106ee84" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/AddTaskController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/view/addTask.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/TaskManageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/dto/TaskDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/dto/TaskState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/dto/tm/TaskTm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/TaskModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/impl/TaskModelImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/view/task_manage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b0f49a0c-ac1c-4f2a-9032-0ada158403b7.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b0f49a0c-ac1c-4f2a-9032-0ada158403b7.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jotsenc/note_20241116153709.enc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/jotsenc/note_20241116172000.enc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/jotsenc/note_20241116201246.enc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/AppInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/AppInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/AddJotController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/AddJotController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/ControllerRef.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/LayoutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/LayoutController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/AddTaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/AddTaskController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/StepTwoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/StepTwoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/ViewJotsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/ViewJotsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/components/CardJot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/components/CardJot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/JotModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/JotModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/impl/JotModelImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/impl/JotModelImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/sql/jottie.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/sql/jottie.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/style/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/style/global.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/addJot.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/addJot.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/addLocation.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/addLocation.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/addMood.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/addMood.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/addTag.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/addTag.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/components/card_jot_.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/components/card_jot_.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/components/card_mood.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/components/card_mood.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/components/card_tag.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/components/card_tag.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/components/mood.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/components/mood.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/components/tag.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/components/tag.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/dashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/mainLayout.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/mainLayout.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/addTask.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/addTask.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/components/card_jot_.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/components/card_jot.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/view/step_two.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/step_two.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/user/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/user/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/user/register.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/user/register.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/viewJots.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/viewJots.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +35,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
+        <option value="Enum" />
         <option value="Interface" />
         <option value="FxmlFile" />
         <option value="Class" />
@@ -71,34 +61,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.AppInitializer.executor&quot;: &quot;Run&quot;,
-    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Database Script.jottie.sql.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/WWW/Desktop/FX/jottie again/jottie/src/main/resources/view/assets/fonts&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.AppInitializer.executor": "Run",
+    "Application.HelloApplication.executor": "Run",
+    "Database Script.jottie.sql.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/WWW/Desktop/FX/jottie again/jottie/src/main/resources/view/assets/fonts",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ],
-    &quot;RunConfigurationTargetLRU&quot;: [
-      &quot;b0f49a0c-ac1c-4f2a-9032-0ada158403b7&quot;
+    "RunConfigurationTargetLRU": [
+      "b0f49a0c-ac1c-4f2a-9032-0ada158403b7"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\WWW\Desktop\FX\jottie again\jottie\src\main\resources\view\assets\fonts" />
@@ -160,11 +150,36 @@
       <workItem from="1731653233181" duration="24068000" />
       <workItem from="1731732007799" duration="1214000" />
       <workItem from="1731733459848" duration="32894000" />
-      <workItem from="1731814796640" duration="15457000" />
+      <workItem from="1731814796640" duration="20879000" />
+      <workItem from="1731897948668" duration="13159000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/impl/TaskModelImpl.java</url>
+          <line>14</line>
+          <properties class="lk.ijse.gdse71.finalproject.jotit.model.impl.TaskModelImpl" method="saveTask">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/impl/TaskModelImpl.java</url>
+          <line>32</line>
+          <properties class="lk.ijse.gdse71.finalproject.jotit.model.impl.TaskModelImpl" method="updateTask">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -12,7 +13,10 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import lk.ijse.gdse71.finalproject.jotit.controller.ControllerRef;
+import lk.ijse.gdse71.finalproject.jotit.controller.TaskManageController;
 import lk.ijse.gdse71.finalproject.jotit.dto.JotDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.MoodDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.TagDto;
@@ -20,6 +24,7 @@ import lk.ijse.gdse71.finalproject.jotit.model.JotModel;
 import lk.ijse.gdse71.finalproject.jotit.model.impl.JotModelImpl;
 import org.ocpsoft.prettytime.PrettyTime;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -114,8 +119,27 @@ public class CardJot {
         }
     }
     @FXML
-    void btnAddTaskOnAction(ActionEvent event) {
+    void btnTaskOnAction(ActionEvent event) {
+        loadTasks();
+    }
 
+    private void loadTasks() {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/task_manage.fxml"));
+            Parent taskMangeView = loader.load();
+            TaskManageController taskManageController = loader.getController();
+
+            taskManageController.setJotDto(jotDto);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(taskMangeView));
+            stage.setTitle("Tasks");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Error loading tasks" + e.getMessage(), ButtonType.OK).show();
+        }
     }
 
     @FXML
@@ -137,9 +161,7 @@ public class CardJot {
 
                 boolean isDeleted = jotModel.deleteJot(jotDto);
                 if (isDeleted) {
-                    // Delete the file from the folder
                     Files.delete(jotPath);
-
                     new Alert(Alert.AlertType.INFORMATION, "Jot deleted").show();
                 }
                 ControllerRef.viewJotsController.loadJotCards();
@@ -149,6 +171,5 @@ public class CardJot {
             }
         }
     }
-
 
 }

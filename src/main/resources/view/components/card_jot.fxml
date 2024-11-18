@@ -88,17 +88,10 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button contentDisplay="RIGHT" layoutX="14.0" layoutY="302.0" mnemonicParsing="false" onAction="#btnAddTaskOnAction" prefHeight="34.0" prefWidth="102.0" style="-fx-background-color: #219B9D; -fx-background-radius: 25;" text="Task" textFill="WHITE">
+            <Button contentDisplay="RIGHT" layoutX="14.0" layoutY="302.0" mnemonicParsing="false" onAction="#btnTaskOnAction" prefHeight="34.0" prefWidth="102.0" style="-fx-background-color: #219B9D; -fx-background-radius: 25;" text="Tasks" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="12.0" />
                </font>
-               <graphic>
-                  <ImageView fitHeight="18.0" fitWidth="22.0" opacity="0.95" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/add.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

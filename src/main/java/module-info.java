@@ -17,4 +17,6 @@ module lk.ijse.gdse71.finalproject.jotit {
     opens lk.ijse.gdse71.finalproject.jotit.controller to javafx.fxml;
     opens lk.ijse.gdse71.finalproject.jotit.controller.components to javafx.fxml;
     exports lk.ijse.gdse71.finalproject.jotit;
+    exports lk.ijse.gdse71.finalproject.jotit.dto.tm;
+
 }

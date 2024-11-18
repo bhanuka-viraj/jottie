@@ -36,7 +36,7 @@ public class ViewJotsController {
             int row = 0;
             int col = 0;
             for (JotDto jot : jots) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/components/card_jot_.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/components/card_jot.fxml"));
                 Parent jotCardRoot = loader.load();
                 CardJot jotCardController = loader.getController();
                 jotCardController.setData(jot);

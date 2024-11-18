@@ -8,26 +8,30 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="344.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse71.finalproject.jotit.controller.StepTwoController">
+<AnchorPane prefHeight="380.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse71.finalproject.jotit.controller.StepTwoController">
    <children>
-      <HBox alignment="CENTER" layoutY="117.0" prefHeight="55.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="117.0">
+      <HBox alignment="CENTER" layoutY="153.0" prefHeight="55.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="153.0">
          <children>
-            <ComboBox fx:id="categoryCombo" prefHeight="26.0" prefWidth="464.0" promptText="Select category" HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" onAction="#addCategoryOnAction" prefHeight="26.0" text="+" />
+            <ComboBox fx:id="categoryCombo" prefHeight="36.0" prefWidth="442.0" promptText="Select category" style="-fx-background-radius: 25 0 0 25;" HBox.hgrow="ALWAYS" />
+            <Button maxWidth="45.0" mnemonicParsing="false" onAction="#addCategoryOnAction" prefHeight="36.0" prefWidth="46.0" style="-fx-background-radius: 0 25 25 0;" text="+" />
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutY="172.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <HBox alignment="CENTER" layoutY="221.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <TextField fx:id="txtCategoryDescription" prefHeight="26.0" prefWidth="442.0" />
-            <Button fx:id="btnSaveCat" mnemonicParsing="false" onAction="#btnSaveCategoryOnAction" prefHeight="26.0" prefWidth="46.0" text="Save" />
+            <TextField fx:id="txtCategoryDescription" prefHeight="36.0" prefWidth="442.0" style="-fx-background-radius: 25 0 0 25;" />
+            <Button fx:id="btnSaveCat" mnemonicParsing="false" onAction="#btnSaveCategoryOnAction" prefHeight="36.0" prefWidth="46.0" style="-fx-background-radius: 0 25 25 0;" text="Save" />
          </children>
       </HBox>
-      <Button layoutX="418.0" layoutY="254.0" mnemonicParsing="false" onAction="#btnSaveJotOnAction" prefHeight="26.0" prefWidth="129.0" text="Save Jot" />
-      <Label layoutX="62.0" layoutY="31.0" text="Step 2">
+      <Button layoutX="419.0" layoutY="320.0" mnemonicParsing="false" onAction="#btnSaveJotOnAction" prefHeight="36.0" prefWidth="129.0" style="-fx-background-radius: 25;" text="Save Jot" />
+      <Label layoutX="72.0" layoutY="59.0" prefHeight="36.0" prefWidth="97.0" text="Category">
+         <font>
+            <Font name="Segoe UI Semibold" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="72.0" layoutY="24.0" text="Step 2">
          <font>
             <Font name="Segoe UI Semibold" size="27.0" />
          </font>
       </Label>
-      <Button layoutX="250.0" layoutY="254.0" mnemonicParsing="false" onAction="#btnAddTaskOnAction" prefHeight="26.0" prefWidth="129.0" text="Add task" />
    </children>
 </AnchorPane>

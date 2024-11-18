@@ -20,8 +20,7 @@ public class JotModelImpl implements JotModel {
         try {
             JotDto existingJot = getJot(jotDto.getId());
             if (existingJot != null) {
-                updateJot(jotDto);
-                return true;
+                return updateJot(jotDto);
             } else {
                 CrudUtil.beginTransaction();
                 boolean isJotSaved = CrudUtil.execute(

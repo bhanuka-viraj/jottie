@@ -89,8 +89,7 @@ public class StepTwoController {
             new Alert(Alert.AlertType.WARNING, "Please select a category").show();
             return;
         }
-
-//        addJotController.setSelectedCategory(selectedCategory);
+;
         Stage stage = (Stage) categoryCombo.getScene().getWindow();
         stage.close();
     }
@@ -108,8 +107,4 @@ public class StepTwoController {
         this.addJotController = addJotController;
     }
 
-    @FXML
-    void btnAddTaskOnAction(ActionEvent event) {
-
-    }
 }

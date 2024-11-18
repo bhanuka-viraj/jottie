@@ -6,26 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="ffa9a06d-aec7-4e3f-aef0-c5d8a106ee84" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jotsenc/note_20241116182654.enc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/AppInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/AppInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jotsenc/note_20241118194621.enc" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/AddJotController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/AddJotController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/AddTaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/AddTaskController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/LayoutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/LayoutController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/TaskManageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/TaskManageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/components/CardJot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/components/CardJot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/CategoryModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/CategoryModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/JotModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/JotModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/TagModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/TagModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/impl/CategoryModelImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/impl/CategoryModelImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/ViewJotsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/controller/ViewJotsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/impl/JotModelImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/impl/JotModelImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/impl/MoodModelImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/impl/MoodModelImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/impl/TagModelImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/impl/TagModelImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/style/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/style/global.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/addJot.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/addJot.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/addTask.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/addTask.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/mainLayout.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/mainLayout_.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/step_two.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/step_two.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/task_manage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/task_manage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,7 +137,7 @@
       <workItem from="1731732007799" duration="1214000" />
       <workItem from="1731733459848" duration="32894000" />
       <workItem from="1731814796640" duration="20879000" />
-      <workItem from="1731897948668" duration="26212000" />
+      <workItem from="1731897948668" duration="37635000" />
     </task>
     <servers />
   </component>
@@ -179,6 +164,25 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/impl/JotModelImpl.java</url>
+          <line>211</line>
+          <properties class="lk.ijse.gdse71.finalproject.jotit.model.impl.JotModelImpl" method="findJotsByCategory">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/impl/JotModelImpl.java</url>
+          <line>212</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/lk/ijse/gdse71/finalproject/jotit/model/impl/JotModelImpl.java</url>
+          <line>200</line>
+          <option name="timeStamp" value="30" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

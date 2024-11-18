@@ -105,6 +105,16 @@ public class AddJotController {
 
     @FXML
     void onSaveButtonClick(ActionEvent event) {
+
+            if (saveJotWithCategory()){
+                clear();
+                ControllerRef.layoutController.loadCategories();
+            }
+
+
+    }
+
+    private boolean setCategory() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/step_two.fxml"));
             Parent categoryView = loader.load();
@@ -131,12 +141,36 @@ public class AddJotController {
 
             if (stepTwoController.getSelectedCategory() != null) {
                 selectedCategory = stepTwoController.getSelectedCategory();
-                saveJotWithCategory();
-                ControllerRef.layoutController.loadCategories();
             }
-
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
+        }
+    }
+
+    private void clear() {
+        txtTitle.setText("");
+        locationCombo.setValue(null);
+        setEditorContent("");
+        selectedMoods.clear();
+        selectedTags.clear();
+
+        for (Node node : moodGridPane.getChildren()) {
+            if (node instanceof Parent root) {
+                Mood moodController = (Mood) root.getProperties().get("controller");
+                if (moodController != null) {
+                    moodController.setSelected(false);
+                }
+            }
+        }
+        for (Node node : tagFlowPane.getChildren()) {
+            if (node instanceof Parent root) {
+                Tag tagController = (Tag) root.getProperties().get("controller");
+                if (tagController != null) {
+                    tagController.setSelected(false);
+                }
+            }
         }
     }
 
@@ -183,41 +217,69 @@ public class AddJotController {
         locationCombo.setValue(jotDto.getLocation());
     }
 
-    private void saveJotWithCategory(){
+    private boolean saveJotWithCategory() {
         try {
-            if (saveFile()) {
-                collectSelectedMoods();
-                collectSelectedTags();
-                LocationDto selectedLocation = locationCombo.getValue();
+            String title = txtTitle.getText();
+            LocationDto location = locationCombo.getValue();
+            String content = getEditorContent();
 
-                JotDto jotDto = new JotDto();
-                if (this.jotDto==null){
-                    jotDto.setId(IdGenerator.generateId("JT", 5));
-                }else {
-                    jotDto.setId(this.jotDto.getId());
-                }
-                jotDto.setTitle(txtTitle.getText());
-                //        jotDto.setUserId("user001");
-                jotDto.setCategory(selectedCategory);
-                jotDto.setLocation(selectedLocation);
-                jotDto.setMoods(selectedMoods);
-                jotDto.setTags(selectedTags);
-                jotDto.setPath(currentFilePath);
+            if (title == null || title.trim().isEmpty()) {
+                new Alert(Alert.AlertType.WARNING, "Please enter a title for the jot.", ButtonType.OK).show();
+                return false;
+            }
 
-                if (jotModel.saveJot(jotDto)) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "Note saved successfully.." + ButtonType.OK).show();
-                    currentFilePath = null;
-                    setEditorContent("");
-                } else {
-                    showNotification("Failed to save the note.", "Please try again");
+            if (location == null) {
+                new Alert(Alert.AlertType.WARNING, "Please select a location.", ButtonType.OK).show();
+                return false;
+            }
+
+            if (content == null || content.trim().isEmpty()) {
+                new Alert(Alert.AlertType.WARNING, "The jot content cannot be empty.", ButtonType.OK).show();
+                return false;
+            }
+
+            collectSelectedMoods();
+            collectSelectedTags();
+
+            if (selectedMoods.isEmpty() && selectedTags.isEmpty()) {
+                new Alert(Alert.AlertType.WARNING, "Please select at least one mood or tag.", ButtonType.OK).show();
+                return false;
+            }
+
+            if (setCategory()) {
+                if (saveFile()) {
+                    JotDto jotDto = new JotDto();
+                    if (this.jotDto == null) {
+                        jotDto.setId(IdGenerator.generateId("JT", 5));
+                    } else {
+                        jotDto.setId(this.jotDto.getId());
+                    }
+                    jotDto.setTitle(title);
+                    jotDto.setCategory(selectedCategory);
+                    jotDto.setLocation(location);
+                    jotDto.setMoods(selectedMoods);
+                    jotDto.setTags(selectedTags);
+                    jotDto.setPath(currentFilePath);
+
+                    if (jotModel.saveJot(jotDto)) {
+                        new Alert(Alert.AlertType.CONFIRMATION, "Note saved successfully..", ButtonType.OK).show();
+                        currentFilePath = null;
+                        setEditorContent("");
+                        this.jotDto = null;
+                        return true;
+                    } else {
+                        showNotification("Failed to save the note.", "Please try again");
+                        return false;
+                    }
                 }
             }
+            return false;
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(), ButtonType.OK).show();
+            return false;
         }
 
     }
-
     private boolean saveFile() {
         try {
             String content = getEditorContent();

@@ -3,6 +3,8 @@ package lk.ijse.gdse71.finalproject.jotit.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.GridPane;
 import lk.ijse.gdse71.finalproject.jotit.controller.components.CardJot;
 import lk.ijse.gdse71.finalproject.jotit.dto.JotDto;
@@ -35,6 +37,7 @@ public class ViewJotsController {
 
             int row = 0;
             int col = 0;
+            gridPane.getChildren().clear();
             for (JotDto jot : jots) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/components/card_jot.fxml"));
                 Parent jotCardRoot = loader.load();
@@ -51,15 +54,21 @@ public class ViewJotsController {
 
         } catch (Exception e) {
             e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Something went wrong" , ButtonType.OK).show();
         }
 
     }
 
-    public void setSearchResults(String title) {
+    public void setSearchResults(String searchText) {
         try {
-            load(jotModel.findJots(title));
+            List<JotDto> jots = null;
+            if (searchText != null && !searchText.isEmpty()) {
+                jots = jotModel.findJots(searchText);
+            }
+            load(jots);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Something went wrong" , ButtonType.OK).show();
         }
     }
 

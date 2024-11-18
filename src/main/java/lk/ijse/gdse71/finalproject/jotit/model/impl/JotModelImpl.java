@@ -198,11 +198,26 @@ public class JotModelImpl implements JotModel {
             text = text.replace("#", "");
             return findJotsByTag(text);
         }
+        if (text.startsWith("cat@")){
+            text = text.replace("cat@", "");
+            return findJotsByCategory(text);
+        }
         ResultSet resultSet = CrudUtil.execute(//ORDER BY created_at DESC
                 "SELECT * FROM jot WHERE title LIKE ? ", "%" + text + "%"
         );
 
         return getJotDtos(resultSet);
+    }
+
+    private List<JotDto> findJotsByCategory(String categoryName) throws Exception {
+        System.out.println(categoryName);
+        ResultSet resultSet = CrudUtil.execute(
+                "SELECT j.* FROM jot j " +
+                        "JOIN category c ON j.category_id = c.category_id " +
+                        "WHERE c.description = ?", categoryName
+        );
+        List<JotDto> dtos =getJotDtos(resultSet);
+        return dtos;
     }
 
     private List<JotDto> findJotsByTag(String tagName) throws Exception {

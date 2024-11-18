@@ -44,6 +44,7 @@ public class LayoutController {
 
     public void loadCategories() {
         try {
+
             categoryPane.getChildren().clear();
             List<CategoryDto> categories = categoryModel.getAllCategories();
             for (CategoryDto category : categories) {
@@ -55,7 +56,7 @@ public class LayoutController {
 
 
                 categoryButton.setOnAction(event -> {
-
+                    loadJotView("cat@"+category.getDescription());
                 });
                 buttons.add(categoryButton);
 
@@ -90,7 +91,7 @@ public class LayoutController {
 
     public void loadJotView(String searchText){
 
-        try {
+        try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/viewJots.fxml"));
             Parent viewJotsRoot = loader.load();
             if (searchText!=null){

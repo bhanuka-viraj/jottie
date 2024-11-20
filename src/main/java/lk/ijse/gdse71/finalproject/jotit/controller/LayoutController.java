@@ -11,6 +11,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import lk.ijse.gdse71.finalproject.jotit.dto.CategoryDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.JotDto;
+import lk.ijse.gdse71.finalproject.jotit.dto.UserDto;
 import lk.ijse.gdse71.finalproject.jotit.model.CategoryModel;
 import lk.ijse.gdse71.finalproject.jotit.model.JotModel;
 import lk.ijse.gdse71.finalproject.jotit.model.impl.CategoryModelImpl;
@@ -23,7 +24,7 @@ import java.util.List;
 public class LayoutController {
 
     @FXML
-    private Button btnAddJot;
+    private Button btnViewJot;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -35,11 +36,14 @@ public class LayoutController {
     private final JotModel jotModel= new JotModelImpl();
 
     private List<Button> buttons = new ArrayList<>();
+    private UserDto userDto;
 
     @FXML
     public void initialize() {
-
+        searchBar.setVisible(true);
+        loadCards();
         loadCategories();
+        Platform.runLater(() -> btnViewJot.requestFocus());
     }
 
     public void loadCategories() {
@@ -52,18 +56,17 @@ public class LayoutController {
                 Button categoryButton = new Button(category.getDescription() + " (" + jotCount + ")");
                 categoryButton.setPrefHeight(35);
                 categoryButton.setPrefWidth(185);
-                categoryButton.setStyle("-fx-background-color: rgb(180,13,204);-fx-text-fill: white;-fx-font-style: Arial-black");
-
+                categoryButton.getStyleClass().add("category-button");
 
                 categoryButton.setOnAction(event -> {
                     loadJotView("cat@"+category.getDescription());
                 });
                 buttons.add(categoryButton);
-
                 categoryPane.getChildren().add(categoryButton);
             }
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Error loading categories: " + e.getMessage(), ButtonType.OK).show();
+            e.printStackTrace();
         }
     }
 
@@ -137,4 +140,7 @@ public class LayoutController {
     }
 
 
+    public void setLoggedUser(UserDto userDto) {
+        this.userDto = userDto;
+    }
 }

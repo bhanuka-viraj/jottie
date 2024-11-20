@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import lk.ijse.gdse71.finalproject.jotit.controller.components.CardJot;
 import lk.ijse.gdse71.finalproject.jotit.dto.JotDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.TaskDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.TaskState;
@@ -28,6 +29,7 @@ public class AddTaskController {
     private TaskDto taskDto;
     private final TaskModel taskModel = new TaskModelImpl();
     private TaskManageController taskManageController;
+    private CardJot cardJotController;
 
     @FXML
     public void initialize() {
@@ -62,6 +64,7 @@ public class AddTaskController {
             if (taskModel.saveTask(taskDto)) {
                 taskManageController.loadTaskData();
                 txtDesc.getScene().getWindow().hide();
+                cardJotController.setPieChart();
                 new Alert(Alert.AlertType.INFORMATION, "Task saved successfully", ButtonType.OK).show();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Failed to save task", ButtonType.OK).show();
@@ -86,5 +89,9 @@ public class AddTaskController {
         txtDesc.setText(taskDto.getDesc());
         taskDto.getDueDate();
         dueDatePicker.setValue(taskDto.getDueDate().toLocalDate());
+    }
+
+    public void setCardJotController(CardJot cardJotController) {
+        this.cardJotController = cardJotController;
     }
 }

@@ -25,6 +25,9 @@ public class AddMoodController {
             ));
 
             if (isSaved) {
+                txtMood.setText("");
+                txtMood.getScene().getWindow().hide();
+                ControllerRef.addJotController.refreshMoodList();
                 new Alert(Alert.AlertType.INFORMATION, "Mood Saved").show();
             }else {
                 new Alert(Alert.AlertType.ERROR, "Error saving mood").show();

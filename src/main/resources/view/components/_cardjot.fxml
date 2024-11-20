@@ -13,14 +13,14 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="403.0" prefWidth="302.0" style="-fx-background-color: #8c68c8; -fx-background-radius: 15;" styleClass="card" stylesheets="@../../style/global.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse71.finalproject.jotit.controller.components.CardJot">
+<AnchorPane prefHeight="403.0" prefWidth="302.0" styleClass="card" stylesheets="@../../style/global.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse71.finalproject.jotit.controller.components.CardJot">
    <children>
-      <Label fx:id="lblLocation" layoutX="52.0" layoutY="37.0" text="Home" textFill="WHITE">
+      <Label fx:id="lblLocation" layoutX="52.0" layoutY="37.0" text="Home" textFill="#898989">
          <font>
             <Font name="Calibri" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lblCategory" layoutX="20.0" layoutY="17.0" text="Personal" textFill="WHITE">
+      <Label fx:id="lblCategory" layoutX="20.0" layoutY="17.0" text="Personal" textFill="#007bff">
          <font>
             <Font name="Arial Rounded MT Bold" size="15.0" />
          </font>
@@ -37,9 +37,9 @@
       </HBox>
       <VBox alignment="CENTER" layoutY="116.0" prefHeight="188.0" prefWidth="302.0">
          <children>
-            <Label fx:id="lblTitle" prefHeight="192.0" prefWidth="302.0" text="Learn How to Become a Developer" textFill="WHITE" wrapText="true" VBox.vgrow="ALWAYS">
+            <Label fx:id="lblTitle" prefHeight="192.0" prefWidth="302.0" text="Learn How to Become a Developer" textFill="#716f6f" wrapText="true" VBox.vgrow="ALWAYS">
                <font>
-                  <Font name="Arial Rounded MT Bold" size="28.0" />
+                  <Font name="Arial Rounded MT Bold" size="23.0" />
                </font>
                <padding>
                   <Insets left="30.0" right="30.0" />
@@ -52,13 +52,13 @@
             <Image url="@../assets/location.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblDate" alignment="CENTER" layoutX="178.0" layoutY="17.0" prefHeight="18.0" prefWidth="122.0" text="1 day ago" textFill="WHITE">
+      <Label fx:id="lblDate" alignment="CENTER" layoutX="178.0" layoutY="17.0" prefHeight="18.0" prefWidth="122.0" text="1 day ago" textFill="#898989">
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font>
       </Label>
 
-      <AnchorPane prefHeight="403.0" prefWidth="302.0" style="-fx-background-radius: 15; -fx-background-color: #3B1E54;" styleClass="card-manage">
+      <AnchorPane prefHeight="403.0" prefWidth="302.0" styleClass="card-manage">
          <children>
             <Circle fill="DODGERBLUE" layoutX="249.0" layoutY="359.0" onMouseClicked="#openOnClicked" radius="26.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: white; -fx-stroke: none;">
                <cursor>
@@ -96,8 +96,8 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <PieChart fx:id="pieChart" layoutX="51.0" layoutY="78.0" prefHeight="150.0" prefWidth="142.0" />
-            <Label fx:id="lblTasks" layoutX="87.0" layoutY="30.0" text="Completed tasks" textFill="WHITE">
+            <PieChart fx:id="pieChart" layoutX="51.0" layoutY="114.0" prefHeight="150.0" prefWidth="142.0" />
+            <Label fx:id="lblTasks" layoutX="87.0" layoutY="19.0" text="Completed tasks" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="15.0" />
                </font>
@@ -114,6 +114,24 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Circle fill="#e06031" layoutX="31.0" layoutY="48.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fill="#5bb05b" layoutX="31.0" layoutY="65.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fill="#e3971c" layoutX="31.0" layoutY="81.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="41.0" layoutY="57.0" text="Not started" textFill="WHITE">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="73.0" text="Running" textFill="WHITE">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="40.0" text="Completed" textFill="WHITE">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
          </children>
          <cursor>
             <Cursor fx:constant="OPEN_HAND" />

@@ -9,5 +9,4 @@ public interface CategoryModel {
     public CategoryDto getCategory(String id)throws Exception;
     public List<CategoryDto> getAllCategories()throws Exception;
     public boolean deleteCategory(CategoryDto category)throws Exception;
-
 }

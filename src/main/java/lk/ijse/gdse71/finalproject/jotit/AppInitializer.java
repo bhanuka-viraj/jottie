@@ -13,9 +13,9 @@ import java.io.IOException;
 public class AppInitializer extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/mainLayout_.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/user/login.fxml"));
         Parent root = fxmlLoader.load();
-        ControllerRef.layoutController = fxmlLoader.getController();
+//        ControllerRef.layoutController = fxmlLoader.getController();
         Scene scene = new Scene(root);
         stage.setTitle("JoTtie");
         stage.setScene(scene);

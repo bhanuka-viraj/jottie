@@ -110,8 +110,6 @@ public class AddJotController {
                 clear();
                 ControllerRef.layoutController.loadCategories();
             }
-
-
     }
 
     private boolean setCategory() {
@@ -305,6 +303,7 @@ public class AddJotController {
 
     }
 
+    //need to learn more
     private byte[] encrypt(String content, String key) throws Exception {
         Cipher cipher = Cipher.getInstance("AES");
         SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(), "AES");
@@ -374,7 +373,7 @@ public class AddJotController {
         }
     }
 
-    private void refreshMoodList() {
+    public void refreshMoodList() {
         try {
             moodGridPane.getChildren().clear();
 
@@ -415,7 +414,7 @@ public class AddJotController {
 
     }
 
-    private void refreshTagList() {
+    public void refreshTagList() {
         try {
             tagFlowPane.getChildren().clear();
 
@@ -472,7 +471,6 @@ public class AddJotController {
 
     private void collectSelectedTags() {
         selectedTags.clear();
-        //tags and moods are not collecting
         for (Node node : tagFlowPane.getChildren()) {
             if (node instanceof Parent root) {
                 Tag tagController = (Tag) root.getProperties().get("controller");
@@ -487,5 +485,15 @@ public class AddJotController {
 
     public void setSelectedCategory(CategoryDto selectedCategory) {
         this.selectedCategory = selectedCategory;
+    }
+
+    public void refreshLocationCombo() {
+        try {
+            List<LocationDto> locationDtos = locationModel.getAllLocations();
+            ObservableList<LocationDto> observableList = FXCollections.observableArrayList(locationDtos);
+            locationCombo.setItems(observableList);
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Failed to refresh locations", ButtonType.OK).show();
+        }
     }
 }

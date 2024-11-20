@@ -39,7 +39,7 @@ public class ViewJotsController {
             int col = 0;
             gridPane.getChildren().clear();
             for (JotDto jot : jots) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/components/card_jot.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/components/_cardjot.fxml"));
                 Parent jotCardRoot = loader.load();
                 CardJot jotCardController = loader.getController();
                 jotCardController.setData(jot);

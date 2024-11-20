@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface UserModel {
-    public void save(UserDto userDto) throws SQLException, ClassNotFoundException;
-    public UserDto getUser();
-    public ArrayList<UserDto> getAllUsers();
+    public boolean save(UserDto userDto) throws Exception;
+    public UserDto getUser(String usrname)throws Exception;
+    public ArrayList<UserDto> getAllUsers()throws Exception;
 }

@@ -27,6 +27,8 @@ public class AddLocationController {
 
             if (isSaved) {
                 new Alert(Alert.AlertType.INFORMATION, "Location Saved").show();
+                ControllerRef.addJotController.refreshLocationCombo();
+                txtLocation.getScene().getWindow().hide();
             }else {
                 new Alert(Alert.AlertType.ERROR, "Error saving Location").show();
             }

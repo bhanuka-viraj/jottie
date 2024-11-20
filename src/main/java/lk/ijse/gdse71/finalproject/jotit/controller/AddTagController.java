@@ -26,7 +26,11 @@ public class AddTagController {
             ));
 
             if (isSaved) {
+                txtTag.setText("");
+                txtTag.getScene().getWindow().hide();
+                ControllerRef.addJotController.refreshTagList();
                 new Alert(Alert.AlertType.INFORMATION, "Tag Saved").show();
+
             }else {
                 new Alert(Alert.AlertType.ERROR, "Error saving Tag").show();
             }

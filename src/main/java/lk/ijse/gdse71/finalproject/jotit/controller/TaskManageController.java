@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import lk.ijse.gdse71.finalproject.jotit.controller.components.CardJot;
 import lk.ijse.gdse71.finalproject.jotit.dto.JotDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.TaskDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.tm.TaskTm;
@@ -46,6 +47,7 @@ public class TaskManageController {
     private final TaskModel taskModel = new TaskModelImpl();
     private AddTaskController addTaskController;
     private JotDto jotDto;
+    private CardJot cardJotController;
 
     @FXML
     public void initialize() {
@@ -82,6 +84,7 @@ public class TaskManageController {
 
             addTaskController.setJotDto(jotDto);
             addTaskController.setTaskManageController(this);
+            addTaskController.setCardJotController(this.cardJotController);
 
             if (taskDto != null) {
                 System.out.println(taskDto.getDueDate());
@@ -153,4 +156,7 @@ public class TaskManageController {
         loadAddTask(taskDto);
     }
 
+    public void setCarJotController(CardJot cardJot) {
+        this.cardJotController = cardJot;
+    }
 }

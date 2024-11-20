@@ -23,8 +23,5 @@ import java.sql.SQLException;
             }
             return dbConnection;
         }
-//    public Connection getConnection(){
-//        return connection;
-//    }
     }
 

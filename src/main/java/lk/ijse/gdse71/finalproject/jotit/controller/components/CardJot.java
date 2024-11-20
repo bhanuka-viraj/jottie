@@ -1,6 +1,8 @@
 package lk.ijse.gdse71.finalproject.jotit.controller.components;
 
-import javafx.concurrent.Worker;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart.Data;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,11 +19,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lk.ijse.gdse71.finalproject.jotit.controller.ControllerRef;
 import lk.ijse.gdse71.finalproject.jotit.controller.TaskManageController;
-import lk.ijse.gdse71.finalproject.jotit.dto.JotDto;
-import lk.ijse.gdse71.finalproject.jotit.dto.MoodDto;
-import lk.ijse.gdse71.finalproject.jotit.dto.TagDto;
+import lk.ijse.gdse71.finalproject.jotit.dto.*;
 import lk.ijse.gdse71.finalproject.jotit.model.JotModel;
+import lk.ijse.gdse71.finalproject.jotit.model.TaskModel;
 import lk.ijse.gdse71.finalproject.jotit.model.impl.JotModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.model.impl.TaskModelImpl;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.io.IOException;
@@ -31,6 +33,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 
 public class CardJot {
 
@@ -58,7 +61,8 @@ public class CardJot {
     @FXML
     private Label lblTasks;
 
-    private JotModel jotModel = new JotModelImpl();
+    private final JotModel jotModel = new JotModelImpl();
+    private final TaskModel taskModel = new TaskModelImpl();
     private JotDto jotDto;
 
     @FXML
@@ -117,6 +121,36 @@ public class CardJot {
                 e.printStackTrace();
             }
         }
+        setPieChart();
+    }
+    public void setPieChart() {
+        try {
+            List<TaskDto> tasks = taskModel.getAllTask(jotDto.getUserId(), jotDto.getId());
+
+            int finishedTasks = 0;
+            int runningTasks = 0;
+            int notStartedTasks = 0;
+
+            for (TaskDto task : tasks) {
+                switch (task.getStatus()) {
+                    case FINISHED -> finishedTasks++;
+                    case RUNNING -> runningTasks++;
+                    case NOT_STARTED -> notStartedTasks++;
+                }
+            }
+
+            ObservableList<Data> pieChartData = FXCollections.observableArrayList(
+                    new Data("Finished", finishedTasks),
+                    new Data("Running", runningTasks),
+                    new Data("Not Started", notStartedTasks)
+            );
+            pieChart.setData(pieChartData);
+            pieChart.setLabelsVisible(false);
+
+            lblTasks.setText("Tasks (" + tasks.size() + ")");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     @FXML
     void btnTaskOnAction(ActionEvent event) {
@@ -131,6 +165,7 @@ public class CardJot {
             TaskManageController taskManageController = loader.getController();
 
             taskManageController.setJotDto(jotDto);
+            taskManageController.setCarJotController(this);
 
             Stage stage = new Stage();
             stage.setScene(new Scene(taskMangeView));

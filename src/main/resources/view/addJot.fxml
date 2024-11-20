@@ -22,7 +22,7 @@
          <center>
             <WebView fx:id="webView" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER">
                <BorderPane.margin>
-                  <Insets />
+                  <Insets top="10.0" />
                </BorderPane.margin>
             </WebView>
          </center>
@@ -32,7 +32,7 @@
                   <HBox alignment="BOTTOM_LEFT" prefHeight="26.0" prefWidth="70.0" HBox.hgrow="ALWAYS">
                      <children>
                         <ComboBox fx:id="locationCombo" prefHeight="26.0" prefWidth="170.0" promptText="select location" />
-                        <Button fx:id="addLocation" mnemonicParsing="false" onAction="#addLocationOnAction" prefHeight="26.0" prefWidth="29.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" text="+" />
+                        <Button fx:id="addLocation" mnemonicParsing="false" onAction="#addLocationOnAction" prefHeight="29.0" prefWidth="29.0" style="-fx-background-radius: 0 25 25 0; -fx-border-radius: 0 25 25 0; -fx-background-color: #f5f5f5; -fx-border-color: #ccc;" text="+" />
                      </children>
                      <HBox.margin>
                         <Insets />
@@ -50,7 +50,7 @@
                   </HBox>
                   <HBox alignment="BOTTOM_RIGHT" prefHeight="26.0" prefWidth="70.0" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button onAction="#onSaveButtonClick" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: #6A42C2;" text="Save" textFill="WHITE" />
+                        <Button onAction="#onSaveButtonClick" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: #0f236f;" text="Save" textFill="WHITE" />
                      </children>
                      <HBox.margin>
                         <Insets />
@@ -82,7 +82,7 @@
                            <Insets left="5.0" />
                         </padding>
                      </ScrollPane>
-                     <Button fx:id="addTag" mnemonicParsing="false" onAction="#addTagOnAction" prefHeight="26.0" prefWidth="170.0" style="-fx-background-color: #88C273;" text="Add Tag" />
+                     <Button fx:id="addTag" mnemonicParsing="false" onAction="#addTagOnAction" prefHeight="26.0" prefWidth="170.0" style="-fx-background-color: #2099b6;" text="Add Tag" textFill="WHITE" />
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
@@ -103,7 +103,7 @@
                            <Insets left="5.0" />
                         </padding>
                      </ScrollPane>
-                     <Button fx:id="addMood" mnemonicParsing="false" onAction="#addMoodOnAction" prefHeight="26.0" prefWidth="170.0" style="-fx-background-color: #88C273;" text="Add Mood" />
+                     <Button fx:id="addMood" mnemonicParsing="false" onAction="#addMoodOnAction" prefHeight="26.0" prefWidth="170.0" style="-fx-background-color: #2099b6;" text="Add Mood" textFill="WHITE" />
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>

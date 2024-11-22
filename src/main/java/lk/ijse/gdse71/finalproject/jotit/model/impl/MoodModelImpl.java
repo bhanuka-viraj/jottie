@@ -13,7 +13,6 @@ public class MoodModelImpl implements MoodModel {
 
     @Override
     public boolean saveMood(MoodDto moodDto) throws Exception {
-        //add a created by
         return CrudUtil.execute("INSERT INTO mood (mood_id, description) VALUES (?, ?)",
                 moodDto.getId(), moodDto.getDescription());
     }

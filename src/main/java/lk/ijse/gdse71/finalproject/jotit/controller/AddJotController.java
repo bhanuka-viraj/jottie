@@ -63,6 +63,17 @@ public class AddJotController {
 
     @FXML
     private FlowPane tagFlowPane;
+    @FXML
+    private Button addLocation;
+
+    @FXML
+    private Button addMood;
+
+    @FXML
+    private Button addTag;
+
+    @FXML
+    private Button btnSave;
 
     private WebEngine webEngine;
     private String currentFilePath = null;
@@ -201,7 +212,6 @@ public class AddJotController {
                 }
             });
             setJotData(jotDto);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -257,6 +267,7 @@ public class AddJotController {
                     jotDto.setLocation(location);
                     jotDto.setMoods(selectedMoods);
                     jotDto.setTags(selectedTags);
+                    jotDto.setUserId(LoginController.userDto.getId());
                     jotDto.setPath(currentFilePath);
 
                     if (jotModel.saveJot(jotDto)) {
@@ -418,7 +429,7 @@ public class AddJotController {
         try {
             tagFlowPane.getChildren().clear();
 
-            List<TagDto> tagDtos = tagModel.getAllTags();
+            List<TagDto> tagDtos = tagModel.getAllTags(LoginController.userDto.getId());
 
             for (TagDto tagDto : tagDtos) {
                 System.out.println(tagDto);
@@ -448,7 +459,7 @@ public class AddJotController {
 
     private void loadLocations() {
         try {
-            List<LocationDto> locationDtos = locationModel.getAllLocations();
+            List<LocationDto> locationDtos = locationModel.getAllLocations(LoginController.userDto.getId());
             ObservableList<LocationDto> observableList = FXCollections.observableArrayList(locationDtos);
             locationCombo.setItems(observableList);
         } catch (Exception e) {
@@ -475,6 +486,7 @@ public class AddJotController {
             if (node instanceof Parent root) {
                 Tag tagController = (Tag) root.getProperties().get("controller");
                 if (tagController != null && tagController.isSelected()) {
+                    tagController.setLoggedUser(LoginController.userDto.getId());
                     TagDto tagDto = tagController.getSelectedTagDto();
                     System.out.println(tagDto.getName());
                     selectedTags.add(tagDto);
@@ -489,11 +501,20 @@ public class AddJotController {
 
     public void refreshLocationCombo() {
         try {
-            List<LocationDto> locationDtos = locationModel.getAllLocations();
+            List<LocationDto> locationDtos = locationModel.getAllLocations(LoginController.userDto.getId());
             ObservableList<LocationDto> observableList = FXCollections.observableArrayList(locationDtos);
             locationCombo.setItems(observableList);
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Failed to refresh locations", ButtonType.OK).show();
         }
+    }
+
+    public void setReadOnly(boolean isReadOnly) {
+        locationCombo.setDisable(isReadOnly);
+        txtTitle.setDisable(isReadOnly);
+        btnSave.setDisable(isReadOnly);
+        addLocation.setDisable(isReadOnly);
+        addMood.setDisable(isReadOnly);
+        addTag.setDisable(isReadOnly);
     }
 }

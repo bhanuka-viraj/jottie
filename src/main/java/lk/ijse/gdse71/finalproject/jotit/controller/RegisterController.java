@@ -13,6 +13,7 @@ import javafx.util.Duration;
 import lk.ijse.gdse71.finalproject.jotit.dto.UserDto;
 import lk.ijse.gdse71.finalproject.jotit.model.UserModel;
 import lk.ijse.gdse71.finalproject.jotit.model.impl.UserModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.util.EmailUtil;
 import lk.ijse.gdse71.finalproject.jotit.util.IdGenerator;
 import lk.ijse.gdse71.finalproject.jotit.util.PasswordUtil;
 
@@ -78,7 +79,7 @@ public class RegisterController {
 
 
     @FXML
-    void btnsignInOnAction(ActionEvent event) {
+    void btnsignUpOnAction(ActionEvent event) {
         try {
 
             if (txtFirstName.getText().isEmpty() || !txtFirstName.getText().matches("[a-zA-Z]+")) {
@@ -144,6 +145,7 @@ public class RegisterController {
             userDto.setPassword(PasswordUtil.hashPassword(txtPassword1.getText()));
             if (userModel.save(userDto)) {
                 showAlert(Alert.AlertType.INFORMATION, "Successfully registered.");
+                EmailUtil.sendEmail(userDto.getEmail(),"Jottie : Acount creation","Acount creation successful");
             }
 
         } catch (Exception e) {

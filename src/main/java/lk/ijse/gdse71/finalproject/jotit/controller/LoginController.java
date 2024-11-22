@@ -14,7 +14,6 @@ import lk.ijse.gdse71.finalproject.jotit.dto.UserDto;
 import lk.ijse.gdse71.finalproject.jotit.model.UserModel;
 import lk.ijse.gdse71.finalproject.jotit.model.impl.UserModelImpl;
 import lk.ijse.gdse71.finalproject.jotit.util.PasswordUtil;
-import org.apache.commons.lang3.text.translate.UnicodeUnpairedSurrogateRemover;
 
 import java.io.IOException;
 
@@ -34,7 +33,7 @@ public class LoginController {
     private TextField txtUserName;
 
     private final UserModel userModel = new UserModelImpl();
-    private UserDto userDto ;
+    protected static UserDto userDto ;
 
     public void initialize() {
         lblPwdIncorrect.setVisible(false);
@@ -78,7 +77,7 @@ public class LoginController {
             Stage stage = (Stage) rootPane.getScene().getWindow();
             stage.close();
 
-            this.userDto = userDto;
+            LoginController.userDto = userDto;
             switchToMainLayout();
 
         } catch (Exception e) {
@@ -92,7 +91,6 @@ public class LoginController {
             FXMLLoader fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/main_Layout.fxml"));
             Parent root = fxmlLoader.load();
             ControllerRef.layoutController = fxmlLoader.getController();
-            ControllerRef.layoutController.setLoggedUser(userDto);
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("JoTtie");
@@ -132,4 +130,5 @@ public class LoginController {
         txtUserName.setStyle("-fx-border-color: transparent transparent #2d4367 transparent;");
         txtPassword.setStyle("-fx-border-color: transparent transparent #2d4367 transparent;");
     }
+
 }

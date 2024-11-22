@@ -1,5 +1,6 @@
 CREATE DATABASE jottie;
 USE jottie;
+
 CREATE TABLE User
 (
     user_id    VARCHAR(50) PRIMARY KEY,
@@ -16,7 +17,9 @@ CREATE TABLE User
 CREATE TABLE Relationship
 (
     relationship_id VARCHAR(50) PRIMARY KEY,
-    type            VARCHAR(50) NOT NULL
+    type            VARCHAR(50) NOT NULL,
+    created_by      VARCHAR(50),
+    FOREIGN KEY (created_by) REFERENCES User (user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE User_Relationship
@@ -33,13 +36,17 @@ CREATE TABLE User_Relationship
 CREATE TABLE Category
 (
     category_id VARCHAR(50) PRIMARY KEY,
-    description VARCHAR(255)
+    description VARCHAR(255),
+    created_by  VARCHAR(50),
+    FOREIGN KEY (created_by) REFERENCES User (user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Location
 (
     location_id VARCHAR(50) PRIMARY KEY,
-    description VARCHAR(255)
+    description VARCHAR(255),
+    created_by  VARCHAR(50),
+    FOREIGN KEY (created_by) REFERENCES User (user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Jot
@@ -73,7 +80,9 @@ CREATE TABLE Shared_Jot
 CREATE TABLE Mood
 (
     mood_id     VARCHAR(50) PRIMARY KEY,
-    description VARCHAR(255)
+    description VARCHAR(255),
+    created_by  VARCHAR(50),
+    FOREIGN KEY (created_by) REFERENCES User (user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Jot_Mood
@@ -86,8 +95,10 @@ CREATE TABLE Jot_Mood
 
 CREATE TABLE Tag
 (
-    tag_id VARCHAR(50) PRIMARY KEY,
-    name   VARCHAR(100)
+    tag_id     VARCHAR(50) PRIMARY KEY,
+    name       VARCHAR(100),
+    created_by VARCHAR(50),
+    FOREIGN KEY (created_by) REFERENCES User (user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Jot_Tag
@@ -100,14 +111,14 @@ CREATE TABLE Jot_Tag
 
 CREATE TABLE Task
 (
-    task_id        VARCHAR(50) PRIMARY KEY,
-    user_id        VARCHAR(50),
-    jot_id         VARCHAR(50),
-    description    TEXT,
-    due_date       DATE,
-    state	       VARCHAR(50)   DEFAULT 'NOT_STARTED',
-    created_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    task_id     VARCHAR(50) PRIMARY KEY,
+    user_id     VARCHAR(50),
+    jot_id      VARCHAR(50),
+    description TEXT,
+    due_date    DATE,
+    state       VARCHAR(50) DEFAULT 'NOT_STARTED',
+    created_at  TIMESTAMP   DEFAULT CURRENT_TIMESTAMP,
+    updated_at  TIMESTAMP   DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES User (user_id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (jot_id) REFERENCES Jot (jot_id) ON DELETE CASCADE ON UPDATE CASCADE
 );

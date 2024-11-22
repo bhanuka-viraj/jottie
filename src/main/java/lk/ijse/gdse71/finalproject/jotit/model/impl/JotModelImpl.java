@@ -79,14 +79,14 @@ public class JotModelImpl implements JotModel {
         try {
 
             CrudUtil.beginTransaction();
-            boolean isJotUpdated = CrudUtil.execute(// AND user_id = ?
-                    "UPDATE jot SET title = ?, path = ?, category_id = ?, location_id = ? WHERE jot_id = ?",
+            boolean isJotUpdated = CrudUtil.execute(
+                    "UPDATE jot SET title = ?, path = ?, category_id = ?, location_id = ? WHERE jot_id = ? AND user_id = ?",
                     jotDto.getTitle(),
                     jotDto.getPath(),
                     jotDto.getCategory().getId(),
                     jotDto.getLocation().getId(),
-                    jotDto.getId()
-//                    jotDto.getUserId()
+                    jotDto.getId(),
+                    jotDto.getUserId()
             );
 
             if (isJotUpdated) {
@@ -145,10 +145,10 @@ public class JotModelImpl implements JotModel {
             jotDto.setPath(resultSet.getString("path"));
 
             jotDto.setCategory(new CategoryDto(resultSet.getString("category_id"),
-                    resultSet.getString("category_description")));
+                    resultSet.getString("category_description"),resultSet.getString("user_id")));
 
             jotDto.setLocation(new LocationDto(resultSet.getString("location_id"),
-                    resultSet.getString("location_description")));
+                    resultSet.getString("location_description"),resultSet.getString("user_id")));
 
             jotDto.setCreatedAt(resultSet.getTimestamp("created_at"));
             jotDto.setUpdatedAt(resultSet.getTimestamp("updated_at"));
@@ -159,7 +159,7 @@ public class JotModelImpl implements JotModel {
                             " JOIN jot_tag jt ON t.tag_id = jt.tag_id " +
                             "WHERE jt.jot_id = ?", id);
             while (tagResultSet.next()) {
-                tags.add(new TagDto(tagResultSet.getString("tag_id"), tagResultSet.getString("name")));
+                tags.add(new TagDto(tagResultSet.getString("tag_id"), tagResultSet.getString("name"), tagResultSet.getString("created_by")));
             }
             jotDto.setTags(tags);
 
@@ -181,9 +181,9 @@ public class JotModelImpl implements JotModel {
     @Override
     public List<JotDto> getAllJot(String userId) throws Exception {
 //        ResultSet resultSet = CrudUtil.execute("SELECT * FROM jot WHERE user_id=?", userId);
-        ResultSet resultSet = CrudUtil.execute("SELECT * FROM jot ORDER BY created_at DESC");
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM jot WHERE user_id=? ORDER BY created_at DESC",userId);
 
-        return getJotDtos(resultSet);
+        return getJotDtos(resultSet,userId);
     }
 
     @Override
@@ -193,44 +193,43 @@ public class JotModelImpl implements JotModel {
     }
 
     @Override
-    public List<JotDto> findJots(String text) throws Exception {
+    public List<JotDto> findJots(String text, String userId) throws Exception {
         if (text.startsWith("#")) {
             text = text.replace("#", "");
-            return findJotsByTag(text);
+            return findJotsByTag(text,userId);
         }
         if (text.startsWith("cat@")){
             text = text.replace("cat@", "");
-            return findJotsByCategory(text);
+            return findJotsByCategory(text,userId);
         }
-        ResultSet resultSet = CrudUtil.execute(//ORDER BY created_at DESC
-                "SELECT * FROM jot WHERE title LIKE ? ", "%" + text + "%"
+        ResultSet resultSet = CrudUtil.execute(
+                "SELECT * FROM jot WHERE user_id = ? AND  title LIKE ? ",userId, "%" + text + "%"
         );
 
-        return getJotDtos(resultSet);
+        return getJotDtos(resultSet,userId);
     }
 
-    private List<JotDto> findJotsByCategory(String categoryName) throws Exception {
-        System.out.println(categoryName);
+    private List<JotDto> findJotsByCategory(String categoryName, String userId) throws Exception {
         ResultSet resultSet = CrudUtil.execute(
                 "SELECT j.* FROM jot j " +
                         "JOIN category c ON j.category_id = c.category_id " +
-                        "WHERE c.description = ?", categoryName
+                        "WHERE c.description = ? AND j.user_id = ?", categoryName,userId
         );
-        List<JotDto> dtos =getJotDtos(resultSet);
+        List<JotDto> dtos =getJotDtos(resultSet,userId);
         return dtos;
     }
 
-    private List<JotDto> findJotsByTag(String tagName) throws Exception {
+    private List<JotDto> findJotsByTag(String tagName, String userId) throws Exception {
         ResultSet resultSet = CrudUtil.execute(
                 "SELECT j.* FROM jot j " +
                         " JOIN jot_tag jt ON j.jot_id = jt.jot_id " +
                         " JOIN tag t ON jt.tag_id = t.tag_id " +
-                        " WHERE t.name LIKE ?", "%" + tagName + "%"
+                        " WHERE t.name LIKE ? AND j.user_id = ?", "%" + tagName + "%",userId
         );
-        return getJotDtos(resultSet);
+        return getJotDtos(resultSet,userId);
     }
 
-    public List<JotDto> getJotDtos(ResultSet resultSet) throws Exception {
+    public List<JotDto> getJotDtos(ResultSet resultSet,String userId) throws Exception {
         List<JotDto> jotDtos = new ArrayList<>();
         while (resultSet.next()) {
             JotDto jotDto = new JotDto();
@@ -238,8 +237,8 @@ public class JotModelImpl implements JotModel {
             jotDto.setUserId(resultSet.getString("user_id"));
             jotDto.setTitle(resultSet.getString("title"));
             jotDto.setPath(resultSet.getString("path"));
-            jotDto.setCategory(categoryModel.getCategory(resultSet.getString("category_id")));
-            jotDto.setLocation(locationModel.getLocation(resultSet.getString("location_id")));
+            jotDto.setCategory(categoryModel.getCategory(resultSet.getString("category_id"),userId));
+            jotDto.setLocation(locationModel.getLocation(resultSet.getString("location_id"),userId));
             //get join queries if there is a performance issue
             jotDto.setCreatedAt(resultSet.getTimestamp("created_at"));
             jotDto.setUpdatedAt(resultSet.getTimestamp("updated_at"));
@@ -248,9 +247,10 @@ public class JotModelImpl implements JotModel {
             ResultSet tagResultSet = CrudUtil.execute(
                     "SELECT * FROM tag t" +
                             " JOIN jot_tag jt ON t.tag_id = jt.tag_id " +
-                            "WHERE jt.jot_id = ?", jotDto.getId());
+                            "WHERE jt.jot_id = ? AND t.created_by = ?", jotDto.getId(),userId);
             while (tagResultSet.next()) {
-                tags.add(new TagDto(tagResultSet.getString("tag_id"), tagResultSet.getString("name")));
+                //add created by to tagdto and other all dtos
+                tags.add(new TagDto(tagResultSet.getString("tag_id"), tagResultSet.getString("name"), tagResultSet.getString("created_by")));
             }
             jotDto.setTags(tags);
 
@@ -270,8 +270,8 @@ public class JotModelImpl implements JotModel {
     }
 
     @Override
-    public int getJotCountByCategory(String categoryId) throws Exception {
-        ResultSet resultSet = CrudUtil.execute("SELECT COUNT(*) FROM jot WHERE category_id = ?", categoryId);
+    public int getJotCountByCategory(String categoryId,String userId) throws Exception {
+        ResultSet resultSet = CrudUtil.execute("SELECT COUNT(*) FROM jot WHERE category_id = ? AND user_id = ?", categoryId,userId);
         if (resultSet.next()) {
             return resultSet.getInt(1);
         }

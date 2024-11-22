@@ -117,6 +117,13 @@
             <artifactId>prettytime</artifactId>
             <version>5.0.7.Final</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.sun.mail/jakarta.mail -->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>jakarta.mail</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+
 
     </dependencies>
 

@@ -11,26 +11,27 @@ import java.util.List;
 public class LocationModelImpl implements LocationModel {
     @Override
     public boolean saveLocation(LocationDto locationDto) throws Exception {
-        return CrudUtil.execute("INSERT INTO location VALUES (?, ?)",
+        return CrudUtil.execute("INSERT INTO location VALUES (?, ?,?)",
                 locationDto.getId(),
-                locationDto.getDescription());
+                locationDto.getDescription(),
+                locationDto.getCreatedBy());
     }
 
     @Override
-    public LocationDto getLocation(String id) throws Exception {
-        ResultSet rs = CrudUtil.execute("SELECT * FROM location WHERE location_id = ?", id);
+    public LocationDto getLocation(String id,String userId) throws Exception {
+        ResultSet rs = CrudUtil.execute("SELECT * FROM location WHERE location_id = ? AND created_by = ?", id,userId);
         if (rs.next()) {
-            return new LocationDto(rs.getString("location_id"), rs.getString("description"));
+            return new LocationDto(rs.getString("location_id"), rs.getString("description"), rs.getString("created_by"));
         }
         return null;
     }
 
     @Override
-    public List<LocationDto> getAllLocations() throws Exception {
-        ResultSet rs = CrudUtil.execute("SELECT * FROM location");
+    public List<LocationDto> getAllLocations(String userId) throws Exception {
+        ResultSet rs = CrudUtil.execute("SELECT * FROM location WHERE created_by = ?", userId);
         List<LocationDto> locations = new ArrayList<>();
         while (rs.next()) {
-            locations.add(new LocationDto(rs.getString("location_id"), rs.getString("description")));
+            locations.add(new LocationDto(rs.getString("location_id"), rs.getString("description"), rs.getString("created_by")));
         }
         return locations;
     }

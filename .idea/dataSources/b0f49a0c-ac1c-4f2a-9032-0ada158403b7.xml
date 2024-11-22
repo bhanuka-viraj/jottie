@@ -999,7 +999,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </schema>
     <schema id="289" parent="1" name="jottie">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2024-11-17.16:12:37</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-11-22.07:36:18</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="290" parent="1" name="mysql">
@@ -1066,11 +1066,11 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="307" parent="289" name="notification">
+    <table id="307" parent="289" name="relationship">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="308" parent="289" name="relationship">
+    <table id="308" parent="289" name="reminder">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
@@ -1103,531 +1103,604 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Position>2</Position>
       <StoredType>varchar(255)|0s</StoredType>
     </column>
-    <index id="316" parent="301" name="PRIMARY">
+    <column id="316" parent="301" name="created_by">
+      <Position>3</Position>
+      <StoredType>varchar(50)|0s</StoredType>
+    </column>
+    <foreign-key id="317" parent="301" name="FK_Category_User">
+      <ColNames>created_by</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>user_id</RefColNames>
+      <RefTableName>user</RefTableName>
+    </foreign-key>
+    <index id="318" parent="301" name="PRIMARY">
       <ColNames>category_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="317" parent="301" name="PRIMARY">
+    <index id="319" parent="301" name="FK_Category_User">
+      <ColNames>created_by</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="320" parent="301" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="318" parent="302" name="jot_id">
+    <column id="321" parent="302" name="jot_id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="319" parent="302" name="user_id">
+    <column id="322" parent="302" name="user_id">
       <Position>2</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="320" parent="302" name="title">
+    <column id="323" parent="302" name="title">
       <Position>3</Position>
       <StoredType>varchar(255)|0s</StoredType>
     </column>
-    <column id="321" parent="302" name="path">
+    <column id="324" parent="302" name="path">
       <Position>4</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <column id="322" parent="302" name="created_at">
+    <column id="325" parent="302" name="created_at">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <Position>5</Position>
       <StoredType>timestamp|0s</StoredType>
     </column>
-    <column id="323" parent="302" name="updated_at">
+    <column id="326" parent="302" name="updated_at">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <OnUpdate>CURRENT_TIMESTAMP</OnUpdate>
       <Position>6</Position>
       <StoredType>timestamp|0s</StoredType>
     </column>
-    <column id="324" parent="302" name="category_id">
+    <column id="327" parent="302" name="category_id">
       <Position>7</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="325" parent="302" name="location_id">
+    <column id="328" parent="302" name="location_id">
       <Position>8</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <foreign-key id="326" parent="302" name="jot_ibfk_1">
+    <foreign-key id="329" parent="302" name="jot_ibfk_1">
       <ColNames>user_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>user_id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
-    <foreign-key id="327" parent="302" name="jot_ibfk_2">
+    <foreign-key id="330" parent="302" name="jot_ibfk_2">
       <ColNames>category_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>category_id</RefColNames>
       <RefTableName>category</RefTableName>
     </foreign-key>
-    <foreign-key id="328" parent="302" name="jot_ibfk_3">
+    <foreign-key id="331" parent="302" name="jot_ibfk_3">
       <ColNames>location_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>location_id</RefColNames>
       <RefTableName>location</RefTableName>
     </foreign-key>
-    <index id="329" parent="302" name="PRIMARY">
+    <index id="332" parent="302" name="PRIMARY">
       <ColNames>jot_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="330" parent="302" name="user_id">
+    <index id="333" parent="302" name="user_id">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="331" parent="302" name="category_id">
+    <index id="334" parent="302" name="category_id">
       <ColNames>category_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="332" parent="302" name="location_id">
+    <index id="335" parent="302" name="location_id">
       <ColNames>location_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="333" parent="302" name="PRIMARY">
+    <key id="336" parent="302" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="334" parent="303" name="jot_id">
+    <column id="337" parent="303" name="jot_id">
       <Position>1</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="335" parent="303" name="mood_id">
+    <column id="338" parent="303" name="mood_id">
       <Position>2</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <foreign-key id="336" parent="303" name="jot_mood_ibfk_1">
+    <foreign-key id="339" parent="303" name="jot_mood_ibfk_1">
       <ColNames>jot_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>jot_id</RefColNames>
       <RefTableName>jot</RefTableName>
     </foreign-key>
-    <foreign-key id="337" parent="303" name="jot_mood_ibfk_2">
+    <foreign-key id="340" parent="303" name="jot_mood_ibfk_2">
       <ColNames>mood_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>mood_id</RefColNames>
       <RefTableName>mood</RefTableName>
     </foreign-key>
-    <index id="338" parent="303" name="jot_id">
+    <index id="341" parent="303" name="jot_id">
       <ColNames>jot_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="339" parent="303" name="mood_id">
+    <index id="342" parent="303" name="mood_id">
       <ColNames>mood_id</ColNames>
       <Type>btree</Type>
     </index>
-    <column id="340" parent="304" name="jot_id">
+    <column id="343" parent="304" name="jot_id">
       <Position>1</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="341" parent="304" name="tag_id">
+    <column id="344" parent="304" name="tag_id">
       <Position>2</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <foreign-key id="342" parent="304" name="jot_tag_ibfk_1">
+    <foreign-key id="345" parent="304" name="jot_tag_ibfk_1">
       <ColNames>jot_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>jot_id</RefColNames>
       <RefTableName>jot</RefTableName>
     </foreign-key>
-    <foreign-key id="343" parent="304" name="jot_tag_ibfk_2">
+    <foreign-key id="346" parent="304" name="jot_tag_ibfk_2">
       <ColNames>tag_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>tag_id</RefColNames>
       <RefTableName>tag</RefTableName>
     </foreign-key>
-    <index id="344" parent="304" name="jot_id">
+    <index id="347" parent="304" name="jot_id">
       <ColNames>jot_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="345" parent="304" name="tag_id">
+    <index id="348" parent="304" name="tag_id">
       <ColNames>tag_id</ColNames>
       <Type>btree</Type>
     </index>
-    <column id="346" parent="305" name="location_id">
+    <column id="349" parent="305" name="location_id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="347" parent="305" name="description">
+    <column id="350" parent="305" name="description">
       <Position>2</Position>
       <StoredType>varchar(255)|0s</StoredType>
     </column>
-    <index id="348" parent="305" name="PRIMARY">
+    <column id="351" parent="305" name="created_by">
+      <Position>3</Position>
+      <StoredType>varchar(50)|0s</StoredType>
+    </column>
+    <foreign-key id="352" parent="305" name="FK_Location_User">
+      <ColNames>created_by</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>user_id</RefColNames>
+      <RefTableName>user</RefTableName>
+    </foreign-key>
+    <index id="353" parent="305" name="PRIMARY">
       <ColNames>location_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="349" parent="305" name="PRIMARY">
+    <index id="354" parent="305" name="FK_Location_User">
+      <ColNames>created_by</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="355" parent="305" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="350" parent="306" name="mood_id">
+    <column id="356" parent="306" name="mood_id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="351" parent="306" name="description">
+    <column id="357" parent="306" name="description">
       <Position>2</Position>
       <StoredType>varchar(255)|0s</StoredType>
     </column>
-    <index id="352" parent="306" name="PRIMARY">
+    <index id="358" parent="306" name="PRIMARY">
       <ColNames>mood_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="353" parent="306" name="PRIMARY">
+    <key id="359" parent="306" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="354" parent="307" name="notification_id">
+    <column id="360" parent="307" name="relationship_id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="355" parent="307" name="jot_id">
+    <column id="361" parent="307" name="type">
+      <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="356" parent="307" name="status">
+    <column id="362" parent="307" name="created_by">
       <Position>3</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="357" parent="307" name="message">
-      <Position>4</Position>
-      <StoredType>text|0s</StoredType>
-    </column>
-    <column id="358" parent="307" name="date_time">
-      <Position>5</Position>
-      <StoredType>timestamp|0s</StoredType>
-    </column>
-    <column id="359" parent="307" name="type">
-      <Position>6</Position>
-      <StoredType>varchar(50)|0s</StoredType>
-    </column>
-    <foreign-key id="360" parent="307" name="notification_ibfk_1">
-      <ColNames>jot_id</ColNames>
+    <foreign-key id="363" parent="307" name="FK_Relationship_User">
+      <ColNames>created_by</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
-      <RefColNames>jot_id</RefColNames>
-      <RefTableName>jot</RefTableName>
+      <RefColNames>user_id</RefColNames>
+      <RefTableName>user</RefTableName>
     </foreign-key>
-    <index id="361" parent="307" name="PRIMARY">
-      <ColNames>notification_id</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="362" parent="307" name="jot_id">
-      <ColNames>jot_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="363" parent="307" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="364" parent="308" name="relationship_id">
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>varchar(50)|0s</StoredType>
-    </column>
-    <column id="365" parent="308" name="type">
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-      <StoredType>varchar(50)|0s</StoredType>
-    </column>
-    <index id="366" parent="308" name="PRIMARY">
+    <index id="364" parent="307" name="PRIMARY">
       <ColNames>relationship_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="367" parent="308" name="PRIMARY">
+    <index id="365" parent="307" name="FK_Relationship_User">
+      <ColNames>created_by</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="366" parent="307" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="368" parent="309" name="shared_jot_id">
+    <column id="367" parent="308" name="reminder_id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="369" parent="309" name="jot_id">
+    <column id="368" parent="308" name="task_id">
       <Position>2</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="370" parent="309" name="user_id_by">
+    <column id="369" parent="308" name="reminder_date_time">
       <Position>3</Position>
-      <StoredType>varchar(50)|0s</StoredType>
+      <StoredType>timestamp|0s</StoredType>
     </column>
-    <column id="371" parent="309" name="user_id_with">
+    <column id="370" parent="308" name="type">
       <Position>4</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="372" parent="309" name="status">
+    <column id="371" parent="308" name="isSent">
+      <DefaultExpression>0</DefaultExpression>
+      <Position>5</Position>
+      <StoredType>tinyint(1)|0s</StoredType>
+    </column>
+    <foreign-key id="372" parent="308" name="reminder_ibfk_1">
+      <ColNames>task_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>task_id</RefColNames>
+      <RefTableName>task</RefTableName>
+    </foreign-key>
+    <index id="373" parent="308" name="PRIMARY">
+      <ColNames>reminder_id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="374" parent="308" name="task_id">
+      <ColNames>task_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="375" parent="308" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="376" parent="309" name="shared_jot_id">
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>varchar(50)|0s</StoredType>
+    </column>
+    <column id="377" parent="309" name="jot_id">
+      <Position>2</Position>
+      <StoredType>varchar(50)|0s</StoredType>
+    </column>
+    <column id="378" parent="309" name="user_id_by">
+      <Position>3</Position>
+      <StoredType>varchar(50)|0s</StoredType>
+    </column>
+    <column id="379" parent="309" name="user_id_with">
+      <Position>4</Position>
+      <StoredType>varchar(50)|0s</StoredType>
+    </column>
+    <column id="380" parent="309" name="status">
       <Position>5</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="373" parent="309" name="date">
+    <column id="381" parent="309" name="date">
       <Position>6</Position>
       <StoredType>date|0s</StoredType>
     </column>
-    <foreign-key id="374" parent="309" name="shared_jot_ibfk_1">
+    <foreign-key id="382" parent="309" name="shared_jot_ibfk_1">
       <ColNames>jot_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>jot_id</RefColNames>
       <RefTableName>jot</RefTableName>
     </foreign-key>
-    <foreign-key id="375" parent="309" name="shared_jot_ibfk_2">
+    <foreign-key id="383" parent="309" name="shared_jot_ibfk_2">
       <ColNames>user_id_by</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>user_id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
-    <foreign-key id="376" parent="309" name="shared_jot_ibfk_3">
+    <foreign-key id="384" parent="309" name="shared_jot_ibfk_3">
       <ColNames>user_id_with</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>user_id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
-    <index id="377" parent="309" name="PRIMARY">
+    <index id="385" parent="309" name="PRIMARY">
       <ColNames>shared_jot_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="378" parent="309" name="jot_id">
+    <index id="386" parent="309" name="jot_id">
       <ColNames>jot_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="379" parent="309" name="user_id_by">
+    <index id="387" parent="309" name="user_id_by">
       <ColNames>user_id_by</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="380" parent="309" name="user_id_with">
+    <index id="388" parent="309" name="user_id_with">
       <ColNames>user_id_with</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="381" parent="309" name="PRIMARY">
+    <key id="389" parent="309" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="382" parent="310" name="tag_id">
+    <column id="390" parent="310" name="tag_id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="383" parent="310" name="name">
+    <column id="391" parent="310" name="name">
       <Position>2</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <index id="384" parent="310" name="PRIMARY">
+    <column id="392" parent="310" name="created_by">
+      <Position>3</Position>
+      <StoredType>varchar(50)|0s</StoredType>
+    </column>
+    <foreign-key id="393" parent="310" name="FK_Tag_User">
+      <ColNames>created_by</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>user_id</RefColNames>
+      <RefTableName>user</RefTableName>
+    </foreign-key>
+    <index id="394" parent="310" name="PRIMARY">
       <ColNames>tag_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="385" parent="310" name="PRIMARY">
+    <index id="395" parent="310" name="FK_Tag_User">
+      <ColNames>created_by</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="396" parent="310" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="386" parent="311" name="task_id">
+    <column id="397" parent="311" name="task_id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="387" parent="311" name="user_id">
+    <column id="398" parent="311" name="user_id">
       <Position>2</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="388" parent="311" name="jot_id">
+    <column id="399" parent="311" name="jot_id">
       <Position>3</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="389" parent="311" name="description">
+    <column id="400" parent="311" name="description">
       <Position>4</Position>
       <StoredType>text|0s</StoredType>
     </column>
-    <column id="390" parent="311" name="due_date">
+    <column id="401" parent="311" name="due_date">
       <Position>5</Position>
       <StoredType>date|0s</StoredType>
     </column>
-    <column id="391" parent="311" name="state">
+    <column id="402" parent="311" name="state">
       <DefaultExpression>&apos;NOT_STARTED&apos;</DefaultExpression>
       <Position>6</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="392" parent="311" name="created_at">
+    <column id="403" parent="311" name="created_at">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <Position>7</Position>
       <StoredType>timestamp|0s</StoredType>
     </column>
-    <column id="393" parent="311" name="updated_at">
+    <column id="404" parent="311" name="updated_at">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <OnUpdate>CURRENT_TIMESTAMP</OnUpdate>
       <Position>8</Position>
       <StoredType>timestamp|0s</StoredType>
     </column>
-    <foreign-key id="394" parent="311" name="task_ibfk_1">
+    <foreign-key id="405" parent="311" name="task_ibfk_1">
       <ColNames>user_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>user_id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
-    <foreign-key id="395" parent="311" name="task_ibfk_2">
+    <foreign-key id="406" parent="311" name="task_ibfk_2">
       <ColNames>jot_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>jot_id</RefColNames>
       <RefTableName>jot</RefTableName>
     </foreign-key>
-    <index id="396" parent="311" name="PRIMARY">
+    <index id="407" parent="311" name="PRIMARY">
       <ColNames>task_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="397" parent="311" name="user_id">
+    <index id="408" parent="311" name="user_id">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="398" parent="311" name="jot_id">
+    <index id="409" parent="311" name="jot_id">
       <ColNames>jot_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="399" parent="311" name="PRIMARY">
+    <key id="410" parent="311" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="400" parent="312" name="user_id">
+    <column id="411" parent="312" name="user_id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="401" parent="312" name="user_name">
+    <column id="412" parent="312" name="user_name">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="402" parent="312" name="password">
+    <column id="413" parent="312" name="password">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>varchar(255)|0s</StoredType>
     </column>
-    <column id="403" parent="312" name="email">
+    <column id="414" parent="312" name="email">
       <Position>4</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <column id="404" parent="312" name="created_at">
+    <column id="415" parent="312" name="created_at">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <Position>5</Position>
       <StoredType>timestamp|0s</StoredType>
     </column>
-    <column id="405" parent="312" name="updated_at">
+    <column id="416" parent="312" name="updated_at">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <OnUpdate>CURRENT_TIMESTAMP</OnUpdate>
       <Position>6</Position>
       <StoredType>timestamp|0s</StoredType>
     </column>
-    <column id="406" parent="312" name="dob">
+    <column id="417" parent="312" name="dob">
       <Position>7</Position>
       <StoredType>date|0s</StoredType>
     </column>
-    <column id="407" parent="312" name="first_name">
+    <column id="418" parent="312" name="first_name">
       <Position>8</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <column id="408" parent="312" name="last_name">
+    <column id="419" parent="312" name="last_name">
       <Position>9</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <index id="409" parent="312" name="PRIMARY">
+    <index id="420" parent="312" name="PRIMARY">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="410" parent="312" name="user_name">
+    <index id="421" parent="312" name="unique_username">
       <ColNames>user_name</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="411" parent="312" name="PRIMARY">
+    <index id="422" parent="312" name="user_name">
+      <ColNames>user_name</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="423" parent="312" name="user_name_2">
+      <ColNames>user_name</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="424" parent="312" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <key id="412" parent="312" name="user_name">
+    <key id="425" parent="312" name="unique_username">
+      <UnderlyingIndexName>unique_username</UnderlyingIndexName>
+    </key>
+    <key id="426" parent="312" name="user_name">
       <UnderlyingIndexName>user_name</UnderlyingIndexName>
     </key>
-    <column id="413" parent="313" name="user_relationship_id">
+    <key id="427" parent="312" name="user_name_2">
+      <UnderlyingIndexName>user_name_2</UnderlyingIndexName>
+    </key>
+    <column id="428" parent="313" name="user_relationship_id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="414" parent="313" name="user_id_1">
+    <column id="429" parent="313" name="user_id_1">
       <Position>2</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="415" parent="313" name="user_id_2">
+    <column id="430" parent="313" name="user_id_2">
       <Position>3</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <column id="416" parent="313" name="relationship_id">
+    <column id="431" parent="313" name="relationship_id">
       <Position>4</Position>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
-    <foreign-key id="417" parent="313" name="user_relationship_ibfk_1">
+    <foreign-key id="432" parent="313" name="user_relationship_ibfk_1">
       <ColNames>user_id_1</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>user_id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
-    <foreign-key id="418" parent="313" name="user_relationship_ibfk_2">
+    <foreign-key id="433" parent="313" name="user_relationship_ibfk_2">
       <ColNames>user_id_2</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>user_id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
-    <foreign-key id="419" parent="313" name="user_relationship_ibfk_3">
+    <foreign-key id="434" parent="313" name="user_relationship_ibfk_3">
       <ColNames>relationship_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>relationship_id</RefColNames>
       <RefTableName>relationship</RefTableName>
     </foreign-key>
-    <index id="420" parent="313" name="PRIMARY">
+    <index id="435" parent="313" name="PRIMARY">
       <ColNames>user_relationship_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="421" parent="313" name="user_id_1">
+    <index id="436" parent="313" name="user_id_1">
       <ColNames>user_id_1</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="422" parent="313" name="user_id_2">
+    <index id="437" parent="313" name="user_id_2">
       <ColNames>user_id_2</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="423" parent="313" name="relationship_id">
+    <index id="438" parent="313" name="relationship_id">
       <ColNames>relationship_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="424" parent="313" name="PRIMARY">
+    <key id="439" parent="313" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>

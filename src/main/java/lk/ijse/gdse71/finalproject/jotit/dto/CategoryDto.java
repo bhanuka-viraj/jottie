@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class CategoryDto {
     private String id;
     private String description;
+    private String userId;
 
     @Override
     public String toString() {

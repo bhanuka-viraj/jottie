@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -18,15 +19,19 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lk.ijse.gdse71.finalproject.jotit.controller.ControllerRef;
+import lk.ijse.gdse71.finalproject.jotit.controller.ShareController;
 import lk.ijse.gdse71.finalproject.jotit.controller.TaskManageController;
 import lk.ijse.gdse71.finalproject.jotit.dto.*;
 import lk.ijse.gdse71.finalproject.jotit.model.JotModel;
+import lk.ijse.gdse71.finalproject.jotit.model.SharedJotModel;
 import lk.ijse.gdse71.finalproject.jotit.model.TaskModel;
+import lk.ijse.gdse71.finalproject.jotit.model.UserModel;
 import lk.ijse.gdse71.finalproject.jotit.model.impl.JotModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.model.impl.SharedJotModelImpl;
 import lk.ijse.gdse71.finalproject.jotit.model.impl.TaskModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.model.impl.UserModelImpl;
 import org.ocpsoft.prettytime.PrettyTime;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -51,6 +56,11 @@ public class CardJot {
 
     @FXML
     private HBox moodHbox;
+    @FXML
+    private Button btnDelete;
+
+    @FXML
+    private Button btnShare;
 
     @FXML
     private HBox tagHbox;
@@ -60,11 +70,20 @@ public class CardJot {
     private PieChart pieChart;
     @FXML
     private Label lblTasks;
+    @FXML
+    private Label lblReceivedBy;
 
     private final JotModel jotModel = new JotModelImpl();
     private final TaskModel taskModel = new TaskModelImpl();
+    private final SharedJotModel sharedJotModel = new SharedJotModelImpl();
+    private final UserModel userModel = new UserModelImpl();
     private JotDto jotDto;
+    private boolean isReadOnly;
+    private String userId;
 
+    public void initialize() {
+        lblReceivedBy.setVisible(false);
+    }
     @FXML
     void cardClickOnAction(MouseEvent event) {
 
@@ -77,6 +96,9 @@ public class CardJot {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/addJot.fxml"));
                 Parent root = loader.load();
 
+                if (isReadOnly) {
+                    ControllerRef.layoutController.setReadOnly(isReadOnly);
+                }
                 ControllerRef.layoutController.viewOnEdtitor(jotDto);
 
             } catch (Exception e) {
@@ -96,7 +118,13 @@ public class CardJot {
 
         PrettyTime p = new PrettyTime();
 
-        lblDate.setText(p.format(localDateTime));
+        lblDate.setText("updated "+p.format(localDateTime));
+
+        if (isReadOnly){
+            showSendersName();
+            btnShare.setVisible(false);
+            btnDelete.setVisible(false);
+        }
 
         for (MoodDto mood : jotDto.getMoods()) {
             try {
@@ -123,6 +151,24 @@ public class CardJot {
         }
         setPieChart();
     }
+
+    private void showSendersName() {
+        try {
+            SharedJotDto sharedJotDto = sharedJotModel.getSharedJotByJotIdAndReceiverId(
+                    jotDto.getId(), userId
+            );
+            if (sharedJotDto != null) {
+                UserDto sender = userModel.getUserById(sharedJotDto.getUserBy());
+                if (sender != null) {
+                    lblReceivedBy.setText("Received by : "+sender.getUsername());
+                    lblReceivedBy.setVisible(true);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void setPieChart() {
         try {
             List<TaskDto> tasks = taskModel.getAllTask(jotDto.getUserId(), jotDto.getId());
@@ -165,7 +211,9 @@ public class CardJot {
             TaskManageController taskManageController = loader.getController();
 
             taskManageController.setJotDto(jotDto);
-            taskManageController.setCarJotController(this);
+            taskManageController.setCardJotController(this);
+            taskManageController.setReceiving(isReadOnly);
+
 
             Stage stage = new Stage();
             stage.setScene(new Scene(taskMangeView));
@@ -208,4 +256,31 @@ public class CardJot {
         }
     }
 
+    @FXML
+    void btnShareOnAction(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/share.fxml"));
+            Parent taskMangeView = loader.load();
+            ShareController shareController = loader.getController();
+
+            shareController.setJotDto(jotDto);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(taskMangeView));
+            stage.setTitle("Share jot");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setReadOnly(boolean isReceiving) {
+        this.isReadOnly = isReceiving;
+    }
+
+    public void setLoggedUser(String id) {
+        this.userId = id;
+    }
 }

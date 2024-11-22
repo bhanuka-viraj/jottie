@@ -31,9 +31,9 @@
                      </image>
                   </ImageView>
                   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="62.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fitHeight="88.0" fitWidth="200.0" layoutX="32.0" layoutY="27.0">
+                  <ImageView fitHeight="123.0" fitWidth="190.0" layoutX="32.0" layoutY="16.0">
                      <image>
-                        <Image url="@../assets/logo.png" />
+                        <Image url="@../assets/logoPic.png" />
                      </image>
                   </ImageView>
                </children>

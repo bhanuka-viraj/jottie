@@ -123,3 +123,54 @@
     -fx-background-color: transparent;
 }
 
+.btnlogout{
+    -fx-background-color: #ee2222;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 2, 0, 0, 1);
+}
+
+.btnUpdate{
+    -fx-background-color: #3434c5;
+    -fx-text-fill: white;
+}
+
+.btnDelete{
+    -fx-background-color: #ee2222;
+    -fx-text-fill: white;
+}
+
+.taskTable {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 10px;
+}
+
+.taskTable .column-header-background {
+    -fx-background-color: #f0f0f0;
+}
+
+.taskTable .table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-cell-size: 30px;
+}
+
+.taskTable .table-row-cell:odd {
+    -fx-background-color: #f5f5f5;
+}
+
+.taskTable .table-row-cell:hover {
+    -fx-background-color: #e0e0e0;
+}
+
+.taskTable .table-row-cell:selected {
+    -fx-background-color: #82bccc; /* Light blue background for selected row */
+    -fx-text-fill: black; /* Black text color for selected row */
+}
+.taskTable .table-row-cell .button { /* Target buttons within table cells */
+    -fx-pref-width: 80px; /* Adjust width as needed */
+}
+
+.taskTable .table-cell {
+    -fx-alignment: CENTER; /* Center align content in all cells */
+}
+

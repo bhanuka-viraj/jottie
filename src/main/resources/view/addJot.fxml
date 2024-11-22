@@ -50,13 +50,16 @@
                   </HBox>
                   <HBox alignment="BOTTOM_RIGHT" prefHeight="26.0" prefWidth="70.0" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button onAction="#onSaveButtonClick" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: #0f236f;" text="Save" textFill="WHITE" />
+                        <Button fx:id="btnSave" onAction="#onSaveButtonClick" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: #0392ff;" text="Save" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Button>
                      </children>
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </HBox>
-                  <VBox prefWidth="130.0" />
+                  <VBox prefWidth="140.0" />
                </children>
                <BorderPane.margin>
                   <Insets />
@@ -69,7 +72,7 @@
          <right>
             <VBox prefHeight="652.0" prefWidth="140.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox alignment="TOP_CENTER">
+                  <VBox alignment="TOP_CENTER" prefWidth="166.0">
                      <ScrollPane fx:id="tagScrollPane" fitToHeight="true" fitToWidth="true" prefHeight="300.0">
                         <content>
                            <VBox fx:id="tagVBox" alignment="TOP_CENTER" spacing="10">
@@ -82,7 +85,10 @@
                            <Insets left="5.0" />
                         </padding>
                      </ScrollPane>
-                     <Button fx:id="addTag" mnemonicParsing="false" onAction="#addTagOnAction" prefHeight="26.0" prefWidth="170.0" style="-fx-background-color: #2099b6;" text="Add Tag" textFill="WHITE" />
+                     <Button fx:id="addTag" mnemonicParsing="false" onAction="#addTagOnAction" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #0056b3;" text="Add Tag" textFill="WHITE">
+                        <font>
+                           <Font name="System Bold" size="12.0" />
+                        </font></Button>
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
@@ -103,7 +109,10 @@
                            <Insets left="5.0" />
                         </padding>
                      </ScrollPane>
-                     <Button fx:id="addMood" mnemonicParsing="false" onAction="#addMoodOnAction" prefHeight="26.0" prefWidth="170.0" style="-fx-background-color: #2099b6;" text="Add Mood" textFill="WHITE" />
+                     <Button fx:id="addMood" mnemonicParsing="false" onAction="#addMoodOnAction" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #0056b3;" text="Add Mood" textFill="WHITE">
+                        <font>
+                           <Font name="System Bold" size="12.0" />
+                        </font></Button>
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
@@ -112,6 +121,9 @@
                <padding>
                   <Insets left="5.0" />
                </padding>
+               <BorderPane.margin>
+                  <Insets right="10.0" />
+               </BorderPane.margin>
             </VBox>
          </right>
       </BorderPane>

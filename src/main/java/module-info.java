@@ -13,6 +13,7 @@ module lk.ijse.gdse71.finalproject.jotit {
     requires jbcrypt;
     requires org.apache.commons.lang3;
     requires prettytime;
+    requires jakarta.mail;
 
     opens lk.ijse.gdse71.finalproject.jotit.controller to javafx.fxml;
     opens lk.ijse.gdse71.finalproject.jotit.controller.components to javafx.fxml;

@@ -22,7 +22,8 @@ public class AddTagController {
         try {
             boolean isSaved = tagModel.saveTag(new TagDto(
                     IdGenerator.generateId("TG",5),
-                    txtTag.getText()
+                    txtTag.getText(),
+                    LoginController.userDto.getId()
             ));
 
             if (isSaved) {

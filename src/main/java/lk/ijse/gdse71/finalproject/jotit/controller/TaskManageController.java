@@ -30,6 +30,7 @@ public class TaskManageController {
     @FXML
     private TableColumn<TaskTm, Date> dueDate;
 
+
     @FXML
     private TableColumn<TaskTm, String> status;
 
@@ -48,6 +49,7 @@ public class TaskManageController {
     private AddTaskController addTaskController;
     private JotDto jotDto;
     private CardJot cardJotController;
+    private boolean isReceiving;
 
     @FXML
     public void initialize() {
@@ -73,6 +75,10 @@ public class TaskManageController {
     }
     @FXML
     public void btnAddTaskOnAction(ActionEvent actionEvent) {
+        if (isReceiving){
+            new Alert(Alert.AlertType.WARNING, "you cannot new tasks to received jots", ButtonType.OK).show();
+            return;
+        }
         loadAddTask(null);
     }
 
@@ -125,9 +131,11 @@ public class TaskManageController {
     private TaskTm createTaskTm(TaskDto taskDto) {
         Button btnDelete = new Button("Delete");
         btnDelete.setOnAction(event -> deleteTask(taskDto));
+        btnDelete.getStyleClass().add("btnDelete");
 
         Button btnUpdate = new Button("Update");
         btnUpdate.setOnAction(event -> updateTask(taskDto));
+        btnUpdate.getStyleClass().add("btnUpdate");
 
         return new TaskTm(
                 taskDto.getDesc(),
@@ -139,6 +147,10 @@ public class TaskManageController {
     }
 
     private void deleteTask(TaskDto taskDto) {
+        if (isReceiving){
+            new Alert(Alert.AlertType.WARNING, "you cannot delete tasks from received jots", ButtonType.OK).show();
+            return;
+        }
         Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION,
                 "Are you sure you want to delete this task?", ButtonType.YES, ButtonType.NO);
         confirmation.showAndWait().ifPresent(response -> {
@@ -153,10 +165,18 @@ public class TaskManageController {
         });
     }
     private void updateTask(TaskDto taskDto) {
+        if (isReceiving){
+            new Alert(Alert.AlertType.WARNING, "you cannot update tasks from received jots", ButtonType.OK).show();
+            return;
+        }
         loadAddTask(taskDto);
     }
 
-    public void setCarJotController(CardJot cardJot) {
+    public void setCardJotController(CardJot cardJot) {
         this.cardJotController = cardJot;
+    }
+
+    public void setReceiving(boolean isReceiving) {
+        this.isReceiving = isReceiving;
     }
 }

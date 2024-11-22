@@ -8,9 +8,13 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.layout.GridPane;
 import lk.ijse.gdse71.finalproject.jotit.controller.components.CardJot;
 import lk.ijse.gdse71.finalproject.jotit.dto.JotDto;
+import lk.ijse.gdse71.finalproject.jotit.dto.SharedJotDto;
 import lk.ijse.gdse71.finalproject.jotit.model.JotModel;
+import lk.ijse.gdse71.finalproject.jotit.model.SharedJotModel;
 import lk.ijse.gdse71.finalproject.jotit.model.impl.JotModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.model.impl.SharedJotModelImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViewJotsController {
@@ -18,11 +22,14 @@ public class ViewJotsController {
     private GridPane gridPane;
 
     private final JotModel jotModel = new JotModelImpl();
-    private String userId;
+    private final SharedJotModel sharedJotModel = new SharedJotModelImpl();
+    private boolean isReceiving;
+
 
     public void initialize() {
         ControllerRef.viewJotsController = this;
         loadJotCards();
+
     }
 
     public void loadJotCards() {
@@ -32,7 +39,7 @@ public class ViewJotsController {
     public void load(List<JotDto> jots) {
         try {
             if (jots == null) {
-                jots = jotModel.getAllJot(userId);
+                jots = jotModel.getAllJot(LoginController.userDto.getId());
             }
 
             int row = 0;
@@ -42,6 +49,12 @@ public class ViewJotsController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/components/_cardjot.fxml"));
                 Parent jotCardRoot = loader.load();
                 CardJot jotCardController = loader.getController();
+                jotCardController.setLoggedUser(LoginController.userDto.getId());
+
+                if (isReceiving){
+                    jotCardController.setReadOnly(isReceiving);
+                }
+
                 jotCardController.setData(jot);
 
                 gridPane.add(jotCardRoot, col, row);
@@ -63,7 +76,7 @@ public class ViewJotsController {
         try {
             List<JotDto> jots = null;
             if (searchText != null && !searchText.isEmpty()) {
-                jots = jotModel.findJots(searchText);
+                jots = jotModel.findJots(searchText,LoginController.userDto.getId());
             }
             load(jots);
         } catch (Exception e) {
@@ -72,7 +85,26 @@ public class ViewJotsController {
         }
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void loadReceivedJots(String userId) {
+        try {
+            List<SharedJotDto> sharedJots = sharedJotModel.getAllByReceiverId(userId);
+
+            List<String> jotIds = sharedJots.stream()
+                    .map(SharedJotDto::getJotId)
+                    .toList();
+
+            List<JotDto> receivedJots = new ArrayList<>();
+            for (String jotId : jotIds) {
+                JotDto jotDto = jotModel.getJot(jotId);
+                if (jotDto != null) {
+                    receivedJots.add(jotDto);
+                }
+            }
+            isReceiving = true;
+            load(receivedJots);
+        } catch (Exception e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Something went wrong", ButtonType.OK).show();
+        }
     }
 }

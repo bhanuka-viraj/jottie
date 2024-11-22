@@ -31,7 +31,6 @@ public class StepTwoController {
     private AddJotController addJotController;
     private CategoryModel categoryModel;
     private CategoryDto selectedCategory;
-
     @FXML
     public void initialize() {
         categoryModel = new CategoryModelImpl();
@@ -49,7 +48,7 @@ public class StepTwoController {
 
     private void loadCategories() {
         try {
-            List<CategoryDto> categoryDtos = categoryModel.getAllCategories();
+            List<CategoryDto> categoryDtos = categoryModel.getAllCategories(LoginController.userDto.getId());
             ObservableList<CategoryDto> observableList = FXCollections.observableArrayList(categoryDtos);
             categoryCombo.setItems(observableList);
         } catch (Exception e) {
@@ -69,10 +68,11 @@ public class StepTwoController {
             CategoryDto categoryDto = new CategoryDto();
             categoryDto.setId(IdGenerator.generateId("Cat", 5));
             categoryDto.setDescription(categoryDescription);
+            categoryDto.setUserId(LoginController.userDto.getId());
 
             if (categoryModel.saveCategory(categoryDto)) {
                 new Alert(Alert.AlertType.INFORMATION, "Category saved successfully").show();
-                loadCategories(); // Refresh the categoryCombo
+                loadCategories();
                 txtCategoryDescription.clear();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Failed to save category").show();

@@ -15,6 +15,11 @@
 
 <AnchorPane prefHeight="403.0" prefWidth="302.0" styleClass="card" stylesheets="@../../style/global.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse71.finalproject.jotit.controller.components.CardJot">
    <children>
+      <Label fx:id="lblReceivedBy" alignment="CENTER" layoutX="135.0" layoutY="46.0" textFill="#3100b9">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="11.0" />
+         </font>
+      </Label>
       <Label fx:id="lblLocation" layoutX="52.0" layoutY="37.0" text="Home" textFill="#898989">
          <font>
             <Font name="Calibri" size="14.0" />
@@ -52,7 +57,7 @@
             <Image url="@../assets/location.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblDate" alignment="CENTER" layoutX="178.0" layoutY="17.0" prefHeight="18.0" prefWidth="122.0" text="1 day ago" textFill="#898989">
+      <Label fx:id="lblDate" alignment="CENTER" layoutX="160.0" layoutY="12.0" prefHeight="18.0" prefWidth="122.0" text="last update 1 day ago" textFill="#898989">
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font>
@@ -73,7 +78,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Button contentDisplay="RIGHT" layoutX="17.0" layoutY="348.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="40.0" prefWidth="41.0" style="-fx-background-color: #F95454; -fx-background-radius: 25;" textFill="WHITE">
+            <Button fx:id="btnDelete" contentDisplay="RIGHT" layoutX="17.0" layoutY="348.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="40.0" prefWidth="41.0" style="-fx-background-color: #F95454; -fx-background-radius: 25;" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="12.0" />
                </font>
@@ -102,7 +107,7 @@
                   <Font name="Arial Rounded MT Bold" size="15.0" />
                </font>
             </Label>
-            <Button layoutX="72.0" layoutY="348.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="41.0" style="-fx-background-radius: 25; -fx-background-color: B9E5E8;">
+            <Button fx:id="btnShare" layoutX="72.0" layoutY="348.0" mnemonicParsing="false" onAction="#btnShareOnAction" prefHeight="40.0" prefWidth="41.0" style="-fx-background-radius: 25; -fx-background-color: B9E5E8;">
                <graphic>
                   <ImageView fitHeight="17.0" fitWidth="21.0" opacity="0.72" pickOnBounds="true" preserveRatio="true">
                      <image>

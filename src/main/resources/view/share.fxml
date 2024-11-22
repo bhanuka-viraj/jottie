@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="306.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse71.finalproject.jotit.controller.ShareController">
+   <children>
+      <Label layoutX="48.0" layoutY="44.0" text="Share with" textFill="#888888">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="32.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="userCombo" layoutX="159.0" layoutY="153.0" prefHeight="30.0" prefWidth="282.0" promptText="User" style="-fx-border-radius: 25 25 25 25;" stylesheets="@../style/global.css" />
+      <Label fx:id="lblUser" layoutX="230.0" layoutY="44.0" text="Bhanuka" textFill="#888888">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="32.0" />
+         </font>
+      </Label>
+      <Button layoutX="157.0" layoutY="210.0" mnemonicParsing="false" onAction="#btnShareOnAction" prefHeight="30.0" prefWidth="282.0" style="-fx-background-radius: 25; -fx-background-color: #00c8ff;" text="Share" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

@@ -22,7 +22,8 @@ public class AddLocationController {
         try {
             boolean isSaved = locationModel.saveLocation(new LocationDto(
                     IdGenerator.generateId("LC",5),
-                    txtLocation.getText()
+                    txtLocation.getText(),
+                    LoginController.userDto.getId()
             ));
 
             if (isSaved) {

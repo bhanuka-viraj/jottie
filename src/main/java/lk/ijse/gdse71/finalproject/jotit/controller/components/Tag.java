@@ -12,6 +12,7 @@ public class Tag {
     @FXML
     private ToggleButton toggleTag;
     private final TagModel tagModel = new TagModelImpl();
+    private String loggedUserId;
 
     public void setData(TagDto tagDto) {
         toggleTag.setText(tagDto.getName());
@@ -27,10 +28,14 @@ public class Tag {
 
     public TagDto getSelectedTagDto(){
         try {
-            return tagModel.getTag(toggleTag.getText());
+            return tagModel.getTag(toggleTag.getText(),loggedUserId);
         }catch (Exception e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
             return null;
         }
+    }
+
+    public void setLoggedUser(String loggedUserId) {
+        this.loggedUserId = loggedUserId;
     }
 }

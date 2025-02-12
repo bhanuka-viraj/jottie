@@ -10,8 +10,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lk.ijse.gdse71.finalproject.jotit.dto.CategoryDto;
-import lk.ijse.gdse71.finalproject.jotit.model.CategoryModel;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.CategoryModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.CategoryService;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.CategoryServiceImpl;
 import lk.ijse.gdse71.finalproject.jotit.util.IdGenerator;
 
 import java.util.List;
@@ -29,11 +29,11 @@ public class StepTwoController {
     private TextField txtCategoryDescription;
 
     private AddJotController addJotController;
-    private CategoryModel categoryModel;
+    private CategoryService categoryService;
     private CategoryDto selectedCategory;
     @FXML
     public void initialize() {
-        categoryModel = new CategoryModelImpl();
+        categoryService = new CategoryServiceImpl();
         loadCategories();
         btnSaveCat.setVisible(false);
         txtCategoryDescription.setVisible(false);
@@ -48,7 +48,7 @@ public class StepTwoController {
 
     private void loadCategories() {
         try {
-            List<CategoryDto> categoryDtos = categoryModel.getAllCategories(LoginController.userDto.getId());
+            List<CategoryDto> categoryDtos = categoryService.getAllCategories(LoginController.userDto.getId());
             ObservableList<CategoryDto> observableList = FXCollections.observableArrayList(categoryDtos);
             categoryCombo.setItems(observableList);
         } catch (Exception e) {
@@ -70,7 +70,7 @@ public class StepTwoController {
             categoryDto.setDescription(categoryDescription);
             categoryDto.setUserId(LoginController.userDto.getId());
 
-            if (categoryModel.saveCategory(categoryDto)) {
+            if (categoryService.saveCategory(categoryDto)) {
                 new Alert(Alert.AlertType.INFORMATION, "Category saved successfully").show();
                 loadCategories();
                 txtCategoryDescription.clear();

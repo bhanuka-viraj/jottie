@@ -9,10 +9,10 @@ import javafx.scene.layout.GridPane;
 import lk.ijse.gdse71.finalproject.jotit.controller.components.CardJot;
 import lk.ijse.gdse71.finalproject.jotit.dto.JotDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.SharedJotDto;
-import lk.ijse.gdse71.finalproject.jotit.model.JotModel;
-import lk.ijse.gdse71.finalproject.jotit.model.SharedJotModel;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.JotModelImpl;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.SharedJotModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.JotService;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.SharedJotService;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.JotServiceImpl;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.SharedJotServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +21,8 @@ public class ViewJotsController {
     @FXML
     private GridPane gridPane;
 
-    private final JotModel jotModel = new JotModelImpl();
-    private final SharedJotModel sharedJotModel = new SharedJotModelImpl();
+    private final JotService jotService = new JotServiceImpl();
+    private final SharedJotService sharedJotService = new SharedJotServiceImpl();
     private boolean isReceiving;
 
 
@@ -39,7 +39,7 @@ public class ViewJotsController {
     public void load(List<JotDto> jots) {
         try {
             if (jots == null) {
-                jots = jotModel.getAllJot(LoginController.userDto.getId());
+                jots = jotService.getAllJot(LoginController.userDto.getId());
             }
 
             int row = 0;
@@ -76,7 +76,7 @@ public class ViewJotsController {
         try {
             List<JotDto> jots = null;
             if (searchText != null && !searchText.isEmpty()) {
-                jots = jotModel.findJots(searchText,LoginController.userDto.getId());
+                jots = jotService.findJots(searchText,LoginController.userDto.getId());
             }
             load(jots);
         } catch (Exception e) {
@@ -87,7 +87,7 @@ public class ViewJotsController {
 
     public void loadReceivedJots(String userId) {
         try {
-            List<SharedJotDto> sharedJots = sharedJotModel.getAllByReceiverId(userId);
+            List<SharedJotDto> sharedJots = sharedJotService.getAllByReceiverId(userId);
 
             List<String> jotIds = sharedJots.stream()
                     .map(SharedJotDto::getJotId)
@@ -95,7 +95,7 @@ public class ViewJotsController {
 
             List<JotDto> receivedJots = new ArrayList<>();
             for (String jotId : jotIds) {
-                JotDto jotDto = jotModel.getJot(jotId);
+                JotDto jotDto = jotService.getJot(jotId);
                 if (jotDto != null) {
                     receivedJots.add(jotDto);
                 }

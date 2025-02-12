@@ -24,16 +24,8 @@ import lk.ijse.gdse71.finalproject.jotit.dto.JotDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.LocationDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.MoodDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.TagDto;
-import lk.ijse.gdse71.finalproject.jotit.model.CategoryModel;
-import lk.ijse.gdse71.finalproject.jotit.model.JotModel;
-import lk.ijse.gdse71.finalproject.jotit.model.LocationModel;
-import lk.ijse.gdse71.finalproject.jotit.model.MoodModel;
-import lk.ijse.gdse71.finalproject.jotit.model.TagModel;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.CategoryModelImpl;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.JotModelImpl;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.LocationModelImpl;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.MoodModelImpl;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.TagModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.*;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.*;
 import lk.ijse.gdse71.finalproject.jotit.util.IdGenerator;
 
 import javax.crypto.Cipher;
@@ -77,11 +69,11 @@ public class AddJotController {
 
     private WebEngine webEngine;
     private String currentFilePath = null;
-    private final CategoryModel categoryModel = new CategoryModelImpl();
-    private final LocationModel locationModel = new LocationModelImpl();
-    private final MoodModel moodModel = new MoodModelImpl();
-    private final TagModel tagModel = new TagModelImpl();
-    private final JotModel jotModel = new JotModelImpl();
+    private final CategoryService categoryService = new CategoryServiceImpl() ;
+    private final LocationService locationService = new LocationServiceImpl();
+    private final MoodService moodService = new MoodServiceImpl();
+    private final TagService tagService = new TagServiceImpl();
+    private final JotService jotService = new JotServiceImpl();
 
     private static final String SECRET_KEY = "1234567890123456";
 
@@ -270,7 +262,7 @@ public class AddJotController {
                     jotDto.setUserId(LoginController.userDto.getId());
                     jotDto.setPath(currentFilePath);
 
-                    if (jotModel.saveJot(jotDto)) {
+                    if (jotService.saveJot(jotDto)) {
                         new Alert(Alert.AlertType.CONFIRMATION, "Note saved successfully..", ButtonType.OK).show();
                         currentFilePath = null;
                         setEditorContent("");
@@ -388,7 +380,7 @@ public class AddJotController {
         try {
             moodGridPane.getChildren().clear();
 
-            List<MoodDto> moodDtos = moodModel.getAllMoods();
+            List<MoodDto> moodDtos = moodService.getAllMoods();
 
             int columnIndex = 0;
             int rowIndex = 0;
@@ -429,7 +421,7 @@ public class AddJotController {
         try {
             tagFlowPane.getChildren().clear();
 
-            List<TagDto> tagDtos = tagModel.getAllTags(LoginController.userDto.getId());
+            List<TagDto> tagDtos = tagService.getAllTags(LoginController.userDto.getId());
 
             for (TagDto tagDto : tagDtos) {
                 System.out.println(tagDto);
@@ -459,7 +451,7 @@ public class AddJotController {
 
     private void loadLocations() {
         try {
-            List<LocationDto> locationDtos = locationModel.getAllLocations(LoginController.userDto.getId());
+            List<LocationDto> locationDtos = locationService.getAllLocations(LoginController.userDto.getId());
             ObservableList<LocationDto> observableList = FXCollections.observableArrayList(locationDtos);
             locationCombo.setItems(observableList);
         } catch (Exception e) {
@@ -501,7 +493,7 @@ public class AddJotController {
 
     public void refreshLocationCombo() {
         try {
-            List<LocationDto> locationDtos = locationModel.getAllLocations(LoginController.userDto.getId());
+            List<LocationDto> locationDtos = locationService.getAllLocations(LoginController.userDto.getId());
             ObservableList<LocationDto> observableList = FXCollections.observableArrayList(locationDtos);
             locationCombo.setItems(observableList);
         } catch (Exception e) {

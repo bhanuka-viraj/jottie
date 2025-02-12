@@ -1,0 +1,11 @@
+package lk.ijse.gdse71.finalproject.jotit.service;
+
+public class ServiceFactory {
+    private static ServiceFactory serviceFactory;
+
+    public static ServiceFactory getInstance(){
+        return serviceFactory != null ? serviceFactory : new ServiceFactory();
+    }
+
+    public 
+}

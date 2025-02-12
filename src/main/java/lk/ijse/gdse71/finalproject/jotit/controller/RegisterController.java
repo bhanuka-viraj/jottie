@@ -11,8 +11,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.ijse.gdse71.finalproject.jotit.dto.UserDto;
-import lk.ijse.gdse71.finalproject.jotit.model.UserModel;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.UserModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.UserService;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.UserServiceImpl;
 import lk.ijse.gdse71.finalproject.jotit.util.EmailUtil;
 import lk.ijse.gdse71.finalproject.jotit.util.IdGenerator;
 import lk.ijse.gdse71.finalproject.jotit.util.PasswordUtil;
@@ -52,7 +52,7 @@ public class RegisterController {
     @FXML
     private Label lblPwdIncorrect;
 
-    private final UserModel userModel = new UserModelImpl();
+    private final UserService userService = new UserServiceImpl();
 
     @FXML
     public void initialize() {
@@ -143,7 +143,7 @@ public class RegisterController {
             userDto.setDateOfBirth(Date.valueOf(dateDob.getValue()));
 
             userDto.setPassword(PasswordUtil.hashPassword(txtPassword1.getText()));
-            if (userModel.save(userDto)) {
+            if (userService.save(userDto)) {
                 showAlert(Alert.AlertType.INFORMATION, "Successfully registered.");
                 EmailUtil.sendEmail(userDto.getEmail(),"Jottie : Acount creation","Acount creation successful");
             }

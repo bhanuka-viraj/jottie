@@ -5,9 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import lk.ijse.gdse71.finalproject.jotit.dto.LocationDto;
-import lk.ijse.gdse71.finalproject.jotit.dto.MoodDto;
-import lk.ijse.gdse71.finalproject.jotit.model.LocationModel;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.LocationModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.LocationService;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.LocationServiceImpl;
 import lk.ijse.gdse71.finalproject.jotit.util.IdGenerator;
 
 public class AddLocationController {
@@ -15,12 +14,12 @@ public class AddLocationController {
     @FXML
     private TextField txtLocation;
 
-    private LocationModel locationModel = new LocationModelImpl();
+    private LocationService locationService = new LocationServiceImpl();
 
     @FXML
     void btnSaveOnAction(ActionEvent event) {
         try {
-            boolean isSaved = locationModel.saveLocation(new LocationDto(
+            boolean isSaved = locationService.saveLocation(new LocationDto(
                     IdGenerator.generateId("LC",5),
                     txtLocation.getText(),
                     LoginController.userDto.getId()

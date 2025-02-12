@@ -10,10 +10,10 @@ import javafx.stage.Stage;
 import lk.ijse.gdse71.finalproject.jotit.dto.JotDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.SharedJotDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.UserDto;
-import lk.ijse.gdse71.finalproject.jotit.model.SharedJotModel;
-import lk.ijse.gdse71.finalproject.jotit.model.UserModel;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.SharedJotModelImpl;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.UserModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.SharedJotService;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.UserService;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.SharedJotServiceImpl;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.UserServiceImpl;
 import lk.ijse.gdse71.finalproject.jotit.util.EmailUtil;
 import lk.ijse.gdse71.finalproject.jotit.util.IdGenerator;
 
@@ -29,8 +29,8 @@ public class ShareController {
     @FXML
     private ComboBox<String> userCombo;
 
-    private final UserModel userModel = new UserModelImpl();
-    private final SharedJotModel sharedJotModel = new SharedJotModelImpl();
+    private final UserService userService = new UserServiceImpl();
+    private final SharedJotService sharedJotService = new SharedJotServiceImpl();
     private JotDto jotDto;
 
     public void initialize() {
@@ -43,8 +43,8 @@ public class ShareController {
 
         if (selectedUsername != null) {
             try {
-                String selectedUserId = userModel.getUserIdByUsername(selectedUsername);
 
+                String selectedUserId = userService.getUserIdByUsername(selectedUsername);
 
                 if (jotDto != null) {
                     SharedJotDto sharedJotDto = new SharedJotDto();
@@ -54,8 +54,8 @@ public class ShareController {
                     sharedJotDto.setUserWith(selectedUserId);
                     sharedJotDto.setDate(Date.valueOf(LocalDate.now()));
 
-                    if (sharedJotModel.save(sharedJotDto)) {
-                        UserDto receiver = userModel.getUserById(selectedUserId);
+                    if (sharedJotService.save(sharedJotDto)) {
+                        UserDto receiver = userService.getUserById(selectedUserId);
                         if (receiver != null) {
                             String receiverEmail = receiver.getEmail();
                             String subject = "You have a new jot!";
@@ -81,7 +81,7 @@ public class ShareController {
 
     public void loadUserCombo() {
         try {
-            List<UserDto> users = userModel.getAllUsers(LoginController.userDto.getId());
+            List<UserDto> users = userService.getAllUsers(LoginController.userDto.getId());
             for (UserDto user : users) {
                 userCombo.getItems().add(user.getUsername());
             }

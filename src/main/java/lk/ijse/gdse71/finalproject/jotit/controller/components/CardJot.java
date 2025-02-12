@@ -22,14 +22,14 @@ import lk.ijse.gdse71.finalproject.jotit.controller.ControllerRef;
 import lk.ijse.gdse71.finalproject.jotit.controller.ShareController;
 import lk.ijse.gdse71.finalproject.jotit.controller.TaskManageController;
 import lk.ijse.gdse71.finalproject.jotit.dto.*;
-import lk.ijse.gdse71.finalproject.jotit.model.JotModel;
-import lk.ijse.gdse71.finalproject.jotit.model.SharedJotModel;
-import lk.ijse.gdse71.finalproject.jotit.model.TaskModel;
-import lk.ijse.gdse71.finalproject.jotit.model.UserModel;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.JotModelImpl;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.SharedJotModelImpl;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.TaskModelImpl;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.UserModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.JotService;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.SharedJotService;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.TaskService;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.UserService;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.JotServiceImpl;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.SharedJotServiceImpl;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.TaskServiceImpl;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.UserServiceImpl;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.nio.file.Files;
@@ -73,10 +73,10 @@ public class CardJot {
     @FXML
     private Label lblReceivedBy;
 
-    private final JotModel jotModel = new JotModelImpl();
-    private final TaskModel taskModel = new TaskModelImpl();
-    private final SharedJotModel sharedJotModel = new SharedJotModelImpl();
-    private final UserModel userModel = new UserModelImpl();
+    private final JotService jotService = new JotServiceImpl();
+    private final TaskService taskService = new TaskServiceImpl();
+    private final SharedJotService sharedJotService = new SharedJotServiceImpl();
+    private final UserService userService = new UserServiceImpl();
     private JotDto jotDto;
     private boolean isReadOnly;
     private String userId;
@@ -154,11 +154,11 @@ public class CardJot {
 
     private void showSendersName() {
         try {
-            SharedJotDto sharedJotDto = sharedJotModel.getSharedJotByJotIdAndReceiverId(
+            SharedJotDto sharedJotDto = sharedJotService.getSharedJotByJotIdAndReceiverId(
                     jotDto.getId(), userId
             );
             if (sharedJotDto != null) {
-                UserDto sender = userModel.getUserById(sharedJotDto.getUserBy());
+                UserDto sender = userService.getUserById(sharedJotDto.getUserBy());
                 if (sender != null) {
                     lblReceivedBy.setText("Received by : "+sender.getUsername());
                     lblReceivedBy.setVisible(true);
@@ -171,7 +171,7 @@ public class CardJot {
 
     public void setPieChart() {
         try {
-            List<TaskDto> tasks = taskModel.getAllTask(jotDto.getUserId(), jotDto.getId());
+            List<TaskDto> tasks = taskService.getAllTask(jotDto.getUserId(), jotDto.getId());
 
             int finishedTasks = 0;
             int runningTasks = 0;
@@ -243,7 +243,7 @@ public class CardJot {
                     return;
                 }
 
-                boolean isDeleted = jotModel.deleteJot(jotDto);
+                boolean isDeleted = jotService.deleteJot(jotDto);
                 if (isDeleted) {
                     Files.delete(jotPath);
                     new Alert(Alert.AlertType.INFORMATION, "Jot deleted").show();

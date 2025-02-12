@@ -1,6 +1,5 @@
 package lk.ijse.gdse71.finalproject.jotit.controller;
 
-import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,8 +15,8 @@ import lk.ijse.gdse71.finalproject.jotit.controller.components.CardJot;
 import lk.ijse.gdse71.finalproject.jotit.dto.JotDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.TaskDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.tm.TaskTm;
-import lk.ijse.gdse71.finalproject.jotit.model.TaskModel;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.TaskModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.TaskService;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.TaskServiceImpl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,7 +44,7 @@ public class TaskManageController {
     @FXML
     private Label lblDescription;
 
-    private final TaskModel taskModel = new TaskModelImpl();
+    private final TaskService taskService = new TaskServiceImpl();
     private AddTaskController addTaskController;
     private JotDto jotDto;
     private CardJot cardJotController;
@@ -112,7 +111,7 @@ public class TaskManageController {
     public void loadTaskData() {
         try {
             if (jotDto != null) {
-                List<TaskDto> tasks = taskModel.getAllTask(jotDto.getUserId(),jotDto.getId());
+                List<TaskDto> tasks = taskService.getAllTask(jotDto.getUserId(),jotDto.getId());
 
                 List<TaskTm> taskTms = new ArrayList<>();
                 for (TaskDto taskDto : tasks) {
@@ -156,7 +155,7 @@ public class TaskManageController {
         confirmation.showAndWait().ifPresent(response -> {
             if (response == ButtonType.YES) {
                 try {
-                    taskModel.deleteTask(taskDto);
+                    taskService.deleteTask(taskDto);
                     loadTaskData();
                 } catch (Exception e) {
                     new Alert(Alert.AlertType.ERROR, "Failed to delete task", ButtonType.OK).show();

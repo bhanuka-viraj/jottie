@@ -5,8 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import lk.ijse.gdse71.finalproject.jotit.dto.MoodDto;
-import lk.ijse.gdse71.finalproject.jotit.model.MoodModel;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.MoodModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.MoodService;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.MoodServiceImpl;
 import lk.ijse.gdse71.finalproject.jotit.util.IdGenerator;
 
 public class AddMoodController {
@@ -14,12 +14,12 @@ public class AddMoodController {
     @FXML
     private TextField txtMood;
 
-    private final MoodModel moodModel = new MoodModelImpl();
+    private final MoodService moodService = new MoodServiceImpl();
 
     @FXML
     void btnSaveOnAction(ActionEvent event) {
         try {
-            boolean isSaved = moodModel.saveMood(new MoodDto(
+            boolean isSaved = moodService.saveMood(new MoodDto(
                     IdGenerator.generateId("MD",5),
                     txtMood.getText()
             ));

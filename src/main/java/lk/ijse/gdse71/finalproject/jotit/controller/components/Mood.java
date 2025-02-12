@@ -6,8 +6,8 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import lk.ijse.gdse71.finalproject.jotit.dto.MoodDto;
-import lk.ijse.gdse71.finalproject.jotit.model.MoodModel;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.MoodModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.MoodService;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.MoodServiceImpl;
 
 public class Mood {
     @FXML
@@ -16,7 +16,7 @@ public class Mood {
     @FXML
     private ToggleButton toggleMood;
 
-    private final MoodModel moodModel = new MoodModelImpl();
+    private final MoodService moodService = new MoodServiceImpl();
 
 
     public void setData(MoodDto moodDto){
@@ -42,7 +42,7 @@ public class Mood {
 
     public MoodDto getSelectedMoodDto(){
         try {
-            MoodDto moodDto = moodModel.getMood(toggleMood.getText());
+            MoodDto moodDto = moodService.getMood(toggleMood.getText());
             return moodDto;
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
@@ -50,4 +50,5 @@ public class Mood {
         }
 
     }
+
 }

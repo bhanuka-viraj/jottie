@@ -7,22 +7,22 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lk.ijse.gdse71.finalproject.jotit.dto.RelationshipDto;
-import lk.ijse.gdse71.finalproject.jotit.model.RelationshipModel;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.RelationshipModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.RelationshipService;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.RelationshipServiceImpl;
 import lk.ijse.gdse71.finalproject.jotit.util.IdGenerator;
 
 public class AddRelationshipController {
 
     @FXML
     private TextField txtRelationship;
-    private final RelationshipModel relationshipModel = new RelationshipModelImpl();
+    private final RelationshipService relationshipService = new RelationshipServiceImpl();
     private UserProfileController userProfileController;
 
     @FXML
     void btnSaveOnAction(ActionEvent event) {
 
         try {
-            boolean isSaved = relationshipModel.save(
+            boolean isSaved = relationshipService.save(
               new RelationshipDto(IdGenerator.generateId("Rel" ,5),
                       txtRelationship.getText(),
                       LoginController.userDto.getId())

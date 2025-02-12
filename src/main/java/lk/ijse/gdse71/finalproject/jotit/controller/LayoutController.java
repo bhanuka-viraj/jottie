@@ -13,14 +13,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import lk.ijse.gdse71.finalproject.jotit.AppInitializer;
 import lk.ijse.gdse71.finalproject.jotit.dto.CategoryDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.JotDto;
-import lk.ijse.gdse71.finalproject.jotit.dto.UserDto;
-import lk.ijse.gdse71.finalproject.jotit.model.CategoryModel;
-import lk.ijse.gdse71.finalproject.jotit.model.JotModel;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.CategoryModelImpl;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.JotModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.CategoryService;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.JotService;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.CategoryServiceImpl;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.JotServiceImpl;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,8 +41,8 @@ public class LayoutController {
     @FXML
     private Label lblUserName;
 
-    private final CategoryModel categoryModel = new CategoryModelImpl();
-    private final JotModel jotModel = new JotModelImpl();
+    private final CategoryService categoryService = new CategoryServiceImpl();
+    private final JotService jotService = new JotServiceImpl();
 
     private List<Button> buttons = new ArrayList<>();
     private boolean isReadOnly;
@@ -62,9 +60,9 @@ public class LayoutController {
     public void loadCategories() {
         try {
             categoryPane.getChildren().clear();
-            List<CategoryDto> categories = categoryModel.getAllCategories(LoginController.userDto.getId());
+            List<CategoryDto> categories = categoryService.getAllCategories(LoginController.userDto.getId());
             for (CategoryDto category : categories) {
-                int jotCount = jotModel.getJotCountByCategory(category.getId(), LoginController.userDto.getId());
+                int jotCount = jotService.getJotCountByCategory(category.getId(), LoginController.userDto.getId());
                 Button categoryButton = new Button(category.getDescription() + " (" + jotCount + ")");
                 categoryButton.setPrefHeight(35);
                 categoryButton.setPrefWidth(185);

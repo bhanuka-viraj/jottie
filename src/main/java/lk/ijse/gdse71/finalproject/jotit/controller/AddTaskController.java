@@ -8,8 +8,8 @@ import lk.ijse.gdse71.finalproject.jotit.controller.components.CardJot;
 import lk.ijse.gdse71.finalproject.jotit.dto.JotDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.TaskDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.TaskState;
-import lk.ijse.gdse71.finalproject.jotit.model.TaskModel;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.TaskModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.TaskService;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.TaskServiceImpl;
 import lk.ijse.gdse71.finalproject.jotit.util.IdGenerator;
 
 import java.sql.Date;
@@ -27,7 +27,7 @@ public class AddTaskController {
     private TextField txtDesc;
     private JotDto jotDto;
     private TaskDto taskDto;
-    private final TaskModel taskModel = new TaskModelImpl();
+    private final TaskService taskService = new TaskServiceImpl();
     private TaskManageController taskManageController;
     private CardJot cardJotController;
 
@@ -61,7 +61,7 @@ public class AddTaskController {
             taskDto.setStatus(status);
             taskDto.setJotId(jotDto.getId());
 
-            if (taskModel.saveTask(taskDto)) {
+            if (taskService.saveTask(taskDto)) {
                 taskManageController.loadTaskData();
                 txtDesc.getScene().getWindow().hide();
                 cardJotController.setPieChart();

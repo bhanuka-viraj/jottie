@@ -11,8 +11,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.gdse71.finalproject.jotit.AppInitializer;
 import lk.ijse.gdse71.finalproject.jotit.dto.UserDto;
-import lk.ijse.gdse71.finalproject.jotit.model.UserModel;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.UserModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.UserService;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.UserServiceImpl;
 import lk.ijse.gdse71.finalproject.jotit.util.PasswordUtil;
 
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class LoginController {
     @FXML
     private TextField txtUserName;
 
-    private final UserModel userModel = new UserModelImpl();
+    private final UserService userService = new UserServiceImpl();
     protected static UserDto userDto ;
 
     public void initialize() {
@@ -59,7 +59,7 @@ public class LoginController {
 
     private void verifyUser(String username, String pwd) {
         try {
-            UserDto userDto = userModel.getUser(username);
+            UserDto userDto = userService.getUser(username);
             if (userDto == null) {
                 lblPwdIncorrect.setVisible(true);
                 setBorderRed(txtUserName);

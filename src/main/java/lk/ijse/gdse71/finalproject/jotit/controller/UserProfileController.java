@@ -14,10 +14,10 @@ import javafx.stage.Stage;
 import lk.ijse.gdse71.finalproject.jotit.dto.RelationshipDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.UserDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.UserRelationshipDto;
-import lk.ijse.gdse71.finalproject.jotit.model.RelationshipModel;
-import lk.ijse.gdse71.finalproject.jotit.model.UserModel;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.RelationshipModelImpl;
-import lk.ijse.gdse71.finalproject.jotit.model.impl.UserModelImpl;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.RelationshipService;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.UserService;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.RelationshipServiceImpl;
+import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.UserServiceImpl;
 import lk.ijse.gdse71.finalproject.jotit.util.IdGenerator;
 import lk.ijse.gdse71.finalproject.jotit.util.PasswordUtil;
 
@@ -51,8 +51,8 @@ public class UserProfileController {
     @FXML
     private TextField txtUserName;
     private UserDto userDto = LoginController.userDto;
-    private final UserModel userModel = new UserModelImpl();
-    private final RelationshipModel relationshipModel = new RelationshipModelImpl();
+    private final UserService userService = new UserServiceImpl();
+    private final RelationshipService relationshipService = new RelationshipServiceImpl();
 
     public void initialize() {
         setDetails();
@@ -96,7 +96,7 @@ public class UserProfileController {
 
             if (selectedUser != null && selectedRelationship != null) {
 
-                String userId = userModel.getUserIdByUsername(selectedUser);
+                String userId = userService.getUserIdByUsername(selectedUser);
 
                 UserRelationshipDto userRelationshipDto = new UserRelationshipDto();
                 userRelationshipDto.setId(IdGenerator.generateId("USREL",5));
@@ -104,7 +104,7 @@ public class UserProfileController {
                 userRelationshipDto.setRelationshipId(selectedRelationship.getId());
                 userRelationshipDto.setAddedById(LoginController.userDto.getId());
 
-                if (userModel.saveUserRelationship(userRelationshipDto)) {
+                if (userService.saveUserRelationship(userRelationshipDto)) {
                     new Alert(Alert.AlertType.INFORMATION, "Relationship added successfully ." ,ButtonType.OK).show();
                     userCombo.setValue("");
                     relationshipCombo.setValue(null);
@@ -128,7 +128,7 @@ public class UserProfileController {
             }
 
             if (isFieldUpdated) {
-                if (userModel.update(userDto)){
+                if (userService.update(userDto)){
                     clearFields();
                     new Alert(Alert.AlertType.INFORMATION, "Profile updated successfully!", ButtonType.OK).showAndWait();
                 }else {
@@ -163,7 +163,7 @@ public class UserProfileController {
     public void refreshRelationshipCombo() {
         try {
             relationshipCombo.getItems().clear();
-            List<RelationshipDto> relationships = relationshipModel.getAllRelationships(LoginController.userDto.getId());
+            List<RelationshipDto> relationships = relationshipService.getAllRelationships(LoginController.userDto.getId());
             ObservableList<RelationshipDto> observableList = FXCollections.observableArrayList(relationships);
             relationshipCombo.setItems(observableList);
         } catch (Exception e) {
@@ -174,7 +174,7 @@ public class UserProfileController {
     public void refreshUserCombo() {
         try {
             userCombo.getItems().clear();
-            List<UserDto> users = userModel.getAllUsers(LoginController.userDto.getId());
+            List<UserDto> users = userService.getAllUsers(LoginController.userDto.getId());
             for (UserDto user : users) {
                 userCombo.getItems().add(user.getUsername());
             }

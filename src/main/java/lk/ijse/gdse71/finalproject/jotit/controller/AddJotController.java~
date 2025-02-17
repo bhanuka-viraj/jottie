@@ -72,8 +72,8 @@ public class AddJotController {
 
     private WebEngine webEngine;
     private String currentFilePath = null;
-    private final CategoryService categoryService = (CategoryService) DaoFactory.getInstance().getDao(DaoType.CATEGORY);
-    private final LocationService locationService = (LocationService) DaoFactory.getInstance().getDao(DaoType.LOCATION);
+    private final CategoryService categoryService = DaoFactory.getInstance().getDao(DaoType.CATEGORY);
+    private final LocationService locationService = new LocationServiceImpl();
     private final MoodService moodService = new MoodServiceImpl();
     private final TagService tagService = new TagServiceImpl();
     private final JotService jotService = new JotServiceImpl();

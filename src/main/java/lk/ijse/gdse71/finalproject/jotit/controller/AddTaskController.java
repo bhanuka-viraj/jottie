@@ -8,6 +8,8 @@ import lk.ijse.gdse71.finalproject.jotit.controller.components.CardJot;
 import lk.ijse.gdse71.finalproject.jotit.dto.JotDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.TaskDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.TaskState;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceFactory;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceType;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.TaskService;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.TaskServiceImpl;
 import lk.ijse.gdse71.finalproject.jotit.util.IdGenerator;
@@ -27,7 +29,7 @@ public class AddTaskController {
     private TextField txtDesc;
     private JotDto jotDto;
     private TaskDto taskDto;
-    private final TaskService taskService = new TaskServiceImpl();
+    private final TaskService taskService = (TaskServiceImpl) ServiceFactory.getInstance().getService(ServiceType.TASK);
     private TaskManageController taskManageController;
     private CardJot cardJotController;
 

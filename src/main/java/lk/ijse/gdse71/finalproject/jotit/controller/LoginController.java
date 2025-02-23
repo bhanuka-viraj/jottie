@@ -11,6 +11,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.gdse71.finalproject.jotit.AppInitializer;
 import lk.ijse.gdse71.finalproject.jotit.dto.UserDto;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceFactory;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceType;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.UserService;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.UserServiceImpl;
 import lk.ijse.gdse71.finalproject.jotit.util.PasswordUtil;
@@ -32,7 +34,7 @@ public class LoginController {
     @FXML
     private TextField txtUserName;
 
-    private final UserService userService = new UserServiceImpl();
+    private final UserService userService = (UserServiceImpl) ServiceFactory.getInstance().getService(ServiceType.USER);
     protected static UserDto userDto ;
 
     public void initialize() {

@@ -6,6 +6,8 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import lk.ijse.gdse71.finalproject.jotit.dto.MoodDto;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceFactory;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceType;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.MoodService;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.MoodServiceImpl;
 
@@ -16,7 +18,7 @@ public class Mood {
     @FXML
     private ToggleButton toggleMood;
 
-    private final MoodService moodService = new MoodServiceImpl();
+    private final MoodService moodService = (MoodServiceImpl) ServiceFactory.getInstance().getService(ServiceType.MOOD);
 
 
     public void setData(MoodDto moodDto){

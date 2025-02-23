@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 import lk.ijse.gdse71.finalproject.jotit.dto.JotDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.SharedJotDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.UserDto;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceFactory;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceType;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.SharedJotService;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.UserService;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.SharedJotServiceImpl;
@@ -29,8 +31,8 @@ public class ShareController {
     @FXML
     private ComboBox<String> userCombo;
 
-    private final UserService userService = new UserServiceImpl();
-    private final SharedJotService sharedJotService = new SharedJotServiceImpl();
+    private final UserService userService = (UserServiceImpl) ServiceFactory.getInstance().getService(ServiceType.USER);
+    private final SharedJotService sharedJotService = (SharedJotServiceImpl)ServiceFactory.getInstance().getService(ServiceType.SHAREDJOT);
     private JotDto jotDto;
 
     public void initialize() {

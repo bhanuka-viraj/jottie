@@ -1,5 +1,7 @@
 package lk.ijse.gdse71.finalproject.jotit.service.custom.impl;
 
+import lk.ijse.gdse71.finalproject.jotit.dao.DaoFactory;
+import lk.ijse.gdse71.finalproject.jotit.dao.DaoType;
 import lk.ijse.gdse71.finalproject.jotit.dao.custom.SharedJotDAO;
 import lk.ijse.gdse71.finalproject.jotit.dao.custom.impl.SharedJotDAOImpl;
 import lk.ijse.gdse71.finalproject.jotit.dto.SharedJotDto;
@@ -9,7 +11,7 @@ import lk.ijse.gdse71.finalproject.jotit.service.custom.SharedJotService;
 import java.util.List;
 
 public class SharedJotServiceImpl implements SharedJotService {
-    private final SharedJotDAO sharedJotDAO = new SharedJotDAOImpl();
+    private final SharedJotDAO sharedJotDAO = (SharedJotDAOImpl) DaoFactory.getInstance().getDao(DaoType.SHAREDJOT);
     @Override
     public boolean save(SharedJotDto sharedJot) throws Exception {
         return sharedJotDAO.save(new SharedJot(sharedJot.getId(), sharedJot.getJotId(), sharedJot.getUserBy(), sharedJot.getUserWith(), sharedJot.getStatus(), sharedJot.getDate()));

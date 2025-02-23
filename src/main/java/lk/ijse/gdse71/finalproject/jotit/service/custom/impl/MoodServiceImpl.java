@@ -1,5 +1,7 @@
 package lk.ijse.gdse71.finalproject.jotit.service.custom.impl;
 
+import lk.ijse.gdse71.finalproject.jotit.dao.DaoFactory;
+import lk.ijse.gdse71.finalproject.jotit.dao.DaoType;
 import lk.ijse.gdse71.finalproject.jotit.dao.custom.MoodDAO;
 import lk.ijse.gdse71.finalproject.jotit.dao.custom.impl.MoodDAOImpl;
 import lk.ijse.gdse71.finalproject.jotit.dto.MoodDto;
@@ -10,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MoodServiceImpl implements MoodService {
-    private final MoodDAO moodDAO = new MoodDAOImpl();
+    private final MoodDAO moodDAO = (MoodDAOImpl) DaoFactory.getInstance().getDao(DaoType.MOOD);
     @Override
     public boolean saveMood(MoodDto mooddto) throws Exception {
         return moodDAO.saveMood(new Mood(mooddto.getId(),mooddto.getDescription()));

@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 import lk.ijse.gdse71.finalproject.jotit.dto.RelationshipDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.UserDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.UserRelationshipDto;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceFactory;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceType;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.RelationshipService;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.UserService;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.RelationshipServiceImpl;
@@ -51,8 +53,8 @@ public class UserProfileController {
     @FXML
     private TextField txtUserName;
     private UserDto userDto = LoginController.userDto;
-    private final UserService userService = new UserServiceImpl();
-    private final RelationshipService relationshipService = new RelationshipServiceImpl();
+    private final UserService userService = (UserServiceImpl) ServiceFactory.getInstance().getService(ServiceType.USER);
+    private final RelationshipService relationshipService = (RelationshipServiceImpl) ServiceFactory.getInstance().getService(ServiceType.RELATIONSHIP);
 
     public void initialize() {
         setDetails();

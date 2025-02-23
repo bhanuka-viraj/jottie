@@ -9,6 +9,8 @@ import javafx.scene.layout.GridPane;
 import lk.ijse.gdse71.finalproject.jotit.controller.components.CardJot;
 import lk.ijse.gdse71.finalproject.jotit.dto.JotDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.SharedJotDto;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceFactory;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceType;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.JotService;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.SharedJotService;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.JotServiceImpl;
@@ -21,8 +23,8 @@ public class ViewJotsController {
     @FXML
     private GridPane gridPane;
 
-    private final JotService jotService = new JotServiceImpl();
-    private final SharedJotService sharedJotService = new SharedJotServiceImpl();
+    private final JotService jotService = (JotServiceImpl) ServiceFactory.getInstance().getService(ServiceType.JOT);
+    private final SharedJotService sharedJotService = (SharedJotServiceImpl) ServiceFactory.getInstance().getService(ServiceType.SHAREDJOT);
     private boolean isReceiving;
 
 

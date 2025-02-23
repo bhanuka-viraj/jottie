@@ -11,6 +11,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.ijse.gdse71.finalproject.jotit.dto.UserDto;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceFactory;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceType;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.UserService;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.UserServiceImpl;
 import lk.ijse.gdse71.finalproject.jotit.util.EmailUtil;
@@ -52,7 +54,7 @@ public class RegisterController {
     @FXML
     private Label lblPwdIncorrect;
 
-    private final UserService userService = new UserServiceImpl();
+    private final UserService userService = (UserServiceImpl) ServiceFactory.getInstance().getService(ServiceType.USER);
 
     @FXML
     public void initialize() {

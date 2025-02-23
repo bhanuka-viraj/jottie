@@ -1,5 +1,7 @@
 package lk.ijse.gdse71.finalproject.jotit.service.custom.impl;
 
+import lk.ijse.gdse71.finalproject.jotit.dao.DaoFactory;
+import lk.ijse.gdse71.finalproject.jotit.dao.DaoType;
 import lk.ijse.gdse71.finalproject.jotit.dao.custom.RelationshipDAO;
 import lk.ijse.gdse71.finalproject.jotit.dao.custom.impl.RelationshipDAOImpl;
 import lk.ijse.gdse71.finalproject.jotit.dto.RelationshipDto;
@@ -9,7 +11,7 @@ import lk.ijse.gdse71.finalproject.jotit.service.custom.RelationshipService;
 import java.util.List;
 
 public class RelationshipServiceImpl implements RelationshipService {
-    private final RelationshipDAO relationshipDAO = new RelationshipDAOImpl();
+    private final RelationshipDAO relationshipDAO = (RelationshipDAOImpl) DaoFactory.getInstance().getDao(DaoType.RELATIONSHIP);
     @Override
     public boolean save(RelationshipDto relationshipDto) throws Exception {
         return relationshipDAO.save(new Relationship(relationshipDto.getId(),relationshipDto.getType(),relationshipDto.getCreatedBy()));

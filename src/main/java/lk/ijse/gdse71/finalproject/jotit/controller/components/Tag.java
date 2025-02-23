@@ -4,13 +4,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ToggleButton;
 import lk.ijse.gdse71.finalproject.jotit.dto.TagDto;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceFactory;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceType;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.TagService;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.TagServiceImpl;
 
 public class Tag {
     @FXML
     private ToggleButton toggleTag;
-    private final TagService tagService = new TagServiceImpl();
+    private final TagService tagService = (TagServiceImpl) ServiceFactory.getInstance().getService(ServiceType.TAG);
     private String loggedUserId;
 
     public void setData(TagDto tagDto) {

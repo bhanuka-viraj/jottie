@@ -7,6 +7,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lk.ijse.gdse71.finalproject.jotit.dto.RelationshipDto;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceFactory;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceType;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.RelationshipService;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.RelationshipServiceImpl;
 import lk.ijse.gdse71.finalproject.jotit.util.IdGenerator;
@@ -15,7 +17,7 @@ public class AddRelationshipController {
 
     @FXML
     private TextField txtRelationship;
-    private final RelationshipService relationshipService = new RelationshipServiceImpl();
+    private final RelationshipService relationshipService = (RelationshipServiceImpl) ServiceFactory.getInstance().getService(ServiceType.RELATIONSHIP);
     private UserProfileController userProfileController;
 
     @FXML

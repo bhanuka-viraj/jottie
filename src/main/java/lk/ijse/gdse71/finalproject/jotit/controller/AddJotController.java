@@ -74,9 +74,9 @@ public class AddJotController {
     private String currentFilePath = null;
     private final CategoryService categoryService = (CategoryService) DaoFactory.getInstance().getDao(DaoType.CATEGORY);
     private final LocationService locationService = (LocationService) DaoFactory.getInstance().getDao(DaoType.LOCATION);
-    private final MoodService moodService = new MoodServiceImpl();
-    private final TagService tagService = new TagServiceImpl();
-    private final JotService jotService = new JotServiceImpl();
+    private final MoodService moodService = (MoodService) DaoFactory.getInstance().getDao(DaoType.MOOD);
+    private final TagService tagService = (TagService) DaoFactory.getInstance().getDao(DaoType.TAG);
+    private final JotService jotService = (JotService) DaoFactory.getInstance().getDao(DaoType.JOT);
 
     private static final String SECRET_KEY = "1234567890123456";
 

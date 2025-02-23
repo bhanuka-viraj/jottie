@@ -1,5 +1,7 @@
 package lk.ijse.gdse71.finalproject.jotit.service.custom.impl;
 
+import lk.ijse.gdse71.finalproject.jotit.dao.DaoFactory;
+import lk.ijse.gdse71.finalproject.jotit.dao.DaoType;
 import lk.ijse.gdse71.finalproject.jotit.dao.custom.LocationDAO;
 import lk.ijse.gdse71.finalproject.jotit.dao.custom.impl.LocationDAOImpl;
 import lk.ijse.gdse71.finalproject.jotit.dto.LocationDto;
@@ -9,7 +11,7 @@ import lk.ijse.gdse71.finalproject.jotit.service.custom.LocationService;
 import java.util.List;
 
 public class LocationServiceImpl implements LocationService {
-    private final LocationDAO locationDAO = new LocationDAOImpl();
+    private final LocationDAO locationDAO = (LocationDAOImpl) DaoFactory.getInstance().getDao(DaoType.LOCATION);
     @Override
     public boolean saveLocation(LocationDto locationDto) throws Exception {
         return locationDAO.saveLocation(new Location(locationDto.getId(),locationDto.getDescription(),locationDto.getCreatedBy()));

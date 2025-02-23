@@ -1,7 +1,5 @@
 package lk.ijse.gdse71.finalproject.jotit.service.custom.impl;
 
-import lk.ijse.gdse71.finalproject.jotit.dao.DaoFactory;
-import lk.ijse.gdse71.finalproject.jotit.dao.DaoType;
 import lk.ijse.gdse71.finalproject.jotit.dao.custom.CategoryDAO;
 import lk.ijse.gdse71.finalproject.jotit.dao.custom.impl.CategoryDAOImpl;
 import lk.ijse.gdse71.finalproject.jotit.dto.CategoryDto;
@@ -11,7 +9,7 @@ import lk.ijse.gdse71.finalproject.jotit.service.custom.CategoryService;
 import java.util.List;
 
 public class CategoryServiceImpl implements CategoryService {
-    public final CategoryDAO categoryDAO = (CategoryDAOImpl) DaoFactory.getInstance().getDao(DaoType.CATEGORY);
+    public final CategoryDAO categoryDAO = new CategoryDAOImpl();
     @Override
     public boolean saveCategory(CategoryDto categoryDto) throws Exception {
 

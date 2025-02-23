@@ -1,5 +1,7 @@
 package lk.ijse.gdse71.finalproject.jotit.service.custom.impl;
 
+import lk.ijse.gdse71.finalproject.jotit.dao.DaoFactory;
+import lk.ijse.gdse71.finalproject.jotit.dao.DaoType;
 import lk.ijse.gdse71.finalproject.jotit.dao.custom.TagDAO;
 import lk.ijse.gdse71.finalproject.jotit.dao.custom.impl.TagDAOImpl;
 import lk.ijse.gdse71.finalproject.jotit.dto.TagDto;
@@ -9,7 +11,7 @@ import lk.ijse.gdse71.finalproject.jotit.service.custom.TagService;
 import java.util.List;
 
 public class TagServiceImpl implements TagService {
-    private final TagDAO tagDAO = new TagDAOImpl();
+    private final TagDAO tagDAO = (TagDAOImpl) DaoFactory.getInstance().getDao(DaoType.TAG);
     @Override
     public boolean saveTag(TagDto tag) throws Exception {
         return tagDAO.saveTag(new Tag(tag.getId(),tag.getName(),tag.getCreatedBy()));

@@ -22,6 +22,8 @@ import lk.ijse.gdse71.finalproject.jotit.controller.ControllerRef;
 import lk.ijse.gdse71.finalproject.jotit.controller.ShareController;
 import lk.ijse.gdse71.finalproject.jotit.controller.TaskManageController;
 import lk.ijse.gdse71.finalproject.jotit.dto.*;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceFactory;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceType;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.JotService;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.SharedJotService;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.TaskService;
@@ -73,10 +75,10 @@ public class CardJot {
     @FXML
     private Label lblReceivedBy;
 
-    private final JotService jotService = new JotServiceImpl();
-    private final TaskService taskService = new TaskServiceImpl();
-    private final SharedJotService sharedJotService = new SharedJotServiceImpl();
-    private final UserService userService = new UserServiceImpl();
+    private final JotService jotService =  (JotService) ServiceFactory.getInstance().getService(ServiceType.JOT);
+    private final TaskService taskService = (TaskService) ServiceFactory.getInstance().getService(ServiceType.TASK);
+    private final SharedJotService sharedJotService = (SharedJotService) ServiceFactory.getInstance().getService(ServiceType.SHAREDJOT);
+    private final UserService userService = (UserService) ServiceFactory.getInstance().getService(ServiceType.USER);
     private JotDto jotDto;
     private boolean isReadOnly;
     private String userId;

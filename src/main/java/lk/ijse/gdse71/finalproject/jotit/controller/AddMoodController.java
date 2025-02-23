@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import lk.ijse.gdse71.finalproject.jotit.dto.MoodDto;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceFactory;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceType;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.MoodService;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.MoodServiceImpl;
 import lk.ijse.gdse71.finalproject.jotit.util.IdGenerator;
@@ -14,7 +16,7 @@ public class AddMoodController {
     @FXML
     private TextField txtMood;
 
-    private final MoodService moodService = new MoodServiceImpl();
+    private final MoodService moodService = (MoodServiceImpl) ServiceFactory.getInstance().getService(ServiceType.MOOD);
 
     @FXML
     void btnSaveOnAction(ActionEvent event) {

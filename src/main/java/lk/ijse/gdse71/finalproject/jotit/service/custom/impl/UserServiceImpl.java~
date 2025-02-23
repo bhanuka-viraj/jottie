@@ -1,7 +1,5 @@
 package lk.ijse.gdse71.finalproject.jotit.service.custom.impl;
 
-import lk.ijse.gdse71.finalproject.jotit.dao.DaoFactory;
-import lk.ijse.gdse71.finalproject.jotit.dao.DaoType;
 import lk.ijse.gdse71.finalproject.jotit.dao.custom.UserDAO;
 import lk.ijse.gdse71.finalproject.jotit.dao.custom.impl.UserDAOImpl;
 import lk.ijse.gdse71.finalproject.jotit.dto.UserDto;
@@ -14,7 +12,7 @@ import java.util.ArrayList;
 
 public class UserServiceImpl implements UserService {
 
-    private final UserDAO userDAO = (UserDAOImpl) DaoFactory.getInstance().getDao(DaoType.USER);
+    private final UserDAO userDAO = new UserDAOImpl();
     @Override
     public boolean save(UserDto user) throws Exception {
         return userDAO.save(new User(user.getId(),user.getUsername(),user.getFirstName(),user.getLastName(),user.getEmail(),user.getPassword(),user.getDateOfBirth(),user.getCreatedDate(),user.getUpdatedDate()));

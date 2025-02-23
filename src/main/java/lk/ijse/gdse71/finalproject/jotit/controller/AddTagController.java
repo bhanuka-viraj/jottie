@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import lk.ijse.gdse71.finalproject.jotit.dto.TagDto;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceFactory;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceType;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.TagService;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.TagServiceImpl;
 import lk.ijse.gdse71.finalproject.jotit.util.IdGenerator;
@@ -14,7 +16,7 @@ public class AddTagController {
     @FXML
     private TextField txtTag;
 
-    private final TagService tagService = new TagServiceImpl();
+    private final TagService tagService = (TagServiceImpl) ServiceFactory.getInstance().getService(ServiceType.TAG);
 
     @FXML
     void btnSaveOnAction(ActionEvent event) {

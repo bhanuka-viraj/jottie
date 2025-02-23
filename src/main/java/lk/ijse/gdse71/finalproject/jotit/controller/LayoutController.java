@@ -15,6 +15,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import lk.ijse.gdse71.finalproject.jotit.dto.CategoryDto;
 import lk.ijse.gdse71.finalproject.jotit.dto.JotDto;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceFactory;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceType;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.CategoryService;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.JotService;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.CategoryServiceImpl;
@@ -41,8 +43,8 @@ public class LayoutController {
     @FXML
     private Label lblUserName;
 
-    private final CategoryService categoryService = new CategoryServiceImpl();
-    private final JotService jotService = new JotServiceImpl();
+    private final CategoryService categoryService = (CategoryServiceImpl) ServiceFactory.getInstance().getService(ServiceType.CATEGORY);
+    private final JotService jotService = (JotServiceImpl)ServiceFactory.getInstance().getService(ServiceType.JOT);
 
     private List<Button> buttons = new ArrayList<>();
     private boolean isReadOnly;

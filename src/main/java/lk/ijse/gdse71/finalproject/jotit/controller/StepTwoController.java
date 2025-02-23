@@ -10,6 +10,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lk.ijse.gdse71.finalproject.jotit.dto.CategoryDto;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceFactory;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceType;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.CategoryService;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.impl.CategoryServiceImpl;
 import lk.ijse.gdse71.finalproject.jotit.util.IdGenerator;
@@ -33,7 +35,7 @@ public class StepTwoController {
     private CategoryDto selectedCategory;
     @FXML
     public void initialize() {
-        categoryService = new CategoryServiceImpl();
+        categoryService = (CategoryServiceImpl) ServiceFactory.getInstance().getService(ServiceType.CATEGORY);
         loadCategories();
         btnSaveCat.setVisible(false);
         txtCategoryDescription.setVisible(false);

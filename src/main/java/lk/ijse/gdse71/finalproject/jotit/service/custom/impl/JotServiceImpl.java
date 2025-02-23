@@ -1,11 +1,15 @@
 package lk.ijse.gdse71.finalproject.jotit.service.custom.impl;
 
+import lk.ijse.gdse71.finalproject.jotit.dao.DaoFactory;
+import lk.ijse.gdse71.finalproject.jotit.dao.DaoType;
 import lk.ijse.gdse71.finalproject.jotit.dao.custom.JotDAO;
 import lk.ijse.gdse71.finalproject.jotit.dao.custom.QueryDAO;
 import lk.ijse.gdse71.finalproject.jotit.dao.custom.impl.JotDAOImpl;
 import lk.ijse.gdse71.finalproject.jotit.dao.custom.impl.QueryDaoImpl;
 import lk.ijse.gdse71.finalproject.jotit.dto.*;
 import lk.ijse.gdse71.finalproject.jotit.entity.*;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceFactory;
+import lk.ijse.gdse71.finalproject.jotit.service.ServiceType;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.CategoryService;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.JotService;
 import lk.ijse.gdse71.finalproject.jotit.service.custom.LocationService;
@@ -17,10 +21,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class JotServiceImpl implements JotService {
-    private final CategoryService categoryService = new CategoryServiceImpl();
-    private final LocationService locationService = new LocationServiceImpl();
-    private final JotDAO jotDAO = new JotDAOImpl();
-    private final QueryDAO queryDAO = new QueryDaoImpl();
+    private final CategoryService categoryService = (CategoryServiceImpl) ServiceFactory.getInstance().getService(ServiceType.CATEGORY);
+    private final LocationService locationService = (LocationServiceImpl) ServiceFactory.getInstance().getService(ServiceType.LOCATION);
+    private final JotDAO jotDAO = (JotDAOImpl) DaoFactory.getInstance().getDao(DaoType.JOT);
+    private final QueryDAO queryDAO = (QueryDaoImpl) DaoFactory.getInstance().getDao(DaoType.QUERY);
 
     @Override
     public boolean saveJot(JotDto jotDto) throws Exception {
